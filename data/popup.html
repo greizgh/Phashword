@@ -1,0 +1,49 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <header class="popup">
+        <img src="img/icon-32.png" alt="logo" width="24px" height="24px"/>
+        <h2>Phashword</h2>
+    </header>
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="profile">Profile</label>
+        </div>
+        <div class="cell">
+            <select id="profile" name="profile">
+            </select>
+            <span id="color" class="color-sample"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="website_tag">Tag</label>
+        </div>
+        <div class="cell">
+            <input type="text" name="tag" id="tag" size="20" maxlength="25"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="password_length">Length</label>
+        </div>
+        <div class="cell">
+            <input type="number" name="password_length" id="password_length" min="1" value="12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="password_type">Type</label>
+        </div>
+        <div class="cell">
+            <select name="password_type" id="password_type">
+                <option value="1" data-l10n-id="alphaspec">Alphanumeric and special characters</option>
+                <option value="2" data-l10n-id="alpha">Alphanumeric</option>
+                <option value="3" data-l10n-id="num">Numeric</option>
+            </select>
+        </div>
+    </div>
+    <button id="settings" data-l10n-id="settings">Settings</button>
+</body>

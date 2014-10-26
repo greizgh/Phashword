@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header class="settings">
+        <img src="img/icon-64.png" alt="logo" width="64px" height="64px"/>
+        <h1>Phashword</h1>
+    </header>
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="profile">Profile</label>
+        </div>
+        <div class="cell">
+            <select id="profile" name="profile"></select>
+            <button id="add_profile" data-l10n-id="add_profile">Add profile</button>
+            <button id="remove_profile" data-l10n-id="remove_profile">Remove profile</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="name">Name</label>
+        </div>
+        <div class="cell">
+            <input type="text" name="name" id="name" size="25" maxlength="25"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="private_key">Private key</label>
+        </div>
+        <div class="cell">
+            <input type="text" name="private_key" id="private_key" size="42" maxlength="40"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="password_length">Password length</label>
+        </div>
+        <div class="cell">
+            <input type="number" name="password_length" id="password_length" min="1" value="12">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="password_type">Password type</label>
+        </div>
+        <div class="cell">
+            <select name="password_type" id="password_type">
+                <option value="1" data-l10n-id="alphaspec">Alphanumeric and special characters</option>
+                <option value="2" data-l10n-id="alpha">Alphanumeric</option>
+                <option value="3" data-l10n-id="num">Numeric</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell">
+            <label data-l10n-id="color">Color</label>
+        </div>
+        <div class="cell">
+            <input type="color" name="color" id="color">
+        </div>
+    </div>
+
+</body>
+</html>
+
