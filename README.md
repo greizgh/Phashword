@@ -8,7 +8,7 @@ Spiritual successor of password hasher (another firefox addon) it is completely 
 
 Phashword will generate per-site passwords based on:
 
-1. a site-specific tag (such as "mozilla" of "github")
+1. a site-specific tag (such as "mozilla" or "github")
 1. a private key (randomly generated if you lack inspiration)
 1. a master key that only you know
 
