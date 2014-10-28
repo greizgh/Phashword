@@ -22,7 +22,7 @@ var elem;
 var profile;
 
 self.port.on("hash", function(hash) {
-  elem.val(hash);
+  elem.value = hash;
 });
 
 self.port.on("update_profile", function(data) {
@@ -34,22 +34,24 @@ function requestHash(key) {
 }
 
 function handleFocus(event) {
-  config.bg = $(this).css('background-color');
-  config.placeholder = $(this).attr("placeholder") || '';
-  if ($(this).data("phashword")) {
-    $(this).css('background-color', profile.color);
-    $(this).attr('placeholder', "Phashword 🔑");
-    $(this).val(config.value);
+  var field = event.target;
+  config.bg = field.style.backgroundColor;
+  config.placeholder = field.getAttribute("placeholder") || '';
+  if (field.dataset.phashword === "true") {
+    field.style.backgroundColor = profile.color;
+    field.setAttribute('placeholder', "Phashword 🔑");
+    field.value = config.value || '';
   }
 }
 
 function handleBlur(event) {
-  $(this).css('background-color', config.bg);
-  $(this).attr("placeholder", config.placeholder);
-  config.value = $(this).val();
-  if ($(this).data("phashword") && $(this).val() !== '') {
-    elem = $(this);
-    requestHash($(this).val());
+  var field = event.target;
+  field.style.backgroundColor = config.bg;
+  field.setAttribute("placeholder", config.placeholder);
+  config.value = field.value;
+  if (field.dataset.phashword === "true" && field.value !== '') {
+    elem = field;
+    requestHash(field.value);
   }
 }
 
@@ -57,24 +59,34 @@ function handleKeypress(event) {
   if (event.defaultPrevented) {
     return;
   }
+  var field = event.target;
   if (event.key === "Esc") {
     event.preventDefault();
-    $(this).data("phashword", !$(this).data("phashword"));
-    if ($(this).data("phashword")) {
-      $(this).trigger("focus");
+    if (field.dataset.phashword === "true") {
+      field.dataset.phashword = "false";
     } else {
-      $(this).val('');
-      $(this).trigger("blur");
-      $(this).trigger("focus");
+      field.dataset.phashword = "true";
+    }
+    if (field.dataset.phashword === "true") {
+      var focus = new CustomEvent('focus');
+      field.dispatchEvent(focus);
+    } else {
+      field.value = '';
+      var blur = new CustomEvent('blur');
+      field.dispatchEvent(blur);
+      var focus = new CustomEvent('focus');
+      field.dispatchEvent(focus);
     }
   }
 }
 
-$('[type="password"]').data("phashword", true);
-$('[type="password"]').on("focus", handleFocus);
-$('[type="password"]').on("blur", handleBlur);
-$('[type="password"]').on("keydown", handleKeypress);
+[].forEach.call(document.querySelectorAll('[type="password"]'), function(el) {
+  el.dataset.phashword = "true";
+  el.addEventListener('focus', handleFocus);
+  el.addEventListener('blur', handleBlur);
+  el.addEventListener('keydown', handleKeypress);
+});
 
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
   self.port.emit("ready");
 });
