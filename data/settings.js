@@ -20,67 +20,67 @@
 var profiles;
 
 self.port.on("populate", function(data) {
-  $('#profile').find('option').remove();
+  document.querySelector('#profile').innerHTML = null;
   profiles = data;
   var index = 0;
   profiles.forEach(function(profile){
-    $('#profile').append(new Option(profile.name, index++));
+    document.querySelector('#profile').appendChild(new Option(profile.name, index++));
   });
-  $('#profile').val(0); // Default profile
-  $('#name').val(profiles[0].name);
-  $('#private_key').val(profiles[0].private_key);
-  $('#password_length').val(profiles[0].password_length);
-  $('#password_type').val(profiles[0].password_type);
-  $('#color').val(profiles[0].color);
+  document.querySelector('#profile').value = 0; // Default profile
+  var change = new CustomEvent('change');
+  document.querySelector('#profile').dispatchEvent(change);
 });
 
-$('#profile').change(function() {
-  $('#name').val(profiles[$(this).val()].name);
-  $('#private_key').val(profiles[$(this).val()].private_key);
-  $('#password_length').val(profiles[$(this).val()].password_length);
-  $('#password_type').val(profiles[$(this).val()].password_type);
-  $('#color').val(profiles[$(this).val()].color);
+document.querySelector('#profile').addEventListener('change', function(event) {
+  var index = event.target.value;
+  document.querySelector('#name').value = profiles[index].name;
+  document.querySelector('#private_key').value = profiles[index].private_key;
+  document.querySelector('#password_length').value = profiles[index].password_length;
+  document.querySelector('#password_type').value = profiles[index].password_type;
+  document.querySelector('#color').value = profiles[index].color;
 });
 
 /**
  * Listen for update and broadcast it
  */
-$('#name').change(function() {
-  profiles[$('#profile').val()].name = $(this).val();
-  $('#profile option:selected').text($(this).val());
+document.querySelector('#name').addEventListener('change', function(event) {
+  var index = document.querySelector('#profile').value; 
+  profiles[index].name = event.target.value;
+  document.querySelector('#profile').options[index].text = event.target.value;
   updateProfile();
 });
-$('#private_key').change(function() {
-  profiles[$('#profile').val()].private_key = $(this).val();
+document.querySelector('#private_key').addEventListener('change', function(event) {
+  profiles[document.querySelector('#profile').value].private_key = event.target.value;
   updateProfile();
 });
-$('#password_length').change(function() {
-  profiles[$('#profile').val()].password_length = $(this).val();
+document.querySelector('#password_length').addEventListener('change', function(event) {
+  profiles[document.querySelector('#profile').value].password_length = event.target.value;
   updateProfile();
 });
-$('#password_type').change(function() {
-  profiles[$('#profile').val()].password_type = $(this).val();
+document.querySelector('#password_type').addEventListener('change', function(event) {
+  profiles[document.querySelector('#profile').value].password_type = event.target.value;
   updateProfile();
 });
-$('#color').change(function() {
-  profiles[$('#profile').val()].color = $(this).val();
+document.querySelector('#color').addEventListener('change', function(event) {
+  profiles[document.querySelector('#profile').value].color = event.target.value;
   updateProfile();
 });
 
 function updateProfile() {
+  var index = document.querySelector('#profile').value;
   var data = {
-    profile_index: $('#profile').val(),
-    profile: profiles[$('#profile').val()],
+    profile_index: index,
+    profile: profiles[index],
   };
   self.port.emit("update_profile", data);
 }
 
-$('#add_profile').on('click', function() {
+document.querySelector('#add_profile').addEventListener('click', function() {
   self.port.emit("add_profile");
 });
-$('#remove_profile').on('click', function() {
+document.querySelector('#remove_profile').addEventListener('click', function() {
   if (profiles.length > 1) {
-    self.port.emit("remove_profile", $('#profile').val());
+    self.port.emit("remove_profile", document.querySelector('#profile').value);
   }
 });
 self.port.emit("ready");
