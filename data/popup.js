@@ -22,9 +22,10 @@ var site_settings;
 
 function updateFields() {
   if (site_settings && profiles) {
-    $('#tag').val(site_settings.tag);
-    $('#profile').val(site_settings.profile_index);
-    $('#profile').trigger('change');
+    document.querySelector('#tag').value = site_settings.tag;
+    document.querySelector('#profile').value = site_settings.profile_index;
+    var change = new CustomEvent('change');
+    document.querySelector('#profile').dispatchEvent(change);
   }
 }
 
@@ -38,41 +39,45 @@ self.port.on("update_settings", function(data) {
 
 self.port.on("populate", function(data) {
   profiles = data;
-  $('#profile').find('option').remove();
+  document.querySelector('#profile').innerHTML = null;
   var index = 0;
   profiles.forEach(function(profile){
-    $('#profile').append(new Option(profile.name, index++));
+    document.querySelector('#profile').appendChild(new Option(profile.name, index++));
   });
   updateFields();
 });
 
-$('#profile').change(function() {
-  $('#password_length').val(profiles[$(this).val()].password_length);
-  $('#password_type').val(profiles[$(this).val()].password_type);
-  $('#color').css('background-color', profiles[$(this).val()].color);
-  site_settings.profile_index = $(this).val();
-  self.port.emit("select_profile", $(this).val());
+document.querySelector('#profile').addEventListener('change', function(event) {
+  var index = event.target.value;
+  document.querySelector('#password_length').value = profiles[index].password_length;
+  document.querySelector('#password_type').value = profiles[index].password_type;
+  document.querySelector('#color').style.backgroundColor = profiles[index].color;
+  site_settings.profile_index = index;
+  self.port.emit("select_profile", index);
 });
 
-$('#tag').change(function() {
-  self.port.emit("update_tag", $(this).val());
+document.querySelector('#tag').addEventListener('change', function(event) {
+  self.port.emit("update_tag", event.target.value);
 });
-$('#password_length').change(function() {
-  profiles[$('#profile').val()].password_length = $(this).val();
+document.querySelector('#password_length').addEventListener('change', function(event) {
+  var index = document.querySelector('#profile').value;
+  profiles[index].password_length = event.target.value;
   updateProfile();
 });
-$('#password_type').change(function() {
-  profiles[$('#profile').val()].password_type = $(this).val();
+document.querySelector('#password_type').addEventListener('change', function(event) {
+  var index = document.querySelector('#profile').value;
+  profiles[index].password_type = event.target.value;
   updateProfile();
 });
-$('#settings').click(function() {
+document.querySelector('#settings').addEventListener('click', function() {
   self.port.emit("display_settings");
 });
 
 function updateProfile() {
+  var index = document.querySelector('#profile').value;
   var data = {
-    profile_index: $('#profile').val(),
-    profile: profiles[$('#profile').val()],
+    profile_index: index,
+    profile: profiles[index],
   };
   self.port.emit("update_profile", data);
 }
