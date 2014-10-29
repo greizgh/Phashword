@@ -29,5 +29,4 @@ Phashword is free software and is distributed under the GPLv3 license. See COPYI
 by Steve Cooper. Distributed under MPL 1.1/GPL 2.0/LGPL 2.1 licenses.
 * [Password Hasher Plus](http://passwordhasherplus.com) by Eric Woodruff.
 Distributed under MPL 1.1/GPL 2.0/LGPL 2.1 licenses.
-* [jQuery](http://jquery.com/) by jQuery Foundation.
 * [TLD](https://www.npmjs.org/package/tldjs) by Thomas Parisot. Distributed under the MIT license.
