@@ -60,7 +60,7 @@ function handleKeypress(event) {
     return;
   }
   var field = event.target;
-  if (event.key === "Esc") {
+  if (event.key === self.options.key) {
     event.preventDefault();
     if (field.dataset.phashword === "true") {
       field.dataset.phashword = "false";

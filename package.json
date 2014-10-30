@@ -7,5 +7,22 @@
   "icon64": "data/img/icon-64.png",
   "icon": "data/img/icon-32.png",
   "license": "GPLv3",
-  "version": "1.1.0"
+  "version": "1.1.0",
+  "preferences": [{
+    "name": "toggle_key",
+    "title": "Toggle key",
+    "description": "Key to press to disable Phashword for focused field",
+    "type": "menulist",
+    "value": "Esc",
+    "options": [
+      {
+        "value": "Esc",
+        "label": "Escape"
+      },
+      {
+        "value": "F2",
+        "label": "F2"
+      }
+    ]
+  }]
 }
