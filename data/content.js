@@ -20,6 +20,7 @@
 var config = {};
 var elem;
 var profile;
+var toggle_key = self.options.key;
 
 self.port.on("hash", function(hash) {
   elem.value = hash;
@@ -27,6 +28,10 @@ self.port.on("hash", function(hash) {
 
 self.port.on("update_profile", function(data) {
   profile = data;
+});
+
+self.port.on("update_prefs", function(data) {
+  toggle_key = data.key;
 });
 
 function requestHash(key) {
@@ -60,7 +65,7 @@ function handleKeypress(event) {
     return;
   }
   var field = event.target;
-  if (event.key === self.options.key) {
+  if (event.key === toggle_key) {
     event.preventDefault();
     if (field.dataset.phashword === "true") {
       field.dataset.phashword = "false";
