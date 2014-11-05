@@ -72,14 +72,13 @@ function handleKeypress(event) {
     } else {
       field.dataset.phashword = "true";
     }
+    var focus = new CustomEvent('focus');
     if (field.dataset.phashword === "true") {
-      var focus = new CustomEvent('focus');
       field.dispatchEvent(focus);
     } else {
       field.value = '';
       var blur = new CustomEvent('blur');
       field.dispatchEvent(blur);
-      var focus = new CustomEvent('focus');
       field.dispatchEvent(focus);
     }
   }
