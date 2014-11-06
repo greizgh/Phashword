@@ -19,11 +19,19 @@
 
 var config = {};
 var elem;
+var hash_request = false;
+var submit = false;
 var profile;
 var toggle_key = self.options.key;
 
 self.port.on("hash", function(hash) {
   elem.value = hash;
+  hash_request = false;
+  if (submit) {
+    submit = false;
+    var submission = new CustomEvent('submit');
+    elem.form.dispatchEvent(submission);
+  }
 });
 
 self.port.on("update_profile", function(data) {
@@ -36,6 +44,7 @@ self.port.on("update_prefs", function(data) {
 
 function requestHash(key) {
   self.port.emit("get_hash", key);
+  hash_request = true;
 }
 
 function handleFocus(event) {
@@ -81,6 +90,25 @@ function handleKeypress(event) {
       field.dispatchEvent(blur);
       field.dispatchEvent(focus);
     }
+  } else if (event.key === "Enter") {
+    event.preventDefault();
+    if (field.dataset.phashword === "true" && field.value !== '') {
+      elem = field;
+      requestHash(field.value);
+      submit = true;
+    }
+
+  }
+}
+
+function handleSubmit(event) {
+  if (hash_request) {
+    // Flag for submission on hash reception
+    submit = true;
+    event.preventDefault();
+    return false;
+  } else {
+    return true;
   }
 }
 
@@ -89,6 +117,7 @@ function handleKeypress(event) {
   el.addEventListener('focus', handleFocus);
   el.addEventListener('blur', handleBlur);
   el.addEventListener('keydown', handleKeypress);
+  el.form.addEventListener('submit', handleSubmit);
 });
 
 document.addEventListener('DOMContentLoaded', function() {
