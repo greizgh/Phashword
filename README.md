@@ -16,7 +16,8 @@ The password will be generated using a keyed-hash message authentication code (H
 
 ## How to use Phashword?
 
-Once installed Phashword will handle every password fields. Phashword can be toggled per field by pressing "Escape" key.
+Once installed Phashword will handle every password fields. Phashword can be toggled per field by pressing "Escape" key (default).
+You can select other keys through addon preferences.
 
 ## License
 
