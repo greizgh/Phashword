@@ -1,3 +1,7 @@
+# 1.3.0 - 2014/11/15
+
+* Add ability to toggle phashword per website
+
 # 1.2.0 - 2014/11/06
 
 * Fix form being submitted before we have an actual hash
