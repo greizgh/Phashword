@@ -22,6 +22,7 @@ var elem;
 var hash_request = false;
 var submit = false;
 var profile;
+var site_settings;
 var toggle_key = self.options.key;
 
 self.port.on("hash", function(hash) {
@@ -35,7 +36,8 @@ self.port.on("hash", function(hash) {
 });
 
 self.port.on("update_profile", function(data) {
-  profile = data;
+  profile = data.profile;
+  site_settings = data.site_settings;
 });
 
 self.port.on("update_prefs", function(data) {
