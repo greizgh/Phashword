@@ -57,7 +57,8 @@ document.querySelector('#profile').addEventListener('change', function(event) {
 });
 
 document.querySelector('#tag').addEventListener('change', function(event) {
-  self.port.emit("update_tag", event.target.value);
+  site_settings.tag = event.target.value;
+  self.port.emit("update_settings", site_settings);
 });
 document.querySelector('#password_length').addEventListener('change', function(event) {
   var index = document.querySelector('#profile').value;
