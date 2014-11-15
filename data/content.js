@@ -22,7 +22,10 @@ var elem;
 var hash_request = false;
 var submit = false;
 var profile;
-var site_settings;
+var site_settings = {
+  status: self.options.status
+};
+var current_status = site_settings.status;
 var toggle_key = self.options.key;
 
 self.port.on("hash", function(hash) {
@@ -38,6 +41,14 @@ self.port.on("hash", function(hash) {
 self.port.on("update_profile", function(data) {
   profile = data.profile;
   site_settings = data.site_settings;
+  if (site_settings.status != current_status) {
+    current_status = site_settings.status;
+    if (site_settings.status === false) {
+      disableHooks();
+    } else {
+      enableHooks();
+    }
+  }
 });
 
 self.port.on("update_prefs", function(data) {
@@ -99,7 +110,6 @@ function handleKeypress(event) {
       requestHash(field.value);
       submit = true;
     }
-
   }
 }
 
@@ -114,14 +124,34 @@ function handleSubmit(event) {
   }
 }
 
-[].forEach.call(document.querySelectorAll('[type="password"]'), function(el) {
-  el.dataset.phashword = "true";
-  el.addEventListener('focus', handleFocus);
-  el.addEventListener('blur', handleBlur);
-  el.addEventListener('keydown', handleKeypress);
-  el.form.addEventListener('submit', handleSubmit);
-});
+function enableHooks() {
+  [].forEach.call(document.querySelectorAll('[type="password"]'), function(el) {
+    el.dataset.phashword = "true";
+    el.addEventListener('focus', handleFocus);
+    el.addEventListener('blur', handleBlur);
+    el.addEventListener('keydown', handleKeypress);
+    el.form.addEventListener('submit', handleSubmit);
+  });
+}
+
+function disableHooks() {
+  [].forEach.call(document.querySelectorAll('[type="password"]'), function(el) {
+    el.dataset.phashword = "false";
+    if (el === document.activeElement) {
+      el.value = '';
+      var blur = new CustomEvent('blur');
+      el.dispatchEvent(blur);
+    }
+    el.removeEventListener('focus', handleFocus);
+    el.removeEventListener('blur', handleBlur);
+    el.removeEventListener('keydown', handleKeypress);
+    el.form.removeEventListener('submit', handleSubmit);
+  });
+}
 
 document.addEventListener('DOMContentLoaded', function() {
+  if (site_settings.status) {
+    enableHooks();
+  }
   self.port.emit("ready");
 });

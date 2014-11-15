@@ -24,6 +24,24 @@ function updateFields() {
   if (site_settings && profiles) {
     document.querySelector('#tag').value = site_settings.tag;
     document.querySelector('#profile').value = site_settings.profile_index;
+    var i;
+    var enabled = document.querySelectorAll('.enabled');
+    var disabled = document.querySelectorAll('.disabled');
+    if (site_settings.status) {
+      for (i=0; i<enabled.length; i++) {
+        enabled[i].style.display = "inline";
+      }
+      for (i=0; i<disabled.length; i++) {
+        disabled[i].style.display = "none";
+      }
+    } else {
+      for (i=0; i<enabled.length; i++) {
+        enabled[i].style.display = "none";
+      }
+      for (i=0; i<disabled.length; i++) {
+        disabled[i].style.display = "inline";
+      }
+    }
     var change = new CustomEvent('change');
     document.querySelector('#profile').dispatchEvent(change);
   }
@@ -53,7 +71,7 @@ document.querySelector('#profile').addEventListener('change', function(event) {
   document.querySelector('#password_type').value = profiles[index].password_type;
   document.querySelector('#color').style.backgroundColor = profiles[index].color;
   site_settings.profile_index = index;
-  self.port.emit("select_profile", index);
+  self.port.emit("update_settings", site_settings);
 });
 
 document.querySelector('#tag').addEventListener('change', function(event) {
@@ -72,6 +90,11 @@ document.querySelector('#password_type').addEventListener('change', function(eve
 });
 document.querySelector('#settings').addEventListener('click', function() {
   self.port.emit("display_settings");
+});
+document.querySelector('#state_btn').addEventListener('click', function() {
+  site_settings.status = !site_settings.status;
+  self.port.emit("update_settings", site_settings);
+  updateFields();
 });
 
 function updateProfile() {
