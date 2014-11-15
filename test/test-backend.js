@@ -39,6 +39,7 @@ exports['test site profile save/load'] = function(assert) {
   var site_profile = manager.getSiteSettings('test');
   assert.ok(site_profile.profile_index === 0, "Site profile should default to default profile");
   assert.ok(site_profile.tag === 'test', "Tag should default to site");
+  assert.ok(site_profile.status === require("sdk/simple-prefs").prefs.default_status, "Site profile should follow default status setting");
   site_profile.tag = "42";
   site_profile.profile_index = 3;
   manager.setSiteSettings('test', site_profile);

@@ -8,7 +8,15 @@
   "icon": "data/img/icon-32.png",
   "license": "GPLv3",
   "version": "1.2.0",
-  "preferences": [{
+  "preferences": [
+    {
+      "name": "default_status",
+      "title": "Default status",
+      "description": "whether to enable or disable Phashword by default",
+      "type": "bool",
+      "value": true
+    },
+    {
     "name": "toggle_key",
     "title": "Toggle key",
     "description": "Key to press to disable Phashword for focused field",
