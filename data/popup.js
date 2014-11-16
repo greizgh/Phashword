@@ -97,6 +97,32 @@ document.querySelector('#state_btn').addEventListener('click', function() {
   updateFields();
 });
 
+/**
+ * Allow user to generate hash via popup
+ */
+document.querySelector('#master_key').addEventListener('keyup', requestHash);
+document.querySelector('#profile').addEventListener('change', requestHash);
+document.querySelector('#tag').addEventListener('change', requestHash);
+document.querySelector('#password_length').addEventListener('change', requestHash);
+document.querySelector('#password_type').addEventListener('change', requestHash);
+
+document.querySelector('#password').addEventListener('click', function(event) {
+  event.target.select();
+});
+
+function requestHash() {
+  var key = document.querySelector('#master_key').value;
+  if (key !== '') {
+    self.port.emit("get_hash", key);
+  } else {
+    document.querySelector('#password').value = null;
+  }
+}
+
+self.port.on("hash", function(hash) {
+  document.querySelector('#password').value = hash;
+});
+
 function updateProfile() {
   var index = document.querySelector('#profile').value;
   var data = {
