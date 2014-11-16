@@ -1,3 +1,7 @@
+# 1.4.0 - 2014/11/16
+
+* Add password generation from within popup
+
 # 1.3.0 - 2014/11/15
 
 * Add ability to toggle phashword per website
