@@ -2,14 +2,9 @@ header img {
   float: left;
   margin-right: 15px;
 }
-header.settings {
-  line-height: 4em;
-}
-header.popup {
-  line-height: 1.6em;
-}
 header {
   margin-bottom: -10px;
+  line-height: 4em;
 }
 .row {
   display: table-row;
