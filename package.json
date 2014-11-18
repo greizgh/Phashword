@@ -60,5 +60,12 @@
         "label": "F10"
       }
     ]
-  }]
+  },
+  {
+    "name": "open_settings",
+    "title": "Profile setting page",
+    "type": "control",
+    "label": "Open"
+  }
+  ]
 }
