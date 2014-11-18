@@ -1,3 +1,7 @@
+# 1.4.1 - 2014/11/18
+
+* Minor UI improvements
+
 # 1.4.0 - 2014/11/16
 
 * Add password generation from within popup

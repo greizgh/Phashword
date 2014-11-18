@@ -7,7 +7,7 @@
   "icon64": "data/img/icon-64.png",
   "icon": "data/img/icon-32.png",
   "license": "GPLv3",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "preferences": [
     {
       "name": "default_status",
