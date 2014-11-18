@@ -44,6 +44,7 @@ function updateFields() {
         disabled[i].style.display = "inline";
       }
     }
+    document.querySelector('#state').checked = site_settings.status;
     var change = new CustomEvent('change');
     document.querySelector('#profile').dispatchEvent(change);
   }
@@ -95,8 +96,8 @@ document.querySelector('#password_type').addEventListener('change', function(eve
 document.querySelector('#settings').addEventListener('click', function() {
   self.port.emit("display_settings");
 });
-document.querySelector('#state_btn').addEventListener('click', function() {
-  site_settings.status = !site_settings.status;
+document.querySelector('#state').addEventListener('change', function(event) {
+  site_settings.status = event.target.checked;
   self.port.emit("update_settings", site_settings);
   updateFields();
 });
