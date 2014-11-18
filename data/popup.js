@@ -20,25 +20,27 @@
 var profiles;
 var site_settings;
 
+/**
+ * Update fields according to site_settings
+ */
 function updateFields() {
   if (site_settings && profiles) {
     document.querySelector('#tag').value = site_settings.tag;
     document.querySelector('#profile').value = site_settings.profile_index;
-    var i;
     var enabled = document.querySelectorAll('.enabled');
     var disabled = document.querySelectorAll('.disabled');
     if (site_settings.status) {
-      for (i=0; i<enabled.length; i++) {
+      for (let i=0; i<enabled.length; i++) {
         enabled[i].style.display = "inline";
       }
-      for (i=0; i<disabled.length; i++) {
+      for (let i=0; i<disabled.length; i++) {
         disabled[i].style.display = "none";
       }
     } else {
-      for (i=0; i<enabled.length; i++) {
+      for (let i=0; i<enabled.length; i++) {
         enabled[i].style.display = "none";
       }
-      for (i=0; i<disabled.length; i++) {
+      for (let i=0; i<disabled.length; i++) {
         disabled[i].style.display = "inline";
       }
     }
@@ -65,6 +67,9 @@ self.port.on("populate", function(data) {
   updateFields();
 });
 
+/**
+ * Listen for changes in the popup and send them to main
+ */
 document.querySelector('#profile').addEventListener('change', function(event) {
   var index = event.target.value;
   document.querySelector('#password_length').value = profiles[index].password_length;
@@ -73,7 +78,6 @@ document.querySelector('#profile').addEventListener('change', function(event) {
   site_settings.profile_index = index;
   self.port.emit("update_settings", site_settings);
 });
-
 document.querySelector('#tag').addEventListener('change', function(event) {
   site_settings.tag = event.target.value;
   self.port.emit("update_settings", site_settings);
@@ -123,6 +127,9 @@ self.port.on("hash", function(hash) {
   document.querySelector('#password').value = hash;
 });
 
+/**
+ * Send changes to main
+ */
 function updateProfile() {
   var index = document.querySelector('#profile').value;
   var data = {
@@ -132,4 +139,5 @@ function updateProfile() {
   self.port.emit("update_profile", data);
 }
 
+// Tell main that we are ready
 self.port.emit("ready");

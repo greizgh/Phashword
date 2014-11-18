@@ -31,6 +31,9 @@ self.port.on("populate", function(data) {
   document.querySelector('#profile').dispatchEvent(change);
 });
 
+/**
+ * Update fields on profile selection
+ */
 document.querySelector('#profile').addEventListener('change', function(event) {
   var index = event.target.value;
   document.querySelector('#name').value = profiles[index].name;
@@ -83,4 +86,6 @@ document.querySelector('#remove_profile').addEventListener('click', function() {
     self.port.emit("remove_profile", document.querySelector('#profile').value);
   }
 });
+
+// Tell main that we are ready
 self.port.emit("ready");
