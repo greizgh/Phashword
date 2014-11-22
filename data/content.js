@@ -62,23 +62,30 @@ function requestHash(key) {
 
 function handleFocus(event) {
   var field = event.target;
-  config.bg = field.style.backgroundColor;
-  config.placeholder = field.getAttribute("placeholder") || '';
-  if (field.dataset.phashword === "true") {
-    field.style.backgroundColor = profile.color;
-    field.setAttribute('placeholder', "Phashword 🔑");
-    field.value = config.value || '';
+  if (field.type === "password") {
+    config.bg = field.style.backgroundColor;
+    config.placeholder = field.getAttribute("placeholder") || '';
+    if (!field.dataset.phashword) {
+      field.dataset.phashword = String(site_settings.status);
+    }
+    if (field.dataset.phashword === "true") {
+      field.style.backgroundColor = profile.color;
+      field.setAttribute('placeholder', "Phashword 🔑");
+      field.value = config.value || '';
+    }
   }
 }
 
 function handleBlur(event) {
   var field = event.target;
-  field.style.backgroundColor = config.bg;
-  field.setAttribute("placeholder", config.placeholder);
-  config.value = field.value;
-  if (field.dataset.phashword === "true" && field.value !== '') {
-    elem = field;
-    requestHash(field.value);
+  if (field.type === "password") {
+    field.style.backgroundColor = config.bg;
+    field.setAttribute("placeholder", config.placeholder);
+    config.value = field.value;
+    if (field.dataset.phashword === "true" && field.value !== '') {
+      elem = field;
+      requestHash(field.value);
+    }
   }
 }
 
@@ -87,28 +94,30 @@ function handleKeypress(event) {
     return;
   }
   var field = event.target;
-  if (event.key === toggle_key) {
-    event.preventDefault();
-    if (field.dataset.phashword === "true") {
-      field.dataset.phashword = "false";
-    } else {
-      field.dataset.phashword = "true";
-    }
-    var focus = new CustomEvent('focus');
-    if (field.dataset.phashword === "true") {
-      field.dispatchEvent(focus);
-    } else {
-      field.value = '';
-      var blur = new CustomEvent('blur');
-      field.dispatchEvent(blur);
-      field.dispatchEvent(focus);
-    }
-  } else if (event.key === "Enter") {
-    event.preventDefault();
-    if (field.dataset.phashword === "true" && field.value !== '') {
-      elem = field;
-      requestHash(field.value);
-      submit = true;
+  if (field.type === "password") {
+    if (event.key === toggle_key) {
+      event.preventDefault();
+      if (field.dataset.phashword === "true") {
+        field.dataset.phashword = "false";
+      } else {
+        field.dataset.phashword = "true";
+      }
+      var focus = new CustomEvent('focus');
+      if (field.dataset.phashword === "true") {
+        field.dispatchEvent(focus);
+      } else {
+        field.value = '';
+        var blur = new CustomEvent('blur');
+        field.dispatchEvent(blur);
+        field.dispatchEvent(focus);
+      }
+    } else if (event.key === "Enter") {
+      event.preventDefault();
+      if (field.dataset.phashword === "true" && field.value !== '') {
+        elem = field;
+        requestHash(field.value);
+        submit = true;
+      }
     }
   }
 }
@@ -125,28 +134,23 @@ function handleSubmit(event) {
 }
 
 function enableHooks() {
-  [].forEach.call(document.querySelectorAll('[type="password"]'), function(el) {
-    el.dataset.phashword = "true";
-    el.addEventListener('focus', handleFocus);
-    el.addEventListener('blur', handleBlur);
-    el.addEventListener('keydown', handleKeypress);
-    el.form.addEventListener('submit', handleSubmit);
-  });
+  document.addEventListener('focus', handleFocus, true);
+  document.addEventListener('blur', handleBlur, true);
+  document.addEventListener('keydown', handleKeypress);
+  document.addEventListener('submit', handleSubmit);
 }
 
 function disableHooks() {
-  [].forEach.call(document.querySelectorAll('[type="password"]'), function(el) {
-    el.dataset.phashword = "false";
-    if (el === document.activeElement) {
-      el.value = '';
-      var blur = new CustomEvent('blur');
-      el.dispatchEvent(blur);
-    }
-    el.removeEventListener('focus', handleFocus);
-    el.removeEventListener('blur', handleBlur);
-    el.removeEventListener('keydown', handleKeypress);
-    el.form.removeEventListener('submit', handleSubmit);
-  });
+  var el = document.activeElement;
+  if (el.mozMatchesSelector('input[type="password"]')) {
+    el.value = '';
+    var blur = new CustomEvent('blur');
+    el.dispatchEvent(blur);
+  }
+  document.removeEventListener('focus', handleFocus, true);
+  document.removeEventListener('blur', handleBlur, true);
+  document.removeEventListener('keydown', handleKeypress);
+  document.removeEventListener('submit', handleSubmit);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
