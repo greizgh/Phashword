@@ -1,3 +1,7 @@
+# 1.4.2 - 2014/11/22
+
+* Handle dynamically created password fields
+
 # 1.4.1 - 2014/11/18
 
 * Minor UI improvements
