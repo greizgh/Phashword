@@ -1,8 +1,8 @@
 # Phashword
 
-Phashword is a firefox addon making password generation and management easier.
+Phashword is a firefox add-on making password generation and management easier.
 
-Spiritual successor of password hasher (another firefox addon) it is completely compatible with [Twik](https://github.com/gustavomondron/twik) and twik for chrome.
+Spiritual successor of password hasher (another firefox add-on) it is completely compatible with [Twik](https://github.com/gustavomondron/twik) on Android and twik for chrome.
 
 ## How does it work?
 
@@ -16,8 +16,10 @@ The password will be generated using a keyed-hash message authentication code (H
 
 ## How to use Phashword?
 
-Once installed Phashword will handle every password fields. Phashword can be toggled per field by pressing "Escape" key (default).
-You can select other keys through addon preferences.
+Once installed Phashword will be active by default. It means that every password fields will be handled by phashword.
+You can toggle Phashword per field by pressing "Escape" key (default, other keys available through add-on configuration).
+You can also toggle Phashword per website using status checkbox in pop-up menu by clicking the Phashword icon in toolbar.
+If you prefer to only enable Phashword on particular websites, then you can change its default status in add-on configuration.
 
 ## License
 
