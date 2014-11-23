@@ -21,6 +21,13 @@ You can toggle Phashword per field by pressing "Escape" key (default, other keys
 You can also toggle Phashword per website using status checkbox in pop-up menu by clicking the Phashword icon in toolbar.
 If you prefer to only enable Phashword on particular websites, then you can change its default status in add-on configuration.
 
+## Where can I get Phashword?
+
+Go to [firefox add-on page](https://addons.mozilla.org/fr/firefox/addon/phashword/) and click _Add to firefox_.
+
+Or you can clone this repository and build the extension using `cfx xpi`.
+See [MDN](https://developer.mozilla.org/en-US/Add-ons/SDK) for more information on firefox add-on SDK.
+
 ## License
 
 Phashword is free software and is distributed under the GPLv3 license. See COPYING for more information.
