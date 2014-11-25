@@ -70,7 +70,7 @@ function handleFocus(event) {
     }
     if (field.dataset.phashword === "true") {
       field.style.backgroundColor = profile.color;
-      field.setAttribute('placeholder', "Phashword 🔑");
+      field.setAttribute('placeholder', profile.name + ' - ' + site_settings.tag);
       field.value = config.value || '';
     }
   }
