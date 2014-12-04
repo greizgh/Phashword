@@ -1,3 +1,8 @@
+# 1.4.3 - 2014/12/04
+
+* Condense popup UI
+* Replace password field placeholder with tag and profile name
+
 # 1.4.2 - 2014/11/22
 
 * Handle dynamically created password fields
