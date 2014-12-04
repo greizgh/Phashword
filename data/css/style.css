@@ -16,9 +16,3 @@ header {
 .row .cell:first-child {
   text-align: right;
 }
-.color-sample {
-  display: inline-block;
-  height: 1.5em;
-  width: 10px;
-  vertical-align: middle;
-}

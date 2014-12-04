@@ -140,5 +140,13 @@ function updateProfile() {
   self.port.emit("update_profile", data);
 }
 
+self.port.on("get_size", function() {
+  var size = {
+    width: document.documentElement.clientWidth,
+    height: document.documentElement.clientHeight,
+  };
+  self.port.emit("resize", size);
+});
+
 // Tell main that we are ready
 self.port.emit("ready");

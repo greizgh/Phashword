@@ -3,68 +3,43 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <div class="row">
-        <div class="cell">
-            <label data-l10n-id="profile">Profile</label>
-        </div>
-        <div class="cell">
-            <select id="profile" name="profile">
-            </select>
-            <span id="color" class="color-sample"></span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="cell">
-            <span class="enabled" style="display: none" data-l10n-id="status_enabled">Enabled</span>
-            <span class="disabled" style="display: none" data-l10n-id="status_disabled">Disabled</span>
-        </div>
-        <div class="cell">
-            <input type="checkbox" id="state"/>
-        </div>
-    </div>
-    <div class="row">
-        <div class="cell">
-            <label data-l10n-id="website_tag">Tag</label>
-        </div>
-        <div class="cell">
+    <div class="content">
+        <div class="group">
+            <div class="profile">
+                <label data-l10n-id="profile" for="profile">Profile</label>
+                <select id="profile" name="profile">
+                </select>
+                <span id="color" class="color-sample"></span>
+            </div>
+            <div class="status">
+                <input type="checkbox" name="state" id="state"/>
+                <label for="state">
+                    <span class="enabled" style="display: none" data-l10n-id="status_enabled">Enabled</span>
+                    <span class="disabled" style="display: none" data-l10n-id="status_disabled">Disabled</span>
+                </label>
+            </div>
+            <label data-l10n-id="website_tag" for="tag">Tag</label>
             <input type="text" name="tag" id="tag" size="20"/>
         </div>
-    </div>
-    <div class="row">
-        <div class="cell">
-            <label data-l10n-id="password_length">Length</label>
-        </div>
-        <div class="cell">
+        <div class="group">
+            <label data-l10n-id="password_length" for="password_length">Length</label>
+            <br>
             <input type="number" name="password_length" id="password_length" min="1" value="12">
-        </div>
-    </div>
-    <div class="row">
-        <div class="cell">
-            <label data-l10n-id="password_type">Type</label>
-        </div>
-        <div class="cell">
+            <br>
+            <label data-l10n-id="password_type" for="password_type">Type</label>
+            <br>
             <select name="password_type" id="password_type">
                 <option value="1" data-l10n-id="alphaspec">Alphanumeric and special characters</option>
                 <option value="2" data-l10n-id="alpha">Alphanumeric</option>
                 <option value="3" data-l10n-id="num">Numeric</option>
             </select>
         </div>
-    </div>
-    <div class="row">
-        <div class="cell">
-            <label data-l10n-id="master_key">Master key</label>
-        </div>
-        <div class="cell">
+        <div class="group">
+            <label data-l10n-id="master_key" for="master_key">Master key</label>
             <input type="password" id="master_key"/>
-        </div>
-    </div>
-    <div class="row">
-        <div class="cell">
-            <label data-l10n-id="password">Password</label>
-        </div>
-        <div class="cell">
+            <label data-l10n-id="password" for="password">Password</label>
             <input type="text" id="password" readonly/>
         </div>
+        <button id="settings" data-l10n-id="settings">Settings</button>
     </div>
-    <button id="settings" data-l10n-id="settings">Settings</button>
 </body>
