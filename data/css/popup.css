@@ -18,9 +18,7 @@ input[type=text], input[type=number], input[type=password] {
 label[for=profile] {
     display: inline-block;
     max-width: 30%;
-    max-height: 1.2em;
     width: 30%;
-    overflow: auto;
 }
 #profile {
     max-width: 60%;
