@@ -1,3 +1,7 @@
+# 1.4.4 - 2014/12/05
+
+* Fix popup design
+
 # 1.4.3 - 2014/12/04
 
 * Condense popup UI
