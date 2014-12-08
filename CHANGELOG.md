@@ -1,3 +1,7 @@
+# 1.4.5 - 2014/12/08
+
+* Fix AMO validation warnings
+
 # 1.4.4 - 2014/12/05
 
 * Fix popup design
