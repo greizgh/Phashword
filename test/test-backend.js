@@ -17,8 +17,8 @@
  * along with Phashword.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var backend = require("./backend.js");
-var constants = require("./constants.js");
+var backend = require("backend");
+var constants = require("constants");
 var manager = new backend.ProfileManager();
 
 exports['test default profile creation'] = function(assert) {
