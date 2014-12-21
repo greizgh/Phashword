@@ -1,3 +1,7 @@
+# 1.4.6 - 2014/12/21
+
+* Fix issue with firefox 36 not properly handling password fields
+
 # 1.4.5 - 2014/12/08
 
 * Fix AMO validation warnings
