@@ -112,8 +112,8 @@ function handleKeypress(event) {
         field.dispatchEvent(focus);
       }
     } else if (event.key === "Enter") {
-      event.preventDefault();
       if (field.dataset.phashword === "true" && field.value !== '') {
+        event.preventDefault();
         elem = field;
         requestHash(field.value);
         submit = true;
