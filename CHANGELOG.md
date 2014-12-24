@@ -1,3 +1,7 @@
+# 1.4.7 - 2014/12/24
+
+* Fix issue where form submitting was prevented in some situation
+
 # 1.4.6 - 2014/12/21
 
 * Fix issue with firefox 36 not properly handling password fields
