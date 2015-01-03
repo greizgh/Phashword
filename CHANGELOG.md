@@ -1,3 +1,7 @@
+# 1.4.8 - 2015/01/03
+
+* Fix issue with phashword state not reflected on current page until reload
+
 # 1.4.7 - 2014/12/24
 
 * Fix issue where form submitting was prevented in some situation
