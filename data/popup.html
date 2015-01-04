@@ -4,42 +4,65 @@
 </head>
 <body>
     <div class="content">
-        <div class="group">
-            <div class="profile">
-                <label data-l10n-id="profile" for="profile">Profile</label>
+        <div class="row">
+            <label data-l10n-id="profile" for="profile">Profile</label>
+        </div>
+        <div class="row">
+            <div class="large-left">
                 <select id="profile" name="profile">
                 </select>
-                <span id="color" class="color-sample"></span>
             </div>
-            <div class="status">
-                <input type="checkbox" name="state" id="state"/>
-                <label for="state">
+            <div class="small-right">
+                <span class="color-sample" id="color"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="full">
+                <button class="state fill" id="state">
                     <span class="enabled" style="display: none" data-l10n-id="status_enabled">Enabled</span>
                     <span class="disabled" style="display: none" data-l10n-id="status_disabled">Disabled</span>
-                </label>
+                </button>
             </div>
-            <label data-l10n-id="website_tag" for="tag">Tag</label>
-            <input type="text" name="tag" id="tag" size="20"/>
         </div>
-        <div class="group">
-            <label data-l10n-id="password_length" for="password_length">Length</label>
-            <br>
-            <input type="number" name="password_length" id="password_length" min="1" value="12">
-            <br>
-            <label data-l10n-id="password_type" for="password_type">Type</label>
-            <br>
-            <select name="password_type" id="password_type">
-                <option value="1" data-l10n-id="alphaspec">Alphanumeric and special characters</option>
-                <option value="2" data-l10n-id="alpha">Alphanumeric</option>
-                <option value="3" data-l10n-id="num">Numeric</option>
-            </select>
+        <div class="row">
+            <div class="full"><label data-l10n-id="website_tag" for="tag">Tag</label></div>
         </div>
-        <div class="group">
-            <label data-l10n-id="master_key" for="master_key">Master key</label>
-            <input type="password" id="master_key"/>
-            <label data-l10n-id="password" for="password">Password</label>
-            <input type="text" id="password" readonly/>
+        <div class="row">
+            <div class="full"><input type="text" name="tag" id="tag" size="20"/></div>
         </div>
-        <button id="settings" data-l10n-id="settings">Settings</button>
+        <div class="row">
+            <div class="full"><label data-l10n-id="password_length" for="password_length">Length</label></div>
+        </div>
+        <div class="row">
+            <div class="full"><input type="number" name="password_length" id="password_length" min="1" value="12"></div>
+        </div>
+        <div class="row">
+            <div class="full"><label data-l10n-id="password_type" for="password_type">Type</label></div>
+        </div>
+        <div class="row">
+            <div class="full">
+                <select name="password_type" id="password_type">
+                    <option value="1" data-l10n-id="alphaspec">Alphanumeric and special characters</option>
+                    <option value="2" data-l10n-id="alpha">Alphanumeric</option>
+                    <option value="3" data-l10n-id="num">Numeric</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="full"><label data-l10n-id="master_key" for="master_key">Master key</label></div>
+        </div>
+        <div class="row">
+            <div class="full"><input type="password" id="master_key"/></div>
+        </div>
+        <div class="row">
+            <div class="full"><label data-l10n-id="password" for="password">Password</label></div>
+        </div>
+        <div class="row">
+            <div class="large-left"><input type="text" id="password" readonly/></div>
+            <div class="small-right"><button class="fill" id="copy"><img src="img/copy.png"/></button></div>
+        </div>
+        <div class="row">
+            <div class="full"><button id="settings" data-l10n-id="settings">Settings</button></div>
+        </div>
     </div>
 </body>

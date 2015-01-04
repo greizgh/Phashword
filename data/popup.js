@@ -96,8 +96,8 @@ document.querySelector('#password_type').addEventListener('change', function(eve
 document.querySelector('#settings').addEventListener('click', function() {
   self.port.emit("display_settings");
 });
-document.querySelector('#state').addEventListener('change', function(event) {
-  site_settings.status = event.target.checked;
+document.querySelector('#state').addEventListener('click', function(event) {
+  site_settings.status = !site_settings.status;
   self.port.emit("update_settings", site_settings);
   updateFields();
 });
@@ -113,6 +113,12 @@ document.querySelector('#password_type').addEventListener('change', requestHash)
 
 document.querySelector('#password').addEventListener('click', function(event) {
   event.target.select();
+});
+
+document.querySelector('#copy').addEventListener('click', function(event) {
+  self.port.emit("copy", document.querySelector('#password').value);
+  document.querySelector('#master_key').value = '';
+  document.querySelector('#password').value = '';
 });
 
 function requestHash() {
