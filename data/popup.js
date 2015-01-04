@@ -148,5 +148,10 @@ self.port.on("get_size", function() {
   self.port.emit("resize", size);
 });
 
+self.port.on("hide", function() {
+  document.querySelector('#password').value = '';
+  document.querySelector('#master_key').value = '';
+});
+
 // Tell main that we are ready
 self.port.emit("ready");
