@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Greizgh
+ * Copyright 2014-2015 Greizgh
  *
  * This file is part of Phashword.
  *
@@ -47,7 +47,7 @@ document.querySelector('#profile').addEventListener('change', function(event) {
  * Listen for update and broadcast it
  */
 document.querySelector('#name').addEventListener('change', function(event) {
-  var index = document.querySelector('#profile').value; 
+  var index = document.querySelector('#profile').value;
   profiles[index].name = event.target.value;
   document.querySelector('#profile').options[index].text = event.target.value;
   updateProfile();
@@ -84,6 +84,51 @@ document.querySelector('#add_profile').addEventListener('click', function() {
 document.querySelector('#remove_profile').addEventListener('click', function() {
   if (profiles.length > 1) {
     self.port.emit("remove_profile", document.querySelector('#profile').value);
+  }
+});
+
+// Tabs handling
+var tabs = document.querySelectorAll('ul.tabs li');
+for (let i=0; i<tabs.length; i++) {
+  tabs[i].addEventListener('click', function(event) {
+    let el = event.target;
+    let tab_id = el.getAttribute('data-tab');
+
+    for (let j=0; j<tabs.length; j++) {
+      tabs[j].classList.remove('active');
+    }
+
+    let tab_content = document.querySelectorAll('.tab-content');
+    for (let j=0; j<tab_content.length; j++) {
+      tab_content[j].classList.remove('active');
+    }
+
+    el.classList.add('active');
+    document.querySelector('#'+tab_id).classList.add('active');
+  });
+}
+
+// List available site settings
+self.port.on("site_settings", function(settings) {
+  while (document.querySelector('#stored_sites tbody').firstChild) {
+    document.querySelector('#stored_sites tbody').removeChild(document.querySelector('#stored_sites tbody').firstChild);
+  }
+  for (site in settings) {
+    let row = document.createElement('tr');
+    let td_site = document.createElement('td');
+    td_site.appendChild(document.createTextNode(site));
+    let td_action = document.createElement('td');
+    let remove_btn = document.createElement('button');
+    remove_btn.onclick = function() {
+      self.port.emit("remove_site", site);
+    };
+    let img = document.createElement('img');
+    img.src = 'img/remove.png';
+    remove_btn.appendChild(img);
+    td_action.appendChild(remove_btn);
+    row.appendChild(td_site);
+    row.appendChild(td_action);
+    document.querySelector('#stored_sites tbody').appendChild(row);
   }
 });
 

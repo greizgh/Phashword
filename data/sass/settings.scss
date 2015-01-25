@@ -1,0 +1,68 @@
+@import "reset";
+@import "susy";
+
+$nav-height: 40px;
+$dark: #cecece;
+$light: #ededed;
+
+$susy: (
+  columns: 6,
+  container: 800px,
+  gutters: 0,
+  global-box-sizing: border-box
+  );
+
+@include border-box-sizing;
+
+body {
+  background-color: $dark;
+}
+
+.wrapper {
+  @include container;
+  margin: 0 auto;
+}
+
+header {
+  margin-top: 20px;
+  height: 70px;
+  padding-left: 20px;
+  img { float: left; }
+  h1 { margin: 0; margin-left: 85px; line-height: 70px }
+}
+
+ul.tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+
+  li.active {
+    background: $light;
+    color: #222;
+  }
+}
+
+.tab-content {
+  display: none;
+  background: $light;
+  padding: 15px;
+}
+
+.tab-content.active {
+  display: inherit;
+}
+
+table {
+  width: 100%;
+  td:nth-child(2) {
+    text-align: right;
+  }
+}
