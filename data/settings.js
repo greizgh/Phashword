@@ -110,10 +110,11 @@ for (let i=0; i<tabs.length; i++) {
 
 // List available site settings
 self.port.on("site_settings", function(settings) {
-  while (document.querySelector('#stored_sites tbody').firstChild) {
-    document.querySelector('#stored_sites tbody').removeChild(document.querySelector('#stored_sites tbody').firstChild);
+  var table = document.querySelector('#stored_sites tbody');
+  while (table.firstChild) {
+    table.removeChild(table.firstChild);
   }
-  for (site in settings) {
+  for (let site in settings) {
     let row = document.createElement('tr');
     let td_site = document.createElement('td');
     td_site.appendChild(document.createTextNode(site));
@@ -128,7 +129,17 @@ self.port.on("site_settings", function(settings) {
     td_action.appendChild(remove_btn);
     row.appendChild(td_site);
     row.appendChild(td_action);
-    document.querySelector('#stored_sites tbody').appendChild(row);
+    table.appendChild(row);
+  }
+});
+
+self.port.on("quota", function(quota) {
+  document.querySelector('#quota').value = quota;
+  document.querySelector('#quota-percent').innerHTML = (quota*100).toFixed(0) + '%';
+  if (quota > 0.9) {
+    document.querySelector('#quota-warning').style.display = "inline";
+  } else {
+    document.querySelector('#quota-warning').style.display = "none";
   }
 });
 

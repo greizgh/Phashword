@@ -12,6 +12,7 @@
       <ul class="tabs">
         <li class="active" data-tab="tab-1" data-l10n-id="profiles">Profiles</li>
         <li data-tab="tab-2" data-l10n-id="sites">Sites</li>
+        <li data-tab="tab-3" data-l10n-id="storage">Storage</li>
       </ul>
       <div class="tab-content active" id="tab-1">
         <div class="row">
@@ -84,6 +85,12 @@
           </thead>
           <tbody></tbody>
         </table>
+      </div>
+      <div class="tab-content" id="tab-3">
+          <p data-l10n-id="quota_notice"></p>
+          <p><span data-l10n-id="quota_use"></span> <span id="quota-percent"></span></p>
+          <meter id="quota" name="storage" min="0" max="1" high="0.9" value="0"></meter>
+          <p data-l10n-id="quota_warning" id="quota-warning"></p>
       </div>
     </div>
   </body>
