@@ -14,6 +14,10 @@ $susy: (
 
 @include border-box-sizing;
 
+@mixin shadowed() {
+  box-shadow: 3px 3px 8px;
+}
+
 body {
   background-color: $dark;
 }
@@ -48,6 +52,7 @@ ul.tabs {
     background: $light;
     color: #222;
   }
+  @include shadowed;
 }
 
 .tab-content {
@@ -58,13 +63,21 @@ ul.tabs {
   &.active {
     display: inherit;
   }
+  @include shadowed;
 }
 
 table {
+  border-collapse: collapse;
   width: 100%;
-  td:nth-child(2) {
-    text-align: right;
+  td {
+    padding: 10px;
+    &:nth-child(2) {
+        text-align: right;
+    }
   }
+  tr:nth-child(odd) {background-color: tint($dark, 50); }
+  tr:nth-child(even) { background-color: tint($dark, 25); }
+  tr:hover td { background-color: #abff97; }
 }
 
 meter {
