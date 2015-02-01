@@ -1,3 +1,10 @@
+# 1.5.0 - 2015/02/01
+
+* Add copy to clipboard button in popup
+* Warn when storage quota is exceeded
+* Manage site settings from backend
+* Toggle phashword via context menu
+
 # 1.4.8 - 2015/01/03
 
 * Fix issue with phashword state not reflected on current page until reload
