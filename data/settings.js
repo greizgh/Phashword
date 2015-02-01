@@ -135,7 +135,8 @@ self.port.on("site_settings", function(settings) {
 
 self.port.on("quota", function(quota) {
   document.querySelector('#quota').value = quota;
-  document.querySelector('#quota-percent').innerHTML = (quota*100).toFixed(0) + '%';
+  document.querySelector('#quota-percent').innerHTML = null;
+  document.querySelector('#quota-percent').appendChild(document.createTextNode((quota*100).toFixed(0) + '%'));
   if (quota > 0.9) {
     document.querySelector('#quota-warning').style.display = "inline";
   } else {
