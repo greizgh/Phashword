@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Greizgh
+ * Copyright 2014-2015 Greizgh
  *
  * This file is part of Phashword.
  *
@@ -30,6 +30,9 @@ var toggle_key = self.options.key;
 
 self.port.on("hash", function(hash) {
   elem.value = hash;
+  elem.dispatchEvent(new KeyboardEvent('keydown'));
+  elem.dispatchEvent(new KeyboardEvent('keypress'));
+  elem.dispatchEvent(new KeyboardEvent('keyup'));
   hash_request = false;
   if (submit) {
     submit = false;

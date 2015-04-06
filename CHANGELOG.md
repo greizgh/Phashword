@@ -1,3 +1,7 @@
+# 1.5.1 - 2015/04/06
+
+* Emit keyboard event after password is received: fix issue with dynamic password validation
+
 # 1.5.0 - 2015/02/01
 
 * Add copy to clipboard button in popup
