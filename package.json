@@ -1,13 +1,13 @@
 {
   "name": "phashword",
   "title": "Phashword",
-  "id": "jid1-nY3RWh8Fb7qhXw",
+  "id": "jid1-nY3RWh8Fb7qhXw@jetpack",
   "description": "Easy to use password generator",
   "author": "Greizgh",
-  "icon64": "data/img/icon-64.png",
-  "icon": "data/img/icon-32.png",
+  "icon": "data/img/icon-48.png",
   "license": "GPLv3",
   "version": "1.5.1",
+  "main": "lib/main.js",
   "preferences": [
     {
       "name": "default_status",

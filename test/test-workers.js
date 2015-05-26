@@ -17,7 +17,7 @@
  * along with Phashword.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var workers = require("workers");
+var workers = require("../lib/workers");
 var manager = workers.manager;
 
 // Mock content worker

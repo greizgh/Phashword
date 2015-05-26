@@ -17,7 +17,7 @@
  * along with Phashword.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var pwh = require("./PasswordHasher");
+var pwh = require("../lib/PasswordHasher");
 var passwordHasher = new pwh.PasswordHasher();
 
 exports["test basic hashing capability"] = function(assert) {
