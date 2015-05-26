@@ -6,7 +6,7 @@
   "author": "Greizgh",
   "icon": "data/img/icon-48.png",
   "license": "GPLv3",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "main": "lib/main.js",
   "preferences": [
     {

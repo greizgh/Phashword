@@ -1,3 +1,8 @@
+# 1.5.2 - 2015/05/26
+
+* Fix toggle key not being taken into account before restart
+* Switch to jpm
+
 # 1.5.1 - 2015/04/06
 
 * Emit keyboard event after password is received: fix issue with dynamic password validation
