@@ -1,3 +1,7 @@
+# 1.5.5 - 2015/06/13
+
+* Fix bad behavior when removing a site profile
+
 # 1.5.2 - 2015/05/26
 
 * Fix toggle key not being taken into account before restart
