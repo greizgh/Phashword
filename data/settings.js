@@ -120,8 +120,9 @@ self.port.on("site_settings", function(settings) {
     td_site.appendChild(document.createTextNode(site));
     let td_action = document.createElement('td');
     let remove_btn = document.createElement('button');
+    remove_btn.setAttribute('data-site', site);
     remove_btn.onclick = function() {
-      self.port.emit("remove_site", site);
+      self.port.emit("remove_site", this.getAttribute('data-site'));
     };
     let img = document.createElement('img');
     img.src = 'img/remove.png';
