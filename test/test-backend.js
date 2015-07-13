@@ -47,13 +47,27 @@ exports['test site profile save/load'] = function(assert) {
   assert.ok(manager.getSiteSettings('test').profile_index === 3, "Profile index should be saved");
 };
 
+exports['test not saving default site profile'] = function(assert) {
+  var nb_sites = Object.keys(manager.getAllSiteSettings()).length;
+  var site_profile = manager.getSiteSettings('somesite');
+  manager.setSiteSettings('somesite', site_profile);
+  assert.ok(Object.keys(manager.getAllSiteSettings()).length === nb_sites, "Default site profile should not be saved");
+};
+
+exports['test force saving'] = function(assert) {
+  var nb_sites = Object.keys(manager.getAllSiteSettings()).length;
+  var site_profile = manager.getSiteSettings('somesite');
+  manager.setSiteSettings('somesite', site_profile, true);
+  assert.ok(Object.keys(manager.getAllSiteSettings()).length === nb_sites + 1, "Profile saving should be forced");
+};
+
 exports['test site settings removal'] = function(assert) {
   var site_settings = manager.getSiteSettings('test');
   manager.setSiteSettings('test', site_settings);
   var nb_sites = Object.keys(manager.getAllSiteSettings()).length;
   manager.removeSiteSettings('test');
   assert.ok(Object.keys(manager.getAllSiteSettings()).length === (nb_sites - 1), "Site should be removed");
-}
+};
 
 exports['test profile creation / deletetion'] = function(assert) {
   var num = manager.getProfiles().length;
