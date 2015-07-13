@@ -1,3 +1,7 @@
+# 1.5.6 - 2015/07/13
+
+* Only save site settings when needed
+
 # 1.5.5 - 2015/06/13
 
 * Fix bad behavior when removing a site profile
