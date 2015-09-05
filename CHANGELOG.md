@@ -1,3 +1,7 @@
+# 1.5.7 - 2015/09/05
+
+* Display private key as QRcode
+
 # 1.5.6 - 2015/07/13
 
 * Only save site settings when needed

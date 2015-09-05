@@ -41,6 +41,7 @@
           </div>
           <div class="cell">
             <input type="text" name="private_key" id="private_key" size="42"/>
+            <div id="qrcode" class="qrcode"></div>
           </div>
         </div>
 
@@ -87,6 +88,26 @@
           <p data-l10n-id="quota_warning" id="quota-warning"></p>
       </div>
     </div>
+    <script src="thirdparties/qrcode.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function(){
+  var qrcode = new QRCode(document.getElementById("qrcode"), {
+    text: '',
+    width: 128,
+    height: 128,
+    correctLevel: QRCode.CorrectLevel.L,
+  });
+  document.querySelector('#private_key').addEventListener('keypress', function(event) {
+    qrcode.makeCode(document.querySelector('#private_key').value);
+  });
+  document.querySelector('#private_key').addEventListener('change', function(event) {
+    qrcode.makeCode(document.querySelector('#private_key').value);
+  });
+  document.querySelector('#profile').addEventListener('change', function(event) {
+    // Wait for private_key to be populated
+    setTimeout(function(){qrcode.makeCode(document.querySelector('#private_key').value);}, 10);
+  });
+});
+    </script>
   </body>
 </html>
-
