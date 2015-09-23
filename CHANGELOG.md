@@ -1,3 +1,7 @@
+# 1.5.8 - 2015/09/23
+
+* Fix incompatibility with twik when using special char in master password
+
 # 1.5.7 - 2015/09/05
 
 * Display private key as QRcode
