@@ -22,21 +22,21 @@ var manager = workers.manager;
 
 // Mock content worker
 function WorkerMock(url, id) {
-  this.url = url;
-  this.tab = {
-    id: id
-  };
-  this.port = {
-    emit: function(event, data) {}
-  };
+    this.url = url;
+    this.tab = {
+        id: id
+    };
+    this.port = {
+        emit: function(event, data) {}
+    };
 }
 
 exports['test worker addition/removal'] = function(assert) {
-  var worker = new WorkerMock('https://www.mozilla.org', 1);
-  manager.addWorker(worker);
-  assert.ok(manager.getWorkers().mozilla[0] === worker, "Worker manager should handle worker addition");
-  manager.removeWorker(worker);
-  assert.ok(manager.getWorkers().mozilla === undefined, "Worker manager should handle worker removal");
+    var worker = new WorkerMock('https://www.mozilla.org', 1);
+    manager.addWorker(worker);
+    assert.ok(manager.getWorkers().mozilla[0] === worker, "Worker manager should handle worker addition");
+    manager.removeWorker(worker);
+    assert.ok(manager.getWorkers().mozilla === undefined, "Worker manager should handle worker removal");
 };
 
 require("sdk/test").run(exports);

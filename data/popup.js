@@ -24,82 +24,82 @@ var site_settings;
  * Update fields according to site_settings
  */
 function updateFields() {
-  if (site_settings && profiles) {
-    document.querySelector('#tag').value = site_settings.tag;
-    document.querySelector('#profile').value = site_settings.profile_index;
-    var enabled = document.querySelectorAll('.enabled');
-    var disabled = document.querySelectorAll('.disabled');
-    if (site_settings.status) {
-      for (let i=0; i<enabled.length; i++) {
-        enabled[i].style.display = "inline";
-      }
-      for (let i=0; i<disabled.length; i++) {
-        disabled[i].style.display = "none";
-      }
-    } else {
-      for (let i=0; i<enabled.length; i++) {
-        enabled[i].style.display = "none";
-      }
-      for (let i=0; i<disabled.length; i++) {
-        disabled[i].style.display = "inline";
-      }
+    if (site_settings && profiles) {
+        document.querySelector('#tag').value = site_settings.tag;
+        document.querySelector('#profile').value = site_settings.profile_index;
+        var enabled = document.querySelectorAll('.enabled');
+        var disabled = document.querySelectorAll('.disabled');
+        if (site_settings.status) {
+            for (let i=0; i<enabled.length; i++) {
+                enabled[i].style.display = "inline";
+            }
+            for (let i=0; i<disabled.length; i++) {
+                disabled[i].style.display = "none";
+            }
+        } else {
+            for (let i=0; i<enabled.length; i++) {
+                enabled[i].style.display = "none";
+            }
+            for (let i=0; i<disabled.length; i++) {
+                disabled[i].style.display = "inline";
+            }
+        }
+        document.querySelector('#state').checked = site_settings.status;
+        var change = new CustomEvent('change');
+        document.querySelector('#profile').dispatchEvent(change);
     }
-    document.querySelector('#state').checked = site_settings.status;
-    var change = new CustomEvent('change');
-    document.querySelector('#profile').dispatchEvent(change);
-  }
 }
 
 /**
  * Update popup with new settings
  */
 self.port.on("update_settings", function(data) {
-  site_settings = data;
-  updateFields();
+    site_settings = data;
+    updateFields();
 });
 
 self.port.on("populate", function(data) {
-  profiles = data;
-  document.querySelector('#profile').innerHTML = null;
-  var index = 0;
-  profiles.forEach(function(profile){
-    document.querySelector('#profile').appendChild(new Option(profile.name, index++));
-  });
-  updateFields();
+    profiles = data;
+    document.querySelector('#profile').innerHTML = null;
+    var index = 0;
+    profiles.forEach(function(profile){
+        document.querySelector('#profile').appendChild(new Option(profile.name, index++));
+    });
+    updateFields();
 });
 
 /**
  * Listen for changes in the popup and send them to main
  */
 document.querySelector('#profile').addEventListener('change', function(event) {
-  var index = event.target.value;
-  document.querySelector('#password_length').value = profiles[index].password_length;
-  document.querySelector('#password_type').value = profiles[index].password_type;
-  document.querySelector('#color').style.backgroundColor = profiles[index].color;
-  site_settings.profile_index = index;
-  self.port.emit("update_settings", site_settings);
+    var index = event.target.value;
+    document.querySelector('#password_length').value = profiles[index].password_length;
+    document.querySelector('#password_type').value = profiles[index].password_type;
+    document.querySelector('#color').style.backgroundColor = profiles[index].color;
+    site_settings.profile_index = index;
+    self.port.emit("update_settings", site_settings);
 });
 document.querySelector('#tag').addEventListener('change', function(event) {
-  site_settings.tag = event.target.value;
-  self.port.emit("update_settings", site_settings);
+    site_settings.tag = event.target.value;
+    self.port.emit("update_settings", site_settings);
 });
 document.querySelector('#password_length').addEventListener('change', function(event) {
-  var index = document.querySelector('#profile').value;
-  profiles[index].password_length = event.target.value;
-  updateProfile();
+    var index = document.querySelector('#profile').value;
+    profiles[index].password_length = event.target.value;
+    updateProfile();
 });
 document.querySelector('#password_type').addEventListener('change', function(event) {
-  var index = document.querySelector('#profile').value;
-  profiles[index].password_type = event.target.value;
-  updateProfile();
+    var index = document.querySelector('#profile').value;
+    profiles[index].password_type = event.target.value;
+    updateProfile();
 });
 document.querySelector('#settings').addEventListener('click', function() {
-  self.port.emit("display_settings");
+    self.port.emit("display_settings");
 });
 document.querySelector('#state').addEventListener('click', function(event) {
-  site_settings.status = !site_settings.status;
-  self.port.emit("update_settings", site_settings);
-  updateFields();
+    site_settings.status = !site_settings.status;
+    self.port.emit("update_settings", site_settings);
+    updateFields();
 });
 
 /**
@@ -112,51 +112,51 @@ document.querySelector('#password_length').addEventListener('change', requestHas
 document.querySelector('#password_type').addEventListener('change', requestHash);
 
 document.querySelector('#password').addEventListener('click', function(event) {
-  event.target.select();
+    event.target.select();
 });
 
 document.querySelector('#copy').addEventListener('click', function(event) {
-  self.port.emit("copy", document.querySelector('#password').value);
-  document.querySelector('#master_key').value = '';
-  document.querySelector('#password').value = '';
+    self.port.emit("copy", document.querySelector('#password').value);
+    document.querySelector('#master_key').value = '';
+    document.querySelector('#password').value = '';
 });
 
 function requestHash() {
-  var key = document.querySelector('#master_key').value;
-  if (key !== '') {
-    self.port.emit("get_hash", key);
-  } else {
-    document.querySelector('#password').value = null;
-  }
+    var key = document.querySelector('#master_key').value;
+    if (key !== '') {
+        self.port.emit("get_hash", key);
+    } else {
+        document.querySelector('#password').value = null;
+    }
 }
 
 self.port.on("hash", function(hash) {
-  document.querySelector('#password').value = hash;
+    document.querySelector('#password').value = hash;
 });
 
 /**
  * Send changes to main
  */
 function updateProfile() {
-  var index = document.querySelector('#profile').value;
-  var data = {
-    profile_index: index,
-    profile: profiles[index],
-  };
-  self.port.emit("update_profile", data);
+    var index = document.querySelector('#profile').value;
+    var data = {
+        profile_index: index,
+        profile: profiles[index],
+    };
+    self.port.emit("update_profile", data);
 }
 
 self.port.on("get_size", function() {
-  var size = {
-    width: document.documentElement.clientWidth,
-    height: document.documentElement.clientHeight,
-  };
-  self.port.emit("resize", size);
+    var size = {
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight,
+    };
+    self.port.emit("resize", size);
 });
 
 self.port.on("hide", function() {
-  document.querySelector('#password').value = '';
-  document.querySelector('#master_key').value = '';
+    document.querySelector('#password').value = '';
+    document.querySelector('#master_key').value = '';
 });
 
 // Tell main that we are ready
