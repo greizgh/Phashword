@@ -66,4 +66,36 @@ exports["test compatibility with twik-for-chrome"] = function(assert) {
     assert.ok(password == twik, "Special chars password seem compatible with Twik");
 };
 
+exports["test compatibility with twik and special chars"] = function(assert) {
+    var password = passwordHasher.hashPassword(
+        "test",
+        "Ümlaut",
+        "private",
+        12,
+        1
+    );
+    var twik = "kphic2eR4/*F";
+    assert.ok(password == twik, "Compatible with umlauts in master key");
+
+    password = passwordHasher.hashPassword(
+        "test",
+        "€uro",
+        "private",
+        12,
+        1
+    );
+    twik = "gxK1KMGF7is+";
+    assert.ok(password == twik, "Compatible with euro symbol in master key");
+
+    password = passwordHasher.hashPassword(
+        "test",
+        "äî$Üœ",
+        "private",
+        12,
+        1
+    );
+    twik = "tck5-E8vrrel";
+    assert.ok(password == twik, "Compatible with several special chars in master key");
+};
+
 require("sdk/test").run(exports);
