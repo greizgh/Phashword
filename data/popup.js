@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Greizgh
+ * Copyright 2014-2015 Greizgh
  *
  * This file is part of Phashword.
  *
@@ -19,14 +19,26 @@
 
 var profiles;
 var site_settings;
+var fields = {
+    tag: document.querySelector('#tag'),
+    profile: document.querySelector('#profile'),
+    state: document.querySelector('#state'),
+    color: document.querySelector('#color'),
+    password_length: document.querySelector('#password_length'),
+    password_type: document.querySelector('#password_type'),
+    settings: document.querySelector('#settings'),
+    master_key: document.querySelector('#master_key'),
+    copy: document.querySelector('#copy'),
+    password: document.querySelector('#password'),
+};
 
 /**
  * Update fields according to site_settings
  */
 function updateFields() {
     if (site_settings && profiles) {
-        document.querySelector('#tag').value = site_settings.tag;
-        document.querySelector('#profile').value = site_settings.profile_index;
+        fields.tag.value = site_settings.tag;
+        fields.profile.value = site_settings.profile_index;
         var enabled = document.querySelectorAll('.enabled');
         var disabled = document.querySelectorAll('.disabled');
         if (site_settings.status) {
@@ -44,9 +56,9 @@ function updateFields() {
                 disabled[i].style.display = "inline";
             }
         }
-        document.querySelector('#state').checked = site_settings.status;
+        fields.state.checked = site_settings.status;
         var change = new CustomEvent('change');
-        document.querySelector('#profile').dispatchEvent(change);
+        fields.profile.dispatchEvent(change);
     }
 }
 
@@ -60,10 +72,10 @@ self.port.on("update_settings", function(data) {
 
 self.port.on("populate", function(data) {
     profiles = data;
-    document.querySelector('#profile').innerHTML = null;
+    fields.profile.innerHTML = null;
     var index = 0;
     profiles.forEach(function(profile){
-        document.querySelector('#profile').appendChild(new Option(profile.name, index++));
+        fields.profile.appendChild(new Option(profile.name, index++));
     });
     updateFields();
 });
@@ -71,32 +83,32 @@ self.port.on("populate", function(data) {
 /**
  * Listen for changes in the popup and send them to main
  */
-document.querySelector('#profile').addEventListener('change', function(event) {
+fields.profile.addEventListener('change', function(event) {
     var index = event.target.value;
-    document.querySelector('#password_length').value = profiles[index].password_length;
-    document.querySelector('#password_type').value = profiles[index].password_type;
-    document.querySelector('#color').style.backgroundColor = profiles[index].color;
+    fields.password_length.value = profiles[index].password_length;
+    fields.password_type.value = profiles[index].password_type;
+    fields.color.style.backgroundColor = profiles[index].color;
     site_settings.profile_index = index;
     self.port.emit("update_settings", site_settings);
 });
-document.querySelector('#tag').addEventListener('change', function(event) {
+fields.tag.addEventListener('change', function(event) {
     site_settings.tag = event.target.value;
     self.port.emit("update_settings", site_settings);
 });
-document.querySelector('#password_length').addEventListener('change', function(event) {
-    var index = document.querySelector('#profile').value;
+fields.password_length.addEventListener('change', function(event) {
+    var index = fields.profile.value;
     profiles[index].password_length = event.target.value;
     updateProfile();
 });
-document.querySelector('#password_type').addEventListener('change', function(event) {
-    var index = document.querySelector('#profile').value;
+fields.password_type.addEventListener('change', function(event) {
+    var index = fields.profile.value;
     profiles[index].password_type = event.target.value;
     updateProfile();
 });
-document.querySelector('#settings').addEventListener('click', function() {
+fields.settings.addEventListener('click', function() {
     self.port.emit("display_settings");
 });
-document.querySelector('#state').addEventListener('click', function(event) {
+fields.state.addEventListener('click', function(event) {
     site_settings.status = !site_settings.status;
     self.port.emit("update_settings", site_settings);
     updateFields();
@@ -105,40 +117,40 @@ document.querySelector('#state').addEventListener('click', function(event) {
 /**
  * Allow user to generate hash via popup
  */
-document.querySelector('#master_key').addEventListener('keyup', requestHash);
-document.querySelector('#profile').addEventListener('change', requestHash);
-document.querySelector('#tag').addEventListener('change', requestHash);
-document.querySelector('#password_length').addEventListener('change', requestHash);
-document.querySelector('#password_type').addEventListener('change', requestHash);
+fields.master_key.addEventListener('keyup', requestHash);
+fields.profile.addEventListener('change', requestHash);
+fields.tag.addEventListener('change', requestHash);
+fields.password_length.addEventListener('change', requestHash);
+fields.password_type.addEventListener('change', requestHash);
 
-document.querySelector('#password').addEventListener('click', function(event) {
+fields.password.addEventListener('click', function(event) {
     event.target.select();
 });
 
-document.querySelector('#copy').addEventListener('click', function(event) {
-    self.port.emit("copy", document.querySelector('#password').value);
-    document.querySelector('#master_key').value = '';
-    document.querySelector('#password').value = '';
+fields.copy.addEventListener('click', function(event) {
+    self.port.emit("copy", fields.password.value);
+    fields.master_key.value = '';
+    fields.password.value = '';
 });
 
 function requestHash() {
-    var key = document.querySelector('#master_key').value;
+    var key = fields.master_key.value;
     if (key !== '') {
         self.port.emit("get_hash", key);
     } else {
-        document.querySelector('#password').value = null;
+        fields.password.value = null;
     }
 }
 
 self.port.on("hash", function(hash) {
-    document.querySelector('#password').value = hash;
+    fields.password.value = hash;
 });
 
 /**
  * Send changes to main
  */
 function updateProfile() {
-    var index = document.querySelector('#profile').value;
+    var index = fields.profile.value;
     var data = {
         profile_index: index,
         profile: profiles[index],
@@ -155,8 +167,8 @@ self.port.on("get_size", function() {
 });
 
 self.port.on("hide", function() {
-    document.querySelector('#password').value = '';
-    document.querySelector('#master_key').value = '';
+    fields.password.value = '';
+    fields.master_key.value = '';
 });
 
 // Tell main that we are ready
