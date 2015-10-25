@@ -88,24 +88,29 @@ document.querySelector('#remove_profile').addEventListener('click', function() {
 });
 
 // Tabs handling
+function switchTab(event) {
+    let el = event.target;
+    let tab_id = el.getAttribute('data-tab');
+
+    for (let j=0; j<tabs.length; j++) {
+        tabs[j].classList.remove('active');
+    }
+
+    let tab_content = document.querySelectorAll('.tab-content');
+    for (let j=0; j<tab_content.length; j++) {
+        tab_content[j].classList.remove('active');
+    }
+
+    el.classList.add('active');
+    document.querySelector('#'+tab_id).classList.add('active');
+}
 var tabs = document.querySelectorAll('ul.tabs li');
 for (let i=0; i<tabs.length; i++) {
-    tabs[i].addEventListener('click', function(event) {
-        let el = event.target;
-        let tab_id = el.getAttribute('data-tab');
+    tabs[i].addEventListener('click', switchTab);
+}
 
-        for (let j=0; j<tabs.length; j++) {
-            tabs[j].classList.remove('active');
-        }
-
-        let tab_content = document.querySelectorAll('.tab-content');
-        for (let j=0; j<tab_content.length; j++) {
-            tab_content[j].classList.remove('active');
-        }
-
-        el.classList.add('active');
-        document.querySelector('#'+tab_id).classList.add('active');
-    });
+function removeHandler() {
+    self.port.emit('remove_site', this.getAttribute('data-site'));
 }
 
 // List available site settings
@@ -121,9 +126,7 @@ self.port.on("site_settings", function(settings) {
         let td_action = document.createElement('td');
         let remove_btn = document.createElement('button');
         remove_btn.setAttribute('data-site', site);
-        remove_btn.onclick = function() {
-            self.port.emit("remove_site", this.getAttribute('data-site'));
-        };
+        remove_btn.onclick = removeHandler;
         let img = document.createElement('img');
         img.src = 'img/remove.png';
         remove_btn.appendChild(img);
