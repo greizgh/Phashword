@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Greizgh
+ * Copyright 2014-2015 Greizgh
  *
  * This file is part of Phashword.
  *
@@ -79,6 +79,23 @@ exports['test profile creation / deletetion'] = function(assert) {
 
 exports['test error'] = function(assert) {
     assert.ok(manager.getProfile(99) === undefined, "Non existent profile should not exists");
+};
+
+exports['test per site settings'] = function(assert) {
+    var profile = manager.getNewProfile();
+    profile.password_length = 20;
+    profile.password_type = constants.PASSWORD_TYPES.NUMERIC;
+    manager.setCurrentProfile(profile);
+    var site_settings = manager.getSiteSettings('abcd');
+    assert.ok(site_settings.password_length === profile.password_length, "Site settings should inherit password length from profile");
+    assert.ok(site_settings.password_type === profile.password_type, "Site settings should inherit password type from profile");
+    site_settings.password_length = 8;
+    site_settings.password_type = constants.PASSWORD_TYPES.SPECIAL;
+    manager.setSiteSettings('abcd', site_settings);
+    site_settings = manager.getSiteSettings('abcd');
+    console.log(site_settings);
+    assert.ok(site_settings.password_length === 8, "Ensure password length is saved with settings");
+    assert.ok(site_settings.password_type === constants.PASSWORD_TYPES.SPECIAL, "Ensure password type is saved with settings");
 };
 
 require("sdk/test").run(exports);

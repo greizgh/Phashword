@@ -39,6 +39,8 @@ function updateFields() {
     if (site_settings && profiles) {
         fields.tag.value = site_settings.tag;
         fields.profile.value = site_settings.profile_index;
+        fields.password_length.value = site_settings.password_length;
+        fields.password_type.value = site_settings.password_type;
         var enabled = document.querySelectorAll('.enabled');
         var disabled = document.querySelectorAll('.disabled');
         if (site_settings.status) {
@@ -85,8 +87,6 @@ self.port.on("populate", function(data) {
  */
 fields.profile.addEventListener('change', function(event) {
     var index = event.target.value;
-    fields.password_length.value = profiles[index].password_length;
-    fields.password_type.value = profiles[index].password_type;
     fields.color.style.backgroundColor = profiles[index].color;
     site_settings.profile_index = index;
     self.port.emit("update_settings", site_settings);
@@ -96,14 +96,12 @@ fields.tag.addEventListener('change', function(event) {
     self.port.emit("update_settings", site_settings);
 });
 fields.password_length.addEventListener('change', function(event) {
-    var index = fields.profile.value;
-    profiles[index].password_length = event.target.value;
-    updateProfile();
+    site_settings.password_length = event.target.value;
+    self.port.emit("update_settings", site_settings);
 });
 fields.password_type.addEventListener('change', function(event) {
-    var index = fields.profile.value;
-    profiles[index].password_type = event.target.value;
-    updateProfile();
+    site_settings.password_type = event.target.value;
+    self.port.emit("update_settings", site_settings);
 });
 fields.settings.addEventListener('click', function() {
     self.port.emit("display_settings");
@@ -145,18 +143,6 @@ function requestHash() {
 self.port.on("hash", function(hash) {
     fields.password.value = hash;
 });
-
-/**
- * Send changes to main
- */
-function updateProfile() {
-    var index = fields.profile.value;
-    var data = {
-        profile_index: index,
-        profile: profiles[index],
-    };
-    self.port.emit("update_profile", data);
-}
 
 self.port.on("get_size", function() {
     var size = {
