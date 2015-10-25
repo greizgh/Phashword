@@ -1,3 +1,7 @@
+# 1.5.9 - 2015/10/25
+
+* Store password length and type per website
+
 # 1.5.8 - 2015/09/23
 
 * Fix incompatibility with twik when using special char in master password
