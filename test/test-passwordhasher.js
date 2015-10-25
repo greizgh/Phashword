@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Greizgh
+ * Copyright 2014-2015 Greizgh
  *
  * This file is part of Phashword.
  *
@@ -96,6 +96,26 @@ exports["test compatibility with twik and special chars"] = function(assert) {
     );
     twik = "tck5-E8vrrel";
     assert.ok(password == twik, "Compatible with several special chars in master key");
+
+    password = passwordHasher.hashPassword(
+        "Ümlaut",
+        "master",
+        "private",
+        12,
+        1
+    );
+    twik = "XPGfT!MmWc2X";
+    assert.ok(password == twik, "Compatible with several special chars in tag");
+
+    password = passwordHasher.hashPassword(
+        "test",
+        "Üœlzk",
+        "Üœlzk",
+        12,
+        1
+    );
+    twik = "B766HlSaS/Gq";
+    assert.ok(password == twik, "Compatible with several special chars in master and private key");
 };
 
 require("sdk/test").run(exports);
