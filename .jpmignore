@@ -1,3 +1,4 @@
 data/sass/*.scss
 .git
 *.xpi
+.*
