@@ -1,3 +1,7 @@
+# 1.6.0 - 2016/02/15
+
+* Add external prompt option
+
 # 1.5.9 - 2015/10/25
 
 * Store password length and type per website
