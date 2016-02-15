@@ -16,6 +16,13 @@
       "value": true
     },
     {
+      "name": "external_prompt",
+      "title": "Paranoid mode",
+      "description": "In paranoid mode, your master key will be prompted outside of page, thus preventing it from leaking to the page",
+      "type": "bool",
+      "value": false
+    },
+    {
     "name": "toggle_key",
     "title": "Toggle key",
     "description": "Key to press to disable Phashword for focused field",

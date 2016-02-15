@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Greizgh
+ * Copyright 2014-2016 Greizgh
  *
  * This file is part of Phashword.
  *
@@ -25,6 +25,7 @@ var profile;
 var site_settings = {
     status: self.options.status
 };
+var external_prompt = self.options.external_prompt;
 var current_status = site_settings.status;
 var toggle_key = self.options.key;
 
@@ -56,6 +57,7 @@ self.port.on("update_profile", function(data) {
 
 self.port.on("update_prefs", function(data) {
     toggle_key = data.key;
+    external_prompt = data.external_prompt;
 });
 
 function requestHash(key) {
@@ -72,9 +74,13 @@ function handleFocus(event) {
             field.dataset.phashword = String(site_settings.status);
         }
         if (field.dataset.phashword === "true") {
+            elem = field;
             field.style.backgroundColor = profile.color;
             field.setAttribute('placeholder', profile.name + ' - ' + site_settings.tag);
             field.value = config.value || '';
+            if (external_prompt) {
+                self.port.emit("ask_pass");
+            }
         }
     }
 }
