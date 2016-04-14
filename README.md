@@ -25,8 +25,8 @@ If you prefer to only enable Phashword on particular websites, then you can chan
 
 Go to [firefox add-on page](https://addons.mozilla.org/fr/firefox/addon/phashword/) and click _Add to firefox_.
 
-Or you can clone this repository and build the extension using `cfx xpi`.
-See [MDN](https://developer.mozilla.org/en-US/Add-ons/SDK) for more information on firefox add-on SDK.
+Or you can clone this repository and build the extension using `jpm xpi`.
+See [MDN](https://developer.mozilla.org/en-US/Add-ons/SDK) for more information on firefox add-on SDK and building process.
 
 ## License
 
