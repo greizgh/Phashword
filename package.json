@@ -1,0 +1,27 @@
+{
+  "name": "Phashword",
+  "description": "Easy to use password generator",
+  "author": "Greizgh",
+  "license": "GPL-3.0",
+  "version": "2.0.0",
+  "scripts": {
+    "build": "npm run prepare && webpack && npm run copy && npm run zip",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "mkdir -p ./dist",
+    "copy": "cp -r res/icons ./dist/ && cp manifest.json ./dist",
+    "zip": "cd ./dist && zip -r -x\"*.zip\" phashword.xpi .",
+    "clean": "rm -rf ./dist/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greizgh/Phashword.git"
+  },
+  "bugs": {
+    "url": "https://github.com/greizgh/Phashword/issues"
+  },
+  "homepage": "https://github.com/greizgh/Phashword#readme",
+  "dependencies": {
+    "json-loader": "^0.5.4",
+    "tldjs": "^1.6.2"
+  }
+}

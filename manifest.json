@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Phashword",
+  "version": "2.0.0",
+
+  "description": "Easy to use password manager",
+  "icons": {
+    "48": "icons/icon-48.png"
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "jid1-nY3RWh8Fb7qhXw@jetpack",
+      "strict_min_version": "45.0.0"
+    }
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.mozilla.org/*"],
+      "js": ["content.bundle.js"]
+    }
+  ]
+}
