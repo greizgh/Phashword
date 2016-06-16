@@ -1,3 +1,5 @@
+'use strict';
+
 const CryptoJS = require('crypto-js');
 const constants = require('./constants');
 
@@ -34,7 +36,7 @@ function _hashPassword(tag, key, length, type) {
 
     /* Trim the password to match the requested length */
     return hash.substring(0, length);
-};
+}
 
 function hashPassword(tag, masterKey, privateKey, length, passwordType) {
     if (privateKey !== null) {
@@ -42,7 +44,7 @@ function hashPassword(tag, masterKey, privateKey, length, passwordType) {
     }
 
     return _hashPassword(tag, masterKey, length, passwordType);
-};
+}
 
 function convertToDigits(input, seed, length) {
     var pivot = 0;
@@ -55,7 +57,7 @@ function convertToDigits(input, seed, length) {
         }
     }
     return input;
-};
+}
 
 function removeSpecialCharacters(input, seed, length) {
     var pivot = 0;
@@ -69,7 +71,7 @@ function removeSpecialCharacters(input, seed, length) {
     }
 
     return input;
-};
+}
 
 function injectCharacter(input, offset, reserved, seed, length, cStart, cNum) {
     var pos0 = seed % length;
@@ -87,14 +89,14 @@ function injectCharacter(input, offset, reserved, seed, length, cStart, cNum) {
     var inject = String.fromCharCode(((seed + input.charCodeAt(pos)) % cNum) + cStartCode);
     var tail = (pos + 1 < input.length) ? input.substring(pos + 1) : '';
     return head + inject + tail;
-};
+}
 
 function isDigit(char) {
     return char >= '0' && char <= '9';
-};
+}
 
 function isAlphaOrDigit(char) {
     return isDigit(char) || (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z');
-};
+}
 
 exports.hashPassword = hashPassword;

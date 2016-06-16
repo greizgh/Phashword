@@ -1,5 +1,6 @@
 var webpackConfig = require('./webpack.config');
 webpackConfig.devtool = 'inline-source-map';
+webpackConfig.entry = {};
 
 module.exports = function (config) {
   config.set({
@@ -9,7 +10,7 @@ module.exports = function (config) {
     ],
     frameworks: [ 'chai', 'mocha' ],
     plugins: [
-      'karma-chrome-launcher',
+      'karma-firefox-launcher',
       'karma-chai',
       'karma-mocha',
       'karma-sourcemap-loader',
