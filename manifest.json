@@ -4,6 +4,7 @@
   "version": "2.0.0",
 
   "description": "Easy to use password manager",
+  "homepage_url": "https://github.com/greizgh/Phashword",
   "icons": {
     "48": "icons/icon-48.png"
   },
@@ -11,8 +12,14 @@
   "applications": {
     "gecko": {
       "id": "jid1-nY3RWh8Fb7qhXw@jetpack",
-      "strict_min_version": "45.0.0"
+      "strict_min_version": "45.0"
     }
+  },
+
+  "browser_action": {
+    "default_icon": "icons/icon-48.png",
+    "default_title": "Phashword",
+    "default_popup": "popup/quick_settings.html"
   },
 
   "content_scripts": [

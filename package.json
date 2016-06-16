@@ -6,9 +6,9 @@
   "version": "2.0.0",
   "scripts": {
     "build": "npm run prepare && webpack && npm run copy && npm run zip",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start",
     "prepare": "mkdir -p ./dist",
-    "copy": "cp -r res/icons ./dist/ && cp manifest.json ./dist",
+    "copy": "cp -r res/icons ./dist/ && cp -r html/* ./dist/ && cp manifest.json ./dist",
     "zip": "cd ./dist && zip -r -x\"*.zip\" phashword.xpi .",
     "clean": "rm -rf ./dist/*"
   },
@@ -21,7 +21,26 @@
   },
   "homepage": "https://github.com/greizgh/Phashword#readme",
   "dependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "crypto-js": "^3.1.6",
     "json-loader": "^0.5.4",
-    "tldjs": "^1.6.2"
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "tldjs": "^1.6.2",
+    "webpack": "^1.13.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "karma": "^0.13.22",
+    "karma-chai": "^0.1.0",
+    "karma-cli": "^1.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-mocha": "^1.0.1",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.5.3"
   }
 }
