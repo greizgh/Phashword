@@ -19,7 +19,7 @@
   "browser_action": {
     "default_icon": "icons/icon-48.png",
     "default_title": "Phashword",
-    "default_popup": "popup/quick_settings.html"
+    "default_popup": "popup.html"
   },
 
   "content_scripts": [
