@@ -1,5 +1,7 @@
 # Phashword
 
+[![Build Status](https://travis-ci.org/greizgh/Phashword.svg?branch=v2)](https://travis-ci.org/greizgh/Phashword)
+
 Phashword is a firefox add-on making password generation and management easier.
 
 Spiritual successor of password hasher (another firefox add-on) it is completely compatible with [Twik](https://github.com/gustavomondron/twik) on Android and twik for chrome.
