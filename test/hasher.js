@@ -1,3 +1,5 @@
+'use strict';
+
 const hasher = require('../src/hasher');
 const assert = require('chai').assert;
 

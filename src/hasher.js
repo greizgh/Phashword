@@ -40,7 +40,7 @@ function _hashPassword(tag, key, length, type) {
 
 function hashPassword(tag, masterKey, privateKey, length, passwordType) {
     if (privateKey !== null) {
-        tag = _hashPassword(privateKey, tag, 24, 1); //Alphanumeric + special chars
+        tag = _hashPassword(privateKey, tag, 24, constants.PASSWORD_TYPES.SPECIAL);
     }
 
     return _hashPassword(tag, masterKey, length, passwordType);
