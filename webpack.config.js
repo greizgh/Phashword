@@ -8,19 +8,19 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
       include: path.join(__dirname, 'src'),
-      loader: 'babel-loader'
+      loader: 'babel-loader',
     },
     {
       test: /\.json$/,
       loaders: [
-        "json",
+        'json',
       ],
-    }]
-  }
+    }],
+  },
 };

@@ -30,11 +30,15 @@
     "json-loader": "^0.5.4",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "rx": "^4.1.0",
     "tldjs": "^1.6.2",
     "webpack": "^1.13.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb": "^10.0.0",
+    "eslint-plugin-react": "^6.0.0",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
     "karma-cli": "^1.0.0",
