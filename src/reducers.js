@@ -4,30 +4,6 @@ import {
   TOGGLE_SITE,
 } from './actions.js';
 
-const constants = require('./constants');
-
-const initialState = {
-  currentSite: 1,
-  currentProfile: 1,
-  siteSettings: [{
-    id: 1,
-    profile: 1,
-    tag: 'firefox',
-    site: 'mozilla.org',
-    enabled: true,
-    length: 12,
-    type: constants.PASSWORD_TYPES.SPECIAL,
-  }],
-  profiles: [{
-    id: 1,
-    name: 'default',
-    color: '#FF0000',
-    type: constants.PASSWORD_TYPES.SPECIAL,
-    length: 12,
-    privateKey: 'qkdjfmqskfmqsdkfjmsdkfm',
-  }],
-};
-
 function currentProfile(state = null, action) {
   switch (action.type) {
     case SET_CURRENT_PROFILE:
@@ -52,9 +28,7 @@ function siteSettings(state = [], action) {
       return [
         state.map((site) => {
           if (site.id === action.id) {
-            return Object.assign({}, site, {
-              enabled: !site.enabled,
-            });
+            return { ...site, enabled: !site.enabled };
           }
           return site;
         }),
@@ -69,7 +43,7 @@ function profiles(state = [], action) {
   return state;
 }
 
-export function appReducer(state = initialState, action) {
+export function appReducer(state, action) {
   return {
     currentSite: currentSite(state.currentSite, action),
     currentProfile: currentProfile(state.currentProfile, action),
