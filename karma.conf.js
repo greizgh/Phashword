@@ -23,5 +23,8 @@ module.exports = function (config) {
     reporters: ['dots'],
     singleRun: true,
     webpack: webpackConfig,
+    webpackServer: {
+      noInfo: true,
+    },
   });
 };
