@@ -28,4 +28,4 @@ export const dispatcher = new Rx.Subject();
 export const store = dispatcher
   .startWith({ type: '@@init' })
   .scan(appReducer, initialState)
-  .share();
+  .shareReplay(1);

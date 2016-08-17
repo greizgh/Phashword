@@ -11,4 +11,12 @@ describe('Store', () => {
     );
     assert.ok(currentProfile);
   });
+  it('should handle multiple subscriptions', () => {
+    let call1 = false;
+    let call2 = false;
+    store.subscribe(() => { call1 = true; });
+    store.subscribe(() => { call2 = true; });
+    assert.isTrue(call1, 'First subscription');
+    assert.isTrue(call2, 'Second subscription');
+  });
 });
