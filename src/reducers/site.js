@@ -14,9 +14,7 @@ export default function sitesReducer(state = [], action) {
       return [
         state.map((site) => {
           if (site.id === action.id) {
-            return {...site,
-              enabled: !site.enabled
-            };
+            return { ...site, enabled: !site.enabled };
           }
           return site;
         }),
