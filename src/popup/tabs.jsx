@@ -21,6 +21,7 @@ export class Tabs extends React.Component {
             <div
               className={activeClass}
               onClick={() => this.setState({ selected: index })}
+              key={index}
             >
               {child.props.label}
               {separator}

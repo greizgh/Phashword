@@ -6,7 +6,11 @@ export default class QuickState extends React.Component {
       <div className="panel-section panel-section-formElements">
         <div className="panel-formElements-item">
           <label htmlFor="profile">Profile</label>
-          <select id="profile"></select>
+          <select id="profile" value={this.props.currentProfile}>
+            {this.props.profiles.map((profile) => {
+              return (<option value={profile.id} key={profile.id}>{profile.name}</option>);
+             })}
+          </select>
           <span className="color-sample" id="color"></span>
         </div>
         <div className="panel-formElements-item">
@@ -16,3 +20,8 @@ export default class QuickState extends React.Component {
     );
   }
 }
+
+QuickState.propTypes = {
+  currentProfile: React.PropTypes.number.isRequired,
+  profiles: React.PropTypes.arrayOf(React.PropTypes.object),
+};
