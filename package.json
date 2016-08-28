@@ -32,6 +32,7 @@
     "react-dom": "^15.1.0",
     "rx": "^4.1.0",
     "tldjs": "^1.6.2",
+    "uuid": "^2.0.2",
     "webpack": "^1.13.1"
   },
   "devDependencies": {

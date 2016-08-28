@@ -13,32 +13,69 @@ class Popup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProfile: 0,
+      selectedProfile: 0,
       profiles: [],
+      siteId: '',
+      enabled: true,
+      tag: '',
+      length: 12,
+      type: 1,
+      password: '',
     };
+    this.requestPass = this.requestPass.bind(this);
+    this.openSettings = this.openSettings.bind(this);
   }
   componentDidMount() {
-    chrome.runtime.sendMessage({ type: 'POPUP_READY' });
+    // Advertise popup is ready to receive current state
+    this.props.dispatch({ type: 'POPUP_READY' });
   }
   close() {
     window.close();
+  }
+  openSettings() {
+    this.props.dispatch({ type: 'OPEN_SETTINGS' });
+  }
+  // Handle state change
+  toggleState() {
+    chrome.runtime.sendMessage({ type: 'TOGGLE_SITE_STATE' });
+  }
+  // Handle profile change
+  updateSiteProfile(profile) {
+    chrome.runtime.sendMessage({ type: 'SET_SITE_PROFILE ', siteId: this.state.siteId, profile });
+  }
+  requestPass(masterKey) {
+    // TODO
+    chrome.runtime.sendMessage({
+      type: 'REQUEST_PASS',
+      privateKey: this.state.profiles[this.state.selectedProfile].privateKey,
+      tag: this.state.tag,
+      masterKey,
+      passwordLength: this.state.length,
+      passwordType: this.state.type,
+    });
   }
   render() {
     return (
       <div className="panel" style={popupStyle}>
         <Tabs>
           <Pane label="Profile">
-            <QuickSettings profiles={this.state.profiles} currentProfile={this.state.currentProfile} />
+            <QuickSettings
+              profiles={this.state.profiles}
+              currentProfile={this.state.selectedProfile}
+              enabled={this.enabled}
+              onToggle={this.toggleState}
+              onProfileChange={this.updateSiteProfile}
+            />
           </Pane>
           <Pane label="Site">
-            <SiteProfile />
+            <SiteProfile length={this.state.length} tag={this.state.tag} type={this.state.type} />
           </Pane>
           <Pane label="Generate">
-            <KeyGenerator />
+            <KeyGenerator requestPassword={this.requestPass} />
           </Pane>
         </Tabs>
         <div className="panel-section panel-section-footer">
-          <div className="panel-section-footer-button">Settings</div>
+          <div className="panel-section-footer-button" onClick={this.openSettings}>Settings</div>
           <div className="panel-section-footer-separator"></div>
           <div className="panel-section-footer-button default" onClick={this.close}>Close</div>
         </div>
@@ -47,10 +84,20 @@ class Popup extends React.Component {
   }
 }
 
-const popup = render(<Popup />, document.getElementById('quick-settings'));
+Popup.propTypes = {
+  dispatch: React.PropTypes.func,
+}
+
+function dispatch(action) {
+  chrome.runtime.sendMessage(action);
+}
+
+const popup = render(<Popup dispatch={dispatch}/>, document.getElementById('quick-settings'));
 
 chrome.runtime.onMessage.addListener((message) => {
-  if (message.type === '@STATE') {
+  console.log('Popup received ' + message.type);
+  if (message.type === '@POPUP_STATE') {
+    console.log('set state');
     popup.setState(message.state);
   }
 });

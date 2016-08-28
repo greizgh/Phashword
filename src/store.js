@@ -1,4 +1,5 @@
 import Rx from 'rx';
+import uuid from 'uuid';
 import { appReducer } from './reducers';
 import { PASSWORD_TYPES } from './constants';
 
@@ -17,10 +18,11 @@ const initialState = {
   profiles: [{
     id: 1,
     name: 'default',
+    default: true,
     color: '#FF0000',
     type: PASSWORD_TYPES.SPECIAL,
     length: 12,
-    privateKey: 'qkdjfmqskfmqsdkfjmsdkfm',
+    privateKey: uuid.v4(),
   }],
 };
 

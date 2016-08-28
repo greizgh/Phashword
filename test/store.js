@@ -1,5 +1,6 @@
 const assert = require('chai').assert;
 const store = require('../src/store').store;
+const dispatcher = require('../src/store').dispatcher;
 
 describe('Store', () => {
   it('should provide default store', () => {
@@ -18,5 +19,14 @@ describe('Store', () => {
     store.subscribe(() => { call2 = true; });
     assert.isTrue(call1, 'First subscription');
     assert.isTrue(call2, 'Second subscription');
+  });
+});
+
+describe('Dispatcher', () => {
+  it('should trigger state change', () => {
+    let call = 0;
+    store.subscribe(() => { call++; });
+    dispatcher.onNext({ type: 'test' });
+    assert.equal(call, 2);
   });
 });

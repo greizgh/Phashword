@@ -24,4 +24,7 @@ export default class QuickState extends React.Component {
 QuickState.propTypes = {
   currentProfile: React.PropTypes.number.isRequired,
   profiles: React.PropTypes.arrayOf(React.PropTypes.object),
+  enabled: React.PropTypes.bool,
+  onToggle: React.PropTypes.func,
+  onProfileChange: React.PropTypes.func,
 };
