@@ -43,15 +43,16 @@ class Popup extends React.Component {
   updateSiteProfile(profile) {
     chrome.runtime.sendMessage({ type: 'SET_SITE_PROFILE ', siteId: this.state.siteId, profile });
   }
-  requestPass(masterKey) {
-    // TODO
+  requestPass(event) {
     chrome.runtime.sendMessage({
       type: 'REQUEST_PASS',
       privateKey: this.state.profiles[this.state.selectedProfile].privateKey,
       tag: this.state.tag,
-      masterKey,
+      masterKey: event.target.value,
       passwordLength: this.state.length,
       passwordType: this.state.type,
+    }, (response) => {
+      this.setState({ ... this.state, password: response.hash });
     });
   }
   render() {
@@ -71,7 +72,7 @@ class Popup extends React.Component {
             <SiteProfile length={this.state.length} tag={this.state.tag} type={this.state.type} />
           </Pane>
           <Pane label="Generate">
-            <KeyGenerator requestPassword={this.requestPass} />
+            <KeyGenerator requestPassword={this.requestPass} password={this.state.password} />
           </Pane>
         </Tabs>
         <div className="panel-section panel-section-footer">
@@ -95,9 +96,7 @@ function dispatch(action) {
 const popup = render(<Popup dispatch={dispatch}/>, document.getElementById('quick-settings'));
 
 chrome.runtime.onMessage.addListener((message) => {
-  console.log('Popup received ' + message.type);
   if (message.type === '@POPUP_STATE') {
-    console.log('set state');
     popup.setState(message.state);
   }
 });

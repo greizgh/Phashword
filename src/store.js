@@ -4,10 +4,10 @@ import { appReducer } from './reducers';
 import { PASSWORD_TYPES } from './constants';
 
 const initialState = {
-  currentSite: 1,
-  currentProfile: 1,
+  currentSite: 0,
+  currentProfile: 0,
   siteSettings: [{
-    id: 1,
+    id: 0,
     profile: 1,
     tag: 'firefox',
     site: 'mozilla.org',
@@ -16,7 +16,7 @@ const initialState = {
     type: PASSWORD_TYPES.SPECIAL,
   }],
   profiles: [{
-    id: 1,
+    id: 0,
     name: 'default',
     default: true,
     color: '#FF0000',

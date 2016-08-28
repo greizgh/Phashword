@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { dispatcher, store } from '../src/store.js';
+import { dispatcher, store } from '../src/store';
 
 describe('Store', () => {
   it('should provide default store', () => {
@@ -9,7 +9,7 @@ describe('Store', () => {
         currentProfile = state.currentProfile;
       }
     );
-    assert.ok(currentProfile);
+    assert.isDefined(currentProfile);
   });
   it('should handle multiple subscriptions', () => {
     let call1 = false;
