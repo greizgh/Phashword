@@ -1,11 +1,11 @@
 'use strict';
 
-const hasher = require('../src/hasher');
-const assert = require('chai').assert;
+import { hashPassword } from '../src/hasher.js';
+import { assert } from 'chai';
 
 describe('hasher', function() {
   it('should has basic hasing capabilities', function() {
-    let hash = hasher.hashPassword(
+    let hash = hashPassword(
       "test",       // site tag
       "master",     // master key
       "private",    // private key
@@ -16,7 +16,7 @@ describe('hasher', function() {
   });
   it('should be compatible with twik-for-chrome', function() {
     // Numeric password
-    let password = hasher.hashPassword(
+    let password = hashPassword(
       "test",       // site tag
       "master",     // master key
       "private",    // private key
@@ -24,10 +24,10 @@ describe('hasher', function() {
       3             // numeric
     );
     let twik = "88105589";  // Password hashed with twik
-    assert.equal(password, twik, "Numeric password seem compatible with Twik");
+    assert.equal(password, twik, "Numeric password seems compatible with Twik");
 
     // Alphanumeric password
-    password = hasher.hashPassword(
+    password = hashPassword(
       "test",       // site tag
       "master",     // master key
       "private",    // private key
@@ -35,10 +35,10 @@ describe('hasher', function() {
       2             // Alphanumeric
     );
     twik = "LL1b5Bjk";  // Password hashed with twik
-    assert.equal(password, twik, "Alphanumeric password seem compatible with Twik");
+    assert.equal(password, twik, "Alphanumeric password seems compatible with Twik");
 
     // Alphanumeric + special characters password
-    password = hasher.hashPassword(
+    password = hashPassword(
       "test",       // site tag
       "master",     // master key
       "private",    // private key
@@ -46,10 +46,10 @@ describe('hasher', function() {
       1             // Alphanumeric + special chars
     );
     twik = "LL1!5Bjk";  // Password hashed with twik
-    assert.equal(password, twik, "Special chars password seem compatible with Twik");
+    assert.equal(password, twik, "Special chars password seems compatible with Twik");
   });
   it('should be compatible with twik and special chars', function() {
-    let password = hasher.hashPassword(
+    let password = hashPassword(
       "test",
       "Ümlaut",
       "private",
@@ -59,7 +59,7 @@ describe('hasher', function() {
     let twik = "kphic2eR4/*F";
     assert.equal(password, twik, "Compatible with umlauts in master key");
 
-    password = hasher.hashPassword(
+    password = hashPassword(
       "test",
       "€uro",
       "private",
@@ -69,7 +69,7 @@ describe('hasher', function() {
     twik = "gxK1KMGF7is+";
     assert.equal(password, twik, "Compatible with euro symbol in master key");
 
-    password = hasher.hashPassword(
+    password = hashPassword(
       "test",
       "äî$Üœ",
       "private",
@@ -79,7 +79,7 @@ describe('hasher', function() {
     twik = "tck5-E8vrrel";
     assert.equal(password, twik, "Compatible with several special chars in master key");
 
-    password = hasher.hashPassword(
+    password = hashPassword(
       "Ümlaut",
       "master",
       "private",
@@ -89,7 +89,7 @@ describe('hasher', function() {
     twik = "XPGfT!MmWc2X";
     assert.equal(password, twik, "Compatible with several special chars in tag");
 
-    password = hasher.hashPassword(
+    password = hashPassword(
       "test",
       "Üœlzk",
       "Üœlzk",

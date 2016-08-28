@@ -1,8 +1,8 @@
 'use strict';
 
-const appReducer = require('../src/reducers').appReducer;
-const assert = require('chai').assert;
-const setCurrentProfile = require('../src/actions').setCurrentProfile;
+import { appReducer } from '../src/reducers.js';
+import { assert } from 'chai';
+import { setCurrentProfile } from '../src/actions.js';
 
 describe('appReducer', () => {
   it('should handle profile change', () => {

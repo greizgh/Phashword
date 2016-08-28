@@ -1,6 +1,5 @@
-const assert = require('chai').assert;
-const store = require('../src/store').store;
-const dispatcher = require('../src/store').dispatcher;
+import { assert } from 'chai';
+import { dispatcher, store } from '../src/store.js';
 
 describe('Store', () => {
   it('should provide default store', () => {
