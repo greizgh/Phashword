@@ -2,6 +2,11 @@ const webpackConfig = require('./webpack.config');
 
 webpackConfig.devtool = 'inline-source-map';
 webpackConfig.entry = {};
+webpackConfig.module.postLoaders = [{
+  test: /\.jsx?$/,
+  exclude: /(test|node_modules)/,
+  loader: 'istanbul-instrumenter',
+}];
 
 module.exports = function (config) {
   config.set({
@@ -16,15 +21,23 @@ module.exports = function (config) {
       'karma-mocha',
       'karma-sourcemap-loader',
       'karma-webpack',
+      'karma-coverage',
     ],
     preprocessors: {
       'tests.bundle.js': ['webpack', 'sourcemap'],
     },
-    reporters: ['dots'],
+    reporters: ['dots', 'coverage'],
     singleRun: true,
     webpack: webpackConfig,
     webpackServer: {
       noInfo: true,
     },
+    coverageReporter: {
+      dir: 'coverage/',
+      reporters: [
+        { type: 'html', subdir: 'html' },
+        { type: 'lcov', subdir: 'lcov' },
+      ]
+    }
   });
 };
