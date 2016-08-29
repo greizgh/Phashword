@@ -16,10 +16,8 @@ export default function profilesReducer(state = [], action) {
     state.push(action.profile);
     return state;
   case DELETE_PROFILE:
-    return state.map((profile) => {
-      if (action.id !== profile.id) {
-        return profile;
-      }
+    return state.filter((profile) => {
+      return profile.id !== action.id;
     });
   case SET_DEFAULT_PROFILE:
     return state.map((profile) => {
@@ -48,7 +46,7 @@ export default function profilesReducer(state = [], action) {
   case SET_PROFILE_TYPE:
     return state.map((profile) => {
       if (action.id === profile.id) {
-        return { ...profile, type: action.type };
+        return { ...profile, type: action.passwordType };
       } else {
         return profile;
       }

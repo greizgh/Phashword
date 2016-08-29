@@ -30,7 +30,7 @@ export function setDefaultProfile(id) {
 }
 
 export function setProfileType(id, type) {
-  return { type: SET_PROFILE_TYPE, id: id, type: type };
+  return { type: SET_PROFILE_TYPE, id: id, passwordType: type };
 }
 
 export function setProfileLength(id, length) {
