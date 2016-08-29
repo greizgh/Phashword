@@ -3,7 +3,7 @@ import {
   DELETE_PROFILE,
   SET_PROFILE_NAME,
   SET_PROFILE_COLOR,
-  SET_PROFILE_DEFAULT,
+  SET_DEFAULT_PROFILE,
   SET_PROFILE_TYPE,
   SET_PROFILE_LENGTH,
   SET_PROFILE_KEY,
@@ -21,10 +21,50 @@ export default function profilesReducer(state = [], action) {
         return profile;
       }
     });
+  case SET_DEFAULT_PROFILE:
+    return state.map((profile) => {
+      if (action.id === profile.id) {
+        return { ...profile, default: true };
+      } else {
+        return { ...profile, default: false };
+      }
+    });
   case SET_PROFILE_NAME:
     return state.map((profile) => {
       if (action.id === profile.id) {
         return { ...profile, name: action.name };
+      } else {
+        return profile;
+      }
+    });
+  case SET_PROFILE_COLOR:
+    return state.map((profile) => {
+      if (action.id === profile.id) {
+        return { ...profile, color: action.color };
+      } else {
+        return profile;
+      }
+    });
+  case SET_PROFILE_TYPE:
+    return state.map((profile) => {
+      if (action.id === profile.id) {
+        return { ...profile, type: action.type };
+      } else {
+        return profile;
+      }
+    });
+  case SET_PROFILE_LENGTH:
+    return state.map((profile) => {
+      if (action.id === profile.id) {
+        return { ...profile, length: action.length };
+      } else {
+        return profile;
+      }
+    });
+  case SET_PROFILE_KEY:
+    return state.map((profile) => {
+      if (action.id === profile.id) {
+        return { ...profile, key: action.key };
       } else {
         return profile;
       }
