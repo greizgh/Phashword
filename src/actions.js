@@ -1,8 +1,3 @@
-/* Profile actions */
-export const ADD_PROFILE = 'ADD_PROFILE';
-export const UPDATE_PROFILE = 'UPDATE_PROFILE';
-export const DELETE_PROFILE = 'DELETE_PROFILE';
-
 /* Site actions */
 export const ADD_SITE = 'ADD_SITE';
 export const UPDATE_SITE = 'UPDATE_SITE';
