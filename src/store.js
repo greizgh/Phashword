@@ -15,19 +15,19 @@ const initialState = {
     length: 12,
     type: PASSWORD_TYPES.SPECIAL,
   }],
-  profiles: [{
-    id: 0,
-    name: 'default',
-    default: true,
-    color: '#FF0000',
-    type: PASSWORD_TYPES.SPECIAL,
-    length: 12,
-    privateKey: uuid.v4(),
-  }],
+  profiles: [],
 };
 
-export const dispatcher = new Rx.Subject();
+export const dispatcher = new Rx.BehaviorSubject({ type: '@@init' });
 export const store = dispatcher
-  .startWith({ type: '@@init' })
   .scan(appReducer, initialState)
   .shareReplay(1);
+
+export function registerObserver({onAction, onState}) {
+  if (onAction) {
+    dispatcher.subscribe(onAction);
+  }
+  if (onState) {
+    store.subscribe(onState);
+  }
+}

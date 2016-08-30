@@ -8,12 +8,22 @@ import {
   SET_PROFILE_LENGTH,
   SET_PROFILE_KEY,
 } from '../actions/profile';
+import { PASSWORD_TYPES, DEFAULT_COLOR, DEFAULT_LENGTH } from '../constants';
+import uuid from 'uuid';
 
 export default function profilesReducer(state = [], action) {
   switch (action.type) {
   case CREATE_PROFILE:
     // TODO generate ID
-    state.push(action.profile);
+    state.push({
+      id: 0,
+      name: 'Default',
+      default: false,
+      color: DEFAULT_COLOR,
+      length: DEFAULT_LENGTH,
+      type: PASSWORD_TYPES.SPECIAL,
+      privateKey: uuid.v4(),
+    });
     return state;
   case DELETE_PROFILE:
     return state.filter((profile) => {
