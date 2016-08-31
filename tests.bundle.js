@@ -1,3 +1,3 @@
-var context = require.context('./test', true, /\.js$/);
+var context = require.context('./test', true, /\.jsx?$/);
 context.keys().forEach(context);
 module.exports = context;
