@@ -14,9 +14,8 @@ import uuid from 'uuid';
 export default function profilesReducer(state = [], action) {
   switch (action.type) {
   case CREATE_PROFILE:
-    // TODO generate ID
     state.push({
-      id: 0,
+      id: uuid.v4(),
       name: 'Default',
       default: false,
       color: DEFAULT_COLOR,
