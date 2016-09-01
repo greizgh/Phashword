@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { shallow } from 'enzyme';
-import { Tabs, Pane } from '../src/popup/tabs.jsx';
+import { Tabs, Pane } from '../src/components/popup/tabs.jsx';
 import React from 'react';
 
 describe('Tab component', () => {
