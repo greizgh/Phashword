@@ -45,3 +45,14 @@ store.subscribe((state) => {
     state: popup_state,
   });
 });
+
+function handleTabChange() {
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    if (tabs[0]) {
+      console.log(tabs[0].url);
+    }
+  });
+}
+
+chrome.tabs.onUpdated.addListener(handleTabChange);
+chrome.tabs.onActivated.addListener(handleTabChange);
