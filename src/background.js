@@ -1,8 +1,9 @@
-import { store, dispatcher, registerObserver } from './store';
-import { defaultProfileGenerator } from './observers';
+import { store, dispatcher } from './store';
+import { defaultProfileGenerator, defaultProfileSelector } from './observers';
 import { hashPassword } from './hasher';
 
-registerObserver(defaultProfileGenerator);
+store.subscribe(defaultProfileGenerator);
+store.subscribe(defaultProfileSelector);
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {

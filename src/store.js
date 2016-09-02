@@ -22,12 +22,3 @@ export const dispatcher = new Rx.BehaviorSubject({ type: '@@init' });
 export const store = dispatcher
   .scan(appReducer, initialState)
   .shareReplay(1);
-
-export function registerObserver({onAction, onState}) {
-  if (onAction) {
-    dispatcher.subscribe(onAction);
-  }
-  if (onState) {
-    store.subscribe(onState);
-  }
-}
