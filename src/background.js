@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     switch (request.type) {
     case 'OPEN_SETTINGS':
-      console.log('open settings');
+      chrome.runtime.openOptionsPage();
       break;
     case 'REQUEST_PASS':
       const hash = hashPassword(

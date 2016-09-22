@@ -29,6 +29,10 @@
     "scripts": ["background.bundle.js"]
   },
 
+  "options_ui": {
+    "page": "settings.html"
+  },
+
   "content_scripts": [
     {
       "matches": ["*://*.mozilla.org/*"],
