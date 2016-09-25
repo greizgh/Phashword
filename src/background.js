@@ -1,8 +1,8 @@
 import { store, dispatcher } from './store';
 import { defaultProfileGenerator, defaultProfileSelector } from './observers';
 import { hashPassword } from './hasher';
-import tld from 'tldjs';
 import { setCurrentSite } from './actions.js';
+import { url2tag } from './utils.js';
 
 store.subscribe(defaultProfileGenerator);
 store.subscribe(defaultProfileSelector);
@@ -52,8 +52,10 @@ store.subscribe((state) => {
 
 function handleTabChange() {
   chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
-    const currentHostname = tld.getDomain(tabs[0].url) || '';
-    dispatcher.onNext(setCurrentSite(currentHostname));
+    if (tabs[0]) {
+      const currentHostname = url2tag(tabs[0].url);
+      dispatcher.onNext(setCurrentSite(currentHostname));
+    }
   });
 }
 
