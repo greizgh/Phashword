@@ -6,7 +6,7 @@ export default class QuickState extends React.Component {
       <div className="panel-section panel-section-formElements">
         <div className="panel-formElements-item">
           <label htmlFor="profile">Profile</label>
-          <select id="profile" value={this.props.currentProfile}>
+          <select id="profile" value={this.props.currentProfile} onChange={this.props.onProfileChange}>
             {this.props.profiles.map((profile) => {
               return (<option value={profile.id} key={profile.id}>{profile.name}</option>);
              })}
@@ -14,7 +14,7 @@ export default class QuickState extends React.Component {
           <span className="color-sample" id="color"></span>
         </div>
         <div className="panel-formElements-item">
-          <button className="default" id="state">State</button>
+          <button className="default" id="state" onClick={this.props.onToggle}>State</button>
         </div>
       </div>
     );

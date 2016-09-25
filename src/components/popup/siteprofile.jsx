@@ -6,15 +6,15 @@ export default class SiteProfile extends React.Component {
       <div className="panel-section panel-section-formElements">
         <div className="panel-formElements-item">
           <label htmlFor="tag">Tag</label>
-          <input type="text" name="tag" id="tag" size="20" value={this.props.tag} />
+          <input type="text" name="tag" id="tag" size="20" value={this.props.tag} onChange={this.props.onChangeTag}/>
         </div>
         <div className="panel-formElements-item">
           <label htmlFor="password_length">Length</label>
-          <input type="number" id="password_length" min="1" value={this.props.length} />
+          <input type="number" id="password_length" min="1" value={this.props.length} onChange={this.props.onChangeLength}/>
         </div>
         <div className="panel-formElements-item">
           <label htmlFor="password_type">Type</label>
-          <select name="password_type" id="password_type" value={this.props.type}>
+          <select name="password_type" id="password_type" value={this.props.type} onChange={this.props.onChangeType}>
             <option value="1">Alphanumeric and special characters</option>
             <option value="2">Alphanumeric</option>
             <option value="3">Numeric</option>
@@ -29,4 +29,7 @@ SiteProfile.propTypes = {
   tag: React.PropTypes.string,
   length: React.PropTypes.number,
   type: React.PropTypes.number,
+  onChangeType: React.PropTypes.func,
+  onChangeLength: React.PropTypes.func,
+  onChangeTag: React.PropTypes.func,
 };

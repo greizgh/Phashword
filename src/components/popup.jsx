@@ -22,14 +22,18 @@ export default class Popup extends React.Component {
       password: '',
     };
     this.requestPass = this.requestPass.bind(this);
+    this.onProfileChange = this.onProfileChange.bind(this);
+    this.onTagChange = this.onTagChange.bind(this);
   }
   componentDidMount() {
     // Advertise popup is ready to receive current state
-    this.props.dispatch({ type: 'POPUP_READY' });
+    this.props.onReady();
   }
-  // Handle profile change
-  updateSiteProfile(profile) {
-    chrome.runtime.sendMessage({ type: 'SET_SITE_PROFILE ', siteId: this.state.siteId, profile });
+  onProfileChange(profile) {
+    this.props.onProfileChange(this.state.siteId, profile);
+  }
+  onTagChange(event) {
+    this.props.onTagChange(this.state.siteId, event.target.value);
   }
   requestPass(event) {
     chrome.runtime.sendMessage({
@@ -53,14 +57,21 @@ export default class Popup extends React.Component {
               currentProfile={this.state.selectedProfile}
               enabled={this.state.enabled}
               onToggle={this.props.onToggleState}
-              onProfileChange={this.props.updateSiteProfile}
+              onProfileChange={this.onProfileChange}
             />
           </Pane>
           <Pane label="Site">
-            <SiteProfile length={this.state.length} tag={this.state.tag} type={this.state.type} />
+            <SiteProfile
+              length={this.state.length}
+              tag={this.state.tag}
+              type={this.state.type}
+              onChangeType={this.props.onTypeChange}
+              onChangeTag={this.onTagChange}
+              onChangeLength={this.props.onLengthChange}
+            />
           </Pane>
           <Pane label="Generate">
-            <KeyGenerator requestPassword={this.requestPass} password={this.state.password} />
+            <KeyGenerator requestPassword={this.props.onPassword} password={this.state.password} />
           </Pane>
         </Tabs>
         <footer>
@@ -74,9 +85,13 @@ export default class Popup extends React.Component {
 }
 
 Popup.propTypes = {
-  dispatch: React.PropTypes.func,
+  onReady: React.PropTypes.func,
+  onPassword: React.PropTypes.func,
   onToggleState: React.PropTypes.func,
   onProfileChange: React.PropTypes.func,
   onSettings: React.PropTypes.func,
   onClose: React.PropTypes.func,
+  onTypeChange: React.PropTypes.func,
+  onLengthChange: React.PropTypes.func,
+  onTagChange: React.PropTypes.func,
 }
