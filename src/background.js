@@ -1,6 +1,8 @@
 import { store, dispatcher } from './store';
 import { defaultProfileGenerator, defaultProfileSelector } from './observers';
 import { hashPassword } from './hasher';
+import tld from 'tldjs';
+import { setCurrentSite } from './actions.js';
 
 store.subscribe(defaultProfileGenerator);
 store.subscribe(defaultProfileSelector);
@@ -32,14 +34,15 @@ chrome.runtime.onMessage.addListener(
 
 // Update popup with new state
 store.subscribe((state) => {
+  const currentSiteSettings = state.siteSettings[state.currentSite] || {};
   const popup_state = {
     selectedProfile: state.currentProfile,
     profiles: state.profiles,
     siteId: state.currentSite,
-    enabled: state.siteSettings[state.currentSite].enabled || state.settings.defaultState,
-    tag: state.siteSettings[state.currentSite].tag || '',
-    length: state.siteSettings[state.currentSite].length || state.profiles[state.currentProfile].length,
-    type: state.siteSettings[state.currentSite].type || state.profiles[state.currentProfile].type,
+    enabled: currentSiteSettings.enabled || state.settings.defaultState,
+    tag: currentSiteSettings.tag || state.currentSite,
+    length: currentSiteSettings.length || state.profiles[state.currentProfile].length,
+    type: currentSiteSettings.type || state.profiles[state.currentProfile].type,
   };
   chrome.runtime.sendMessage({
     type: '@POPUP_STATE',
@@ -48,10 +51,9 @@ store.subscribe((state) => {
 });
 
 function handleTabChange() {
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    if (tabs[0]) {
-      console.log(tabs[0].url);
-    }
+  chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
+    const currentHostname = tld.getDomain(tabs[0].url) || '';
+    dispatcher.onNext(setCurrentSite(currentHostname));
   });
 }
 

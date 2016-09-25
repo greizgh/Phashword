@@ -12,11 +12,11 @@
   "applications": {
     "gecko": {
       "id": "jid1-nY3RWh8Fb7qhXw@jetpack",
-      "strict_min_version": "45.0"
+      "strict_min_version": "50.0"
     }
   },
 
-  "permissions": ["activeTab"],
+  "permissions": ["tabs"],
 
   "browser_action": {
     "default_icon": "icons/icon-48.png",
