@@ -63,11 +63,11 @@ export default class Popup extends React.Component {
             <KeyGenerator requestPassword={this.requestPass} password={this.state.password} />
           </Pane>
         </Tabs>
-        <div className="panel-section panel-section-footer">
+        <footer>
           <div className="panel-section-footer-button" onClick={this.props.onSettings}>Settings</div>
-          <div className="panel-section-footer-separator"></div>
+          <div className="separator"></div>
           <div className="panel-section-footer-button default" onClick={this.props.onClose}>Close</div>
-        </div>
+        </footer>
       </div>
     );
   }
