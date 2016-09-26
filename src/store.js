@@ -10,7 +10,7 @@ const initialState = {
     id: 0,
     profile: 1,
     tag: 'firefox',
-    site: 'mozilla.org',
+    hostname: 'mozilla.org',
     enabled: true,
     length: 12,
     type: PASSWORD_TYPES.SPECIAL,

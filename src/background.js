@@ -1,11 +1,12 @@
 import { store, dispatcher } from './store';
-import { defaultProfileGenerator, defaultProfileSelector } from './observers';
+import { defaultProfileGenerator, defaultProfileSelector, siteSettingsSaver } from './observers';
 import { hashPassword } from './hasher';
 import { setCurrentSite } from './actions.js';
 import { url2tag } from './utils.js';
 
 store.subscribe(defaultProfileGenerator);
 store.subscribe(defaultProfileSelector);
+dispatcher.subscribe(siteSettingsSaver);
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
