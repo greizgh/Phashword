@@ -7,55 +7,36 @@ import {
   SET_LENGTH,
   SET_TYPE,
 } from '../actions/site';
+import { Map } from 'immutable';
 
-export default function sitesReducer(state = [], action) {
+export default function sitesReducer(state = Map(), action) {
   switch (action.type) {
-  case ADD_SITE:
-    return [ ...state, {hostname: action.hostname}];
-  case TOGGLE_SITE:
-    return state.map((site) => {
-      if (site.hostname === action.hostname) {
+    case ADD_SITE:
+      // Todo populate site settings
+      return state.set(action.hostname, {});
+    case TOGGLE_SITE:
+      return state.update(action.hostname, (site) => {
         return { ...site, enabled: !site.enabled };
-      }
-      return site;
-    });
-  case DELETE_SITE:
-    return state.filter((site) => {
-      return action.hostname !== site.hostname;
-    });
-  case SET_PROFILE:
-    return state.map((site) => {
-      if (action.hostname === site.hostname) {
+      });
+    case DELETE_SITE:
+      return state.delete(action.hostname);
+    case SET_PROFILE:
+      return state.update(action.hostname, (site) => {
         return { ...site, profileId: action.profileId };
-      } else {
-        return site;
-      }
-    });
-  case SET_LENGTH:
-    return state.map((site) => {
-      if (action.hostname === site.hostname) {
+      });
+    case SET_LENGTH:
+      return state.update(action.hostname, (site) => {
         return { ...site, length: action.length };
-      } else {
-        return site;
-      }
-    });
-  case SET_TAG:
-    return state.map((site) => {
-      if (action.hostname === site.hostname) {
+      });
+    case SET_TAG:
+      return state.update(action.hostname, (site) => {
         return { ...site, tag: action.tag };
-      } else {
-        return site;
-      }
-    });
-  case SET_TYPE:
-    return state.map((site) => {
-      if (action.hostname === site.hostname) {
+      });
+    case SET_TYPE:
+      return state.update(action.hostname, (site) => {
         return { ...site, type: action.passwordType };
-      } else {
-        return site;
-      }
-    });
-  default:
-    return state;
+      });
+    default:
+      return state;
   }
 }

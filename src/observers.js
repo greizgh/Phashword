@@ -26,8 +26,7 @@ export function defaultProfileSelector(state) {
 // Save site settings if default values are changed
 export function siteSettingsSaver(action) {
   const siteActions = [TOGGLE_SITE, SET_PROFILE, SET_TAG, SET_TYPE, SET_LENGTH];
-  const targetSite = (site) => site.hostname === action.hostname;
-  if (siteActions.includes(action.type) && lastKnownState.siteSettings.filter(targetSite).length === 0) {
+  if (siteActions.includes(action.type) && !lastKnownState.siteSettings.has(action.hostname)) {
     // Create target siteSettings
     dispatcher.onNext(addSite(action.hostname));
     // Replay initial action as it couldn't be handled

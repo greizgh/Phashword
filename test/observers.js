@@ -33,6 +33,6 @@ describe('siteSettingsSaver', () => {
     store.subscribe((newState) => { state = newState; });
     dispatcher.subscribe(siteSettingsSaver);
     dispatcher.onNext(setTag('test', 'tag'));
-    assert.equal(state.siteSettings.filter((site) => site.hostname === 'test')[0].tag, 'tag');
+    assert.equal(state.siteSettings.get('test').tag, 'tag');
   });
 });
