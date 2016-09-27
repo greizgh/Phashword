@@ -35,15 +35,21 @@ chrome.runtime.onMessage.addListener(
 
 // Update popup with new state
 store.subscribe((state) => {
-  const currentSiteSettings = state.siteSettings[state.currentSite] || {};
+  const defaultValues = {
+    enabled: state.settings.defaultState,
+    tag: state.currentSite,
+    length: state.profiles[state.currentProfile].length,
+    type: state.profiles[state.currentProfile].type,
+  };
+  const currentSiteSettings = state.siteSettings.get(state.currentSite) || defaultValues;
   const popup_state = {
     selectedProfile: state.currentProfile,
     profiles: state.profiles,
     siteId: state.currentSite,
-    enabled: currentSiteSettings.enabled || state.settings.defaultState,
-    tag: currentSiteSettings.tag || state.currentSite,
-    length: currentSiteSettings.length || state.profiles[state.currentProfile].length,
-    type: currentSiteSettings.type || state.profiles[state.currentProfile].type,
+    enabled: currentSiteSettings.enabled,
+    tag: currentSiteSettings.tag,
+    length: currentSiteSettings.length,
+    type: currentSiteSettings.type,
   };
   chrome.runtime.sendMessage({
     type: '@POPUP_STATE',
