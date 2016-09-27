@@ -24,6 +24,8 @@ export default class Popup extends React.Component {
     this.requestPass = this.requestPass.bind(this);
     this.onProfileChange = this.onProfileChange.bind(this);
     this.onTagChange = this.onTagChange.bind(this);
+    this.onLengthChange = this.onLengthChange.bind(this);
+    this.onTypeChange = this.onTypeChange.bind(this);
   }
   componentDidMount() {
     // Advertise popup is ready to receive current state
@@ -34,6 +36,12 @@ export default class Popup extends React.Component {
   }
   onTagChange(event) {
     this.props.onTagChange(this.state.siteId, event.target.value);
+  }
+  onLengthChange(event) {
+    this.props.onLengthChange(this.state.siteId, event.target.value);
+  }
+  onTypeChange(event) {
+    this.props.onTypeChange(this.state.siteId, event.target.value);
   }
   requestPass(event) {
     chrome.runtime.sendMessage({
@@ -65,9 +73,9 @@ export default class Popup extends React.Component {
               length={this.state.length}
               tag={this.state.tag}
               type={this.state.type}
-              onChangeType={this.props.onTypeChange}
+              onChangeType={this.onTypeChange}
               onChangeTag={this.onTagChange}
-              onChangeLength={this.props.onLengthChange}
+              onChangeLength={this.onLengthChange}
             />
           </Pane>
           <Pane label="Generate">
