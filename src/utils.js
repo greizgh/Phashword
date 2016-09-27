@@ -44,3 +44,13 @@ export function url2tag(url) {
     return '';                                                      // d
   }
 }
+
+export function getSiteSettings(state) {
+  const defaultValues = {
+    enabled: state.settings.defaultState,
+    tag: state.currentSite,
+    length: state.profiles[state.currentProfile].length,
+    type: state.profiles[state.currentProfile].type,
+  };
+  return state.siteSettings.get(state.currentSite) || defaultValues;
+}

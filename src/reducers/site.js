@@ -12,8 +12,13 @@ import { Map } from 'immutable';
 export default function sitesReducer(state = Map(), action) {
   switch (action.type) {
     case ADD_SITE:
-      // Todo populate site settings
-      return state.set(action.id, {});
+      return state.set(action.id, {
+        profile: action.profile,
+        tag: action.tag,
+        length: action.length,
+        type: action.passwordType,
+        enabled: action.enabled,
+      });
     case TOGGLE_SITE:
       return state.update(action.id, (site) => {
         return { ...site, enabled: !site.enabled };

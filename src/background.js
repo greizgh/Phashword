@@ -2,7 +2,7 @@ import { store, dispatcher } from './store';
 import { defaultProfileGenerator, defaultProfileSelector, siteSettingsSaver } from './observers';
 import { hashPassword } from './hasher';
 import { setCurrentSite } from './actions.js';
-import { url2tag } from './utils.js';
+import { url2tag, getSiteSettings } from './utils.js';
 
 store.subscribe(defaultProfileGenerator);
 store.subscribe(defaultProfileSelector);
@@ -35,13 +35,7 @@ chrome.runtime.onMessage.addListener(
 
 // Update popup with new state
 store.subscribe((state) => {
-  const defaultValues = {
-    enabled: state.settings.defaultState,
-    tag: state.currentSite,
-    length: state.profiles[state.currentProfile].length,
-    type: state.profiles[state.currentProfile].type,
-  };
-  const currentSiteSettings = state.siteSettings.get(state.currentSite) || defaultValues;
+  const currentSiteSettings = getSiteSettings(state);
   const popupState = {
     selectedProfile: state.currentProfile,
     profiles: state.profiles,

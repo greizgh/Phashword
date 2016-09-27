@@ -7,8 +7,8 @@ export const SET_TAG = 'SET_TAG';
 export const SET_LENGTH = 'SET_LENGTH';
 export const SET_TYPE = 'SET_TYPE';
 
-export function addSite(id) {
-  return { type: ADD_SITE, id };
+export function addSite(id, profile, tag, length, passwordType, enabled) {
+  return { type: ADD_SITE, id, profile, tag, length, passwordType, enabled };
 }
 
 export function deleteSite(id) {
