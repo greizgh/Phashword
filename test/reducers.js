@@ -1,6 +1,4 @@
-'use strict';
-
-import { appReducer } from '../src/reducers.js';
+import appReducer from '../src/reducers.js';
 import { assert } from 'chai';
 import { setCurrentProfile } from '../src/actions.js';
 

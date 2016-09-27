@@ -8,29 +8,29 @@ export const SET_LENGTH = 'SET_LENGTH';
 export const SET_TYPE = 'SET_TYPE';
 
 export function addSite(id) {
-  return { type: ADD_SITE, id: id };
+  return { type: ADD_SITE, id };
 }
 
 export function deleteSite(id) {
-  return { type: DELETE_SITE, id: id };
+  return { type: DELETE_SITE, id };
 }
 
 export function toggleSite(id) {
-  return { type: TOGGLE_SITE, id: id };
+  return { type: TOGGLE_SITE, id };
 }
 
 export function setTag(id, tag) {
-  return { type: SET_TAG, id: id, tag: tag };
+  return { type: SET_TAG, id, tag };
 }
 
 export function setProfile(id, profileId) {
-  return { type: SET_PROFILE, id: id, profileId: profileId };
+  return { type: SET_PROFILE, id, profileId };
 }
 
 export function setLength(id, length) {
-  return { type: SET_LENGTH, id: id, length: length };
+  return { type: SET_LENGTH, id, length };
 }
 
 export function setType(id, passwordType) {
-  return { type: SET_TYPE, id, passwordType: passwordType };
+  return { type: SET_TYPE, id, passwordType };
 }

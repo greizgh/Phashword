@@ -24,7 +24,7 @@ function currentSite(state = null, action) {
   }
 }
 
-export function appReducer(state, action) {
+export default function appReducer(state, action) {
   return {
     currentSite: currentSite(state.currentSite, action),
     currentProfile: currentProfile(state.currentProfile, action),

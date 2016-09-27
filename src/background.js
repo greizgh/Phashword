@@ -9,26 +9,26 @@ store.subscribe(defaultProfileSelector);
 dispatcher.subscribe(siteSettingsSaver);
 
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
+  (request, sender, sendResponse) => {
     switch (request.type) {
-    case 'OPEN_SETTINGS':
-      chrome.runtime.openOptionsPage();
-      break;
-    case 'REQUEST_PASS':
-      const hash = hashPassword(
-        request.tag,
-        request.masterKey,
-        request.privateKey,
-        request.passwordLength,
-        request.passwordType
-      );
-      sendResponse({ hash });
-      break;
-    default:
-      if (!request.type.startsWith('@')) {
-        dispatcher.onNext(request);
-      }
-      break;
+      case 'OPEN_SETTINGS':
+        chrome.runtime.openOptionsPage();
+        break;
+      case 'REQUEST_PASS':
+        const hash = hashPassword(
+          request.tag,
+          request.masterKey,
+          request.privateKey,
+          request.passwordLength,
+          request.passwordType
+        );
+        sendResponse({ hash });
+        break;
+      default:
+        if (!request.type.startsWith('@')) {
+          dispatcher.onNext(request);
+        }
+        break;
     }
   }
 );
@@ -42,7 +42,7 @@ store.subscribe((state) => {
     type: state.profiles[state.currentProfile].type,
   };
   const currentSiteSettings = state.siteSettings.get(state.currentSite) || defaultValues;
-  const popup_state = {
+  const popupState = {
     selectedProfile: state.currentProfile,
     profiles: state.profiles,
     siteId: state.currentSite,
@@ -53,12 +53,12 @@ store.subscribe((state) => {
   };
   chrome.runtime.sendMessage({
     type: '@POPUP_STATE',
-    state: popup_state,
+    state: popupState,
   });
 });
 
 function handleTabChange() {
-  chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
+  chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
     if (tabs[0]) {
       const currentHostname = url2tag(tabs[0].url);
       dispatcher.onNext(setCurrentSite(currentHostname));
