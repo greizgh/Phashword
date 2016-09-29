@@ -1,20 +1,32 @@
 import React from 'react';
 
 export default class QuickState extends React.Component {
+  getColorStyle() {
+    const style = {};
+    if (this.props.profiles[this.props.currentProfile]) {
+      style.borderBottom = `5px solid ${this.props.profiles[this.props.currentProfile].color}`;
+    }
+    return style;
+  }
+
   render() {
     return (
       <div className="panel-section panel-section-formElements">
-        <div className="panel-formElements-item">
+        <div className="panel-formElements-item" style={this.getColorStyle()}>
           <label htmlFor="profile">Profile</label>
-          <select id="profile" value={this.props.currentProfile} onChange={this.props.onProfileChange}>
-            {this.props.profiles.map((profile) => {
-              return (<option value={profile.id} key={profile.id}>{profile.name}</option>);
-             })}
+          <select
+            id="profile"
+            value={this.props.currentProfile}
+            onChange={this.props.onProfileChange}
+          >
+            {this.props.profiles.map((profile) => (
+              <option value={profile.id} key={profile.id}>{profile.name}</option>
+            ))}
           </select>
-          <span className="color-sample" id="color"></span>
         </div>
         <div className="panel-formElements-item">
-          <button className="default" id="state" onClick={this.props.onToggle}>State</button>
+          <label htmlFor="state">Active</label>
+          <input type="checkbox" className="default" id="state" onClick={this.props.onToggle} checked={this.props.enabled}/>
         </div>
       </div>
     );

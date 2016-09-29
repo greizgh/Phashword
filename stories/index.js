@@ -23,7 +23,7 @@ const profile = {
   id: '1234567898',
   name: 'Default',
   default: true,
-  color: '#abcdff',
+  color: '#c32c32',
   length: 12,
   type: 3,
   privateKey: 'private',
