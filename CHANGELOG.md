@@ -1,3 +1,7 @@
+# 1.6.1 - 2016/09/29
+
+* Mark add-on as multiprocess compatible
+
 # 1.6.0 - 2016/02/15
 
 * Add external prompt option

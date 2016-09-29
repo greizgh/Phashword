@@ -4,9 +4,12 @@
   "id": "jid1-nY3RWh8Fb7qhXw@jetpack",
   "description": "Easy to use password generator",
   "author": "Greizgh",
-  "license": "GPLv3",
-  "version": "1.6.0",
+  "license": "GPL-3.0",
+  "version": "1.6.1",
   "main": "lib/main.js",
+  "permissions": {
+    "multiprocess": true
+  },
   "preferences": [
     {
       "name": "default_status",

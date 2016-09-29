@@ -28,6 +28,13 @@ Go to [firefox add-on page](https://addons.mozilla.org/fr/firefox/addon/phashwor
 Or you can clone this repository and build the extension using `jpm xpi`.
 See [MDN](https://developer.mozilla.org/en-US/Add-ons/SDK) for more information on firefox add-on SDK and building process.
 
+Build steps:
+
+    cd data
+    compass compile
+    cd ..
+    jpm xpi
+
 ## License
 
 Phashword is free software and is distributed under the GPLv3 license. See COPYING for more information.
