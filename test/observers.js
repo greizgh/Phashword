@@ -8,8 +8,8 @@ describe('generateDefaultProfile', () => {
     store.subscribe(defaultProfileGenerator);
     let state;
     store.subscribe((newState) => state=newState);
-    assert.equal(state.profiles.length, 1);
-    assert.isTrue(state.profiles[0].default);
+    assert.equal(state.profiles.size, 1);
+    assert.isTrue(state.profiles.first().default);
   });
 });
 
@@ -21,9 +21,9 @@ describe('defaultProfileSelector', () => {
     store.subscribe(defaultProfileSelector);
     dispatcher.onNext(createProfile());
     dispatcher.onNext(createProfile());
-    let defaultId = state.profiles.filter((profile) => profile.default).map((profile) => profile.id)[0];
+    let defaultId = state.profiles.filter((profile) => profile.default).map((profile) => profile.id).first();
     dispatcher.onNext(deleteProfile(defaultId));
-    assert.equal(state.profiles.filter((profile) => profile.default).length, 1);
+    assert.equal(state.profiles.count((profile) => profile.default), 1);
   });
 });
 

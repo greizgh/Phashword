@@ -16,7 +16,7 @@ const initialState = {
       type: PASSWORD_TYPES.SPECIAL,
     },
   }),
-  profiles: [],
+  profiles: Map(),
 };
 
 export const dispatcher = new Rx.BehaviorSubject({ type: '@@init' });

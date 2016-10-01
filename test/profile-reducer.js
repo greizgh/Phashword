@@ -1,6 +1,7 @@
 import profilesReducer from '../src/reducers/profile';
 import { PASSWORD_TYPES } from '../src/constants';
 import { assert } from 'chai';
+import { Map } from 'immutable';
 import {
   createProfile,
   deleteProfile,
@@ -14,70 +15,65 @@ import {
 
 describe('profilesReducer', () => {
   it('should handle profile creation', () => {
-    let profiles = profilesReducer([], createProfile());
-    assert.equal(profiles.length, 1);
+    let profiles = profilesReducer(Map(), createProfile());
+    assert.equal(profiles.size, 1);
   });
   it('should update profile name', () => {
     let profiles = profilesReducer(
-      [{id: 1, name: 'test'}, {id: 2, name: 'original'}],
-      setProfileName(1, 'update')
+      Map({'uuid1': {name: 'test'}, 'uuid2': {name: 'original'}}),
+      setProfileName('uuid1', 'update')
     );
-    assert.equal(profiles[0].name, 'update');
-    assert.equal(profiles[1].name, 'original');
+    assert.equal(profiles.get('uuid1').name, 'update');
+    assert.equal(profiles.get('uuid2').name, 'original');
   });
   it('should allow to change default profile', () => {
-    let profiles = [
-      {id: 1, default: true},
-      {id: 2, default: false},
-    ];
-    let state = profilesReducer(profiles, setDefaultProfile(2));
-    state.map((profile) => {
-      if (profile.id === 1) {
-        assert.isFalse(profile.default);
-      } else {
-        assert.isTrue(profile.default);
-      }
+    let profiles = Map({
+      'uuid1': {default: true},
+      'uuid2': {default: false}, 
     });
+    let state = profilesReducer(profiles, setDefaultProfile('uuid2'));
+    assert.isFalse(state.get('uuid1').default);
+    assert.isTrue(state.get('uuid2').default);
   });
   it('should update profile color', () => {
     let profiles = profilesReducer(
-      [{id: 2, color: '#000000'}, {id: 1, color: 'blue'}],
-      setProfileColor(2, '#ffffff')
+      Map({'uuid1': {color: '#000000'}, 'uuid2': {color: 'blue'}}),
+      setProfileColor('uuid1', '#ffffff')
     );
-    assert.equal(profiles[0].color, '#ffffff');
-    assert.equal(profiles[1].color, 'blue');
+    assert.equal(profiles.get('uuid1').color, '#ffffff');
+    assert.equal(profiles.get('uuid2').color, 'blue');
   });
   it('should update profile key', () => {
     let profiles = profilesReducer(
-      [{id: 1, key: 'dumb'}, {id: 2, key: '1234'}],
-      setProfileKey(1, 'test')
+      Map({'uuid1': {key: 'dumb'}, 'uuid2': {key: '1234'}}),
+      setProfileKey('uuid1', 'test')
     );
-    assert.equal(profiles[0].key, 'test');
-    assert.equal(profiles[1].key, '1234');
+    assert.equal(profiles.get('uuid1').key, 'test');
+    assert.equal(profiles.get('uuid2').key, '1234');
   });
   it('should update profile length', () => {
     let profiles = profilesReducer(
-      [{id: 1, length: 8}, {id: 3, length: 22}],
-      setProfileLength(1, 12)
+      Map({'uuid1': {length: 8}, 'uuid2': {length: 22}}),
+      setProfileLength('uuid1', 12)
     );
-    assert.equal(profiles[0].length, 12);
-    assert.equal(profiles[1].length, 22);
+    assert.equal(profiles.get('uuid1').length, 12);
+    assert.equal(profiles.get('uuid2').length, 22);
   });
   it('should update profile type', () => {
     let profiles = profilesReducer(
-      [{id: 1, type: PASSWORD_TYPES.SPECIAL}, {id: 3, type: PASSWORD_TYPES.ALPHANUMERIC}],
-      setProfileType(1, PASSWORD_TYPES.NUMERIC)
+      Map({'uuid1': {type: PASSWORD_TYPES.SPECIAL}, 'uuid2': {type: PASSWORD_TYPES.ALPHANUMERIC}}),
+      setProfileType('uuid1', PASSWORD_TYPES.NUMERIC)
     );
-    assert.equal(profiles[0].type, PASSWORD_TYPES.NUMERIC);
-    assert.equal(profiles[1].type, PASSWORD_TYPES.ALPHANUMERIC);
+    assert.equal(profiles.get('uuid1').type, PASSWORD_TYPES.NUMERIC);
+    assert.equal(profiles.get('uuid2').type, PASSWORD_TYPES.ALPHANUMERIC);
   });
   it('should support profile deletion', () => {
-    let initialState = [
-      {id: 1},
-      {id: 2},
-      {id: 3},
-    ];
-    let profiles = profilesReducer(initialState, deleteProfile(2));
-    assert.equal(profiles.length, 2);
+    let initialState = Map({
+      'uuid1': {},
+      'uuid2': {},
+      'uuid3': {},
+    });
+    let profiles = profilesReducer(initialState, deleteProfile('uuid2'));
+    assert.equal(profiles.size, 2);
   });
 });

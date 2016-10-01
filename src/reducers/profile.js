@@ -10,73 +10,36 @@ import {
 } from '../actions/profile';
 import { PASSWORD_TYPES, DEFAULT_COLOR, DEFAULT_LENGTH } from '../constants';
 import uuid from 'uuid';
+import { Map } from 'immutable';
 
-export default function profilesReducer(state = [], action) {
+export default function profilesReducer(state = Map(), action) {
   switch (action.type) {
-  case CREATE_PROFILE:
-    state.push({
-      id: uuid.v4(),
-      name: 'Default',
-      default: false,
-      color: DEFAULT_COLOR,
-      length: DEFAULT_LENGTH,
-      type: PASSWORD_TYPES.SPECIAL,
-      privateKey: uuid.v4(),
-    });
-    return state;
-  case DELETE_PROFILE:
-    return state.filter((profile) => {
-      return profile.id !== action.id;
-    });
-  case SET_DEFAULT_PROFILE:
-    return state.map((profile) => {
-      if (action.id === profile.id) {
-        return { ...profile, default: true };
-      } else {
-        return { ...profile, default: false };
-      }
-    });
-  case SET_PROFILE_NAME:
-    return state.map((profile) => {
-      if (action.id === profile.id) {
-        return { ...profile, name: action.name };
-      } else {
-        return profile;
-      }
-    });
-  case SET_PROFILE_COLOR:
-    return state.map((profile) => {
-      if (action.id === profile.id) {
-        return { ...profile, color: action.color };
-      } else {
-        return profile;
-      }
-    });
-  case SET_PROFILE_TYPE:
-    return state.map((profile) => {
-      if (action.id === profile.id) {
-        return { ...profile, type: action.passwordType };
-      } else {
-        return profile;
-      }
-    });
-  case SET_PROFILE_LENGTH:
-    return state.map((profile) => {
-      if (action.id === profile.id) {
-        return { ...profile, length: action.length };
-      } else {
-        return profile;
-      }
-    });
-  case SET_PROFILE_KEY:
-    return state.map((profile) => {
-      if (action.id === profile.id) {
-        return { ...profile, key: action.key };
-      } else {
-        return profile;
-      }
-    });
-  default:
-    return state;
+    case CREATE_PROFILE:
+      return state.set(uuid.v4(), {
+        name: 'Default',
+        default: false,
+        color: DEFAULT_COLOR,
+        length: DEFAULT_LENGTH,
+        type: PASSWORD_TYPES.SPECIAL,
+        privateKey: uuid.v4(),
+      });
+    case DELETE_PROFILE:
+      return state.delete(action.id);
+    case SET_DEFAULT_PROFILE:
+      return state
+        .map((profile) => ({ ...profile, default: false }))
+        .update(action.id, (profile) => ({ ...profile, default: true }));
+    case SET_PROFILE_NAME:
+      return state.update(action.id, (profile) => ({ ...profile, name: action.name }));
+    case SET_PROFILE_COLOR:
+      return state.update(action.id, (profile) => ({ ...profile, color: action.color }));
+    case SET_PROFILE_TYPE:
+      return state.update(action.id, (profile) => ({ ...profile, type: action.passwordType }));
+    case SET_PROFILE_LENGTH:
+      return state.update(action.id, (profile) => ({ ...profile, length: action.length }));
+    case SET_PROFILE_KEY:
+      return state.update(action.id, (profile) => ({ ...profile, key: action.key }));
+    default:
+      return state;
   }
 }
