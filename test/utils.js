@@ -1,7 +1,35 @@
 import { Map } from 'immutable';
 import { assert } from 'chai';
-import { url2tag, getSiteSettings } from '../src/utils.js';
+import { url2tag, getSiteSettings, getPopupState } from '../src/utils.js';
 import { PASSWORD_TYPES } from '../src/constants.js';
+
+const state = {
+  settings: {
+    defaultState: false,
+  },
+  currentSite: 'localhost',
+  profiles: Map({
+    uuid: {
+      type: PASSWORD_TYPES.NUMERIC,
+      length: 8,
+      default: true,
+    },
+    uuid2: {
+      type: PASSWORD_TYPES.SPECIAL,
+      length: 12,
+      default: false,
+    },
+  }),
+  siteSettings: Map({
+    mozilla: {
+      enabled: true,
+      type: PASSWORD_TYPES.SPECIAL,
+      length: 12,
+      tag: 'special',
+      profile: 'uuid2',
+    },
+  }),
+};
 
 describe('url2tag', () => {
   it('should handle IPs', () => {
@@ -21,35 +49,26 @@ describe('url2tag', () => {
 });
 
 describe('getSiteSettings', () => {
-  const state = {
-    settings: {
-      defaultState: false
-    },
-    currentSite: 'localhost',
-    currentProfile: 'uuid',
-    profiles: Map({ 'uuid': {
-      type: PASSWORD_TYPES.NUMERIC,
-      length: 8,
-    }}),
-    siteSettings: Map({
-      mozilla: {
-        enabled: true,
-        type: PASSWORD_TYPES.SPECIAL,
-        length: 12,
-        tag: 'special',
-        profile: 'uuid',
-      }
-    })
-  };
   it('should return default data when there is no site settings', () => {
-    assert.equal(getSiteSettings(state).tag, 'localhost');
-    assert.equal(getSiteSettings(state).length, 8);
-    assert.isFalse(getSiteSettings(state).enabled);
+    const settings = getSiteSettings(state)
+    assert.equal(settings.tag, 'localhost');
+    assert.equal(settings.length, 8);
+    assert.isFalse(settings.enabled);
+    assert.equal(settings.profile, 'uuid');
   });
   it('should return site settings where possible', () => {
     state.currentSite = 'mozilla';
-    assert.equal(getSiteSettings(state).tag, 'special');
-    assert.isTrue(getSiteSettings(state).enabled);
-    assert.equal(getSiteSettings(state).length, 12);
-  })
+    const settings = getSiteSettings(state)
+    assert.equal(settings.tag, 'special');
+    assert.isTrue(settings.enabled);
+    assert.equal(settings.length, 12);
+    assert.equal(settings.profile, 'uuid2');
+  });
+});
+
+describe('getPopupState', () => {
+  it('should return profiles as an array', () => {
+    const popupState = getPopupState(state);
+    assert.equal(popupState.profiles.length, 2);
+  });
 });

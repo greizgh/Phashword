@@ -45,12 +45,29 @@ export function url2tag(url) {
   }
 }
 
+
 export function getSiteSettings(state) {
+  const defaultProfile = state.profiles.findEntry((profile) => profile.default);
   const defaultValues = {
     enabled: state.settings.defaultState,
     tag: state.currentSite,
-    length: state.profiles.get(state.currentProfile).length,
-    type: state.profiles.get(state.currentProfile).type,
+    length: defaultProfile[1].length,
+    type: defaultProfile[1].type,
+    profile: defaultProfile[0],
   };
   return state.siteSettings.get(state.currentSite, defaultValues);
+}
+
+// Extract popup data from global state
+export function getPopupState(state) {
+  const currentSiteSettings = getSiteSettings(state);
+  return {
+    selectedProfile: currentSiteSettings.profile,
+    profiles: state.profiles.map((value, key) => ({ ...value, id: key })).toArray(),
+    siteId: state.currentSite,
+    enabled: currentSiteSettings.enabled,
+    tag: currentSiteSettings.tag,
+    length: currentSiteSettings.length,
+    type: currentSiteSettings.type,
+  };
 }

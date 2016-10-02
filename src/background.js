@@ -1,11 +1,10 @@
 import { store, dispatcher } from './store';
-import { defaultProfileGenerator, defaultProfileSelector, siteSettingsSaver } from './observers';
+import { defaultProfileObserver, siteSettingsSaver } from './observers';
 import { hashPassword } from './hasher';
 import { setCurrentSite } from './actions.js';
-import { url2tag, getSiteSettings } from './utils.js';
+import { url2tag, getPopupState } from './utils.js';
 
-store.subscribe(defaultProfileGenerator);
-store.subscribe(defaultProfileSelector);
+store.subscribe(defaultProfileObserver);
 dispatcher.subscribe(siteSettingsSaver);
 
 chrome.runtime.onMessage.addListener(
@@ -35,19 +34,9 @@ chrome.runtime.onMessage.addListener(
 
 // Update popup with new state
 store.subscribe((state) => {
-  const currentSiteSettings = getSiteSettings(state);
-  const popupState = {
-    selectedProfile: state.currentProfile,
-    profiles: state.profiles,
-    siteId: state.currentSite,
-    enabled: currentSiteSettings.enabled,
-    tag: currentSiteSettings.tag,
-    length: currentSiteSettings.length,
-    type: currentSiteSettings.type,
-  };
   chrome.runtime.sendMessage({
     type: '@POPUP_STATE',
-    state: popupState,
+    state: getPopupState(state),
   });
 });
 

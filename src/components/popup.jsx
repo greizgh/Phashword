@@ -12,7 +12,7 @@ export default class Popup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedProfile: 0,
+      selectedProfile: '',
       profiles: [],
       siteId: '',
       enabled: true,

@@ -4,17 +4,9 @@ import appReducer from './reducers';
 import { PASSWORD_TYPES } from './constants';
 
 const initialState = {
-  currentSite: 0,
-  currentProfile: 0,
-  siteSettings: Map({
-    mozilla: {
-      profile: 1,
-      tag: 'firefox',
-      enabled: true,
-      length: 12,
-      type: PASSWORD_TYPES.SPECIAL,
-    },
-  }),
+  currentSite: null,
+  currentProfile: null,
+  siteSettings: Map(),
   profiles: Map(),
 };
 
