@@ -8,7 +8,7 @@ store.subscribe((state) => { lastKnownState = state; });
 
 // Make sure there is a profile and if there is only one make it default
 export function defaultProfileGenerator(state) {
-  if (state.profiles.size === 0) {
+  if (state.profiles.isEmpty()) {
     dispatcher.onNext(createProfile());
   }
   if (state.profiles.size === 1 && state.profiles.count((profile) => profile.default) === 0) {
@@ -19,7 +19,7 @@ export function defaultProfileGenerator(state) {
 // Make sure there is a default profile.
 // Useful after profile deletion
 export function defaultProfileSelector(state) {
-  if (state.profiles.size > 0 && state.profiles.count((profile) => profile.default) === 0) {
+  if (!state.profiles.isEmpty() && state.profiles.count((profile) => profile.default) === 0) {
     dispatcher.onNext(setDefaultProfile(state.profiles.slice(0).keySeq().first()));
   }
 }
