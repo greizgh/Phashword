@@ -32,7 +32,7 @@ describe('getSiteSettings', () => {
       length: 8,
     }}),
     siteSettings: Map({
-      'mozilla': {
+      mozilla: {
         enabled: true,
         type: PASSWORD_TYPES.SPECIAL,
         length: 12,

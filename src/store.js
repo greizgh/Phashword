@@ -8,7 +8,6 @@ const initialState = {
   currentProfile: 0,
   siteSettings: Map({
     mozilla: {
-      id: 0,
       profile: 1,
       tag: 'firefox',
       enabled: true,

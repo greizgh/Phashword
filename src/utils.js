@@ -52,5 +52,5 @@ export function getSiteSettings(state) {
     length: state.profiles.get(state.currentProfile).length,
     type: state.profiles.get(state.currentProfile).type,
   };
-  return state.siteSettings.get(state.currentSite) || defaultValues;
+  return state.siteSettings.get(state.currentSite, defaultValues);
 }
