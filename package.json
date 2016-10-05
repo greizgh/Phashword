@@ -31,6 +31,7 @@
     "crypto-js": "^3.1.6",
     "immutable": "^3.8.1",
     "json-loader": "^0.5.4",
+    "radium": "^0.18.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "rx": "^4.1.0",

@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import Popup from '../src/components/popup.jsx';
 import QuickState from '../src/components/popup/quicksettings.jsx';
+import SiteItem from '../src/components/admin/siteItem.jsx';
 import '../css/popup.css';
 
 storiesOf('popup', module)
@@ -20,7 +21,7 @@ storiesOf('popup', module)
   ));
 
 const profile = {
-  id: '1234567898',
+  id: 'uuid',
   name: 'Default',
   default: true,
   color: '#c32c32',
@@ -32,7 +33,7 @@ const profile = {
 storiesOf('popup.quickstate', module)
   .add('Site disabled', () =>
     <QuickState
-      currentProfile={0}
+      currentProfile={'uuid'}
       profiles={[profile]}
       enabled={false}
       onToggle={action('toggle state')}
@@ -41,10 +42,19 @@ storiesOf('popup.quickstate', module)
   )
   .add('Site enabled', () =>
     <QuickState
-      currentProfile={0}
+      currentProfile={'uuid'}
       profiles={[profile]}
       enabled={true}
       onToggle={action('toggle state')}
       onProfileChange={action('profile change')}
     />
   );
+
+const site = {
+  id: 'mozilla',
+  profile: 'uuid',
+  tag: 'custom',
+  length: 12,
+}
+storiesOf('admin.siteItem', module)
+.add('default', () => <SiteItem site={site} onDelete={action('delete site')} />);
