@@ -8,7 +8,7 @@ const state = {
     defaultState: false,
   },
   currentSite: 'localhost',
-  profiles: Map({
+  profiles: new Map({
     uuid: {
       type: PASSWORD_TYPES.NUMERIC,
       length: 8,
@@ -20,7 +20,7 @@ const state = {
       default: false,
     },
   }),
-  siteSettings: Map({
+  siteSettings: new Map({
     mozilla: {
       enabled: true,
       type: PASSWORD_TYPES.SPECIAL,
@@ -33,7 +33,7 @@ const state = {
 
 describe('url2tag', () => {
   it('should handle IPs', () => {
-    let url = 'http://127.0.0.1';
+    const url = 'http://127.0.0.1';
     assert.equal('127.0.0.1', url2tag(url));
   });
   it('should return the same tag from different domains', () => {
@@ -50,7 +50,7 @@ describe('url2tag', () => {
 
 describe('getSiteSettings', () => {
   it('should return default data when there is no site settings', () => {
-    const settings = getSiteSettings(state)
+    const settings = getSiteSettings(state);
     assert.equal(settings.tag, 'localhost');
     assert.equal(settings.length, 8);
     assert.isFalse(settings.enabled);
@@ -58,7 +58,7 @@ describe('getSiteSettings', () => {
   });
   it('should return site settings where possible', () => {
     state.currentSite = 'mozilla';
-    const settings = getSiteSettings(state)
+    const settings = getSiteSettings(state);
     assert.equal(settings.tag, 'special');
     assert.isTrue(settings.enabled);
     assert.equal(settings.length, 12);

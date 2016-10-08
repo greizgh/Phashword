@@ -1,3 +1,4 @@
+/* global chrome */
 import { store, dispatcher } from './store';
 import { defaultProfileObserver, siteSettingsSaver } from './observers';
 import { hashPassword } from './hasher';
@@ -9,12 +10,13 @@ dispatcher.subscribe(siteSettingsSaver);
 
 chrome.runtime.onMessage.addListener(
   (request, sender, sendResponse) => {
+    let hash;
     switch (request.type) {
       case 'OPEN_SETTINGS':
         chrome.runtime.openOptionsPage();
         break;
       case 'REQUEST_PASS':
-        const hash = hashPassword(
+        hash = hashPassword(
           request.tag,
           request.masterKey,
           request.privateKey,

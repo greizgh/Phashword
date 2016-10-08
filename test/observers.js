@@ -1,3 +1,4 @@
+import { assert } from 'chai';
 import { defaultProfileObserver, siteSettingsSaver } from '../src/observers';
 import { store, dispatcher } from '../src/store';
 import { createProfile, deleteProfile } from '../src/actions/profile';

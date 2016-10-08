@@ -1,3 +1,4 @@
+import { Map } from 'immutable';
 import {
   ADD_SITE,
   DELETE_SITE,
@@ -7,9 +8,8 @@ import {
   SET_LENGTH,
   SET_TYPE,
 } from '../actions/site';
-import { Map } from 'immutable';
 
-export default function sitesReducer(state = Map(), action) {
+export default function sitesReducer(state = new Map(), action) {
   switch (action.type) {
     case ADD_SITE:
       return state.set(action.id, {
@@ -20,27 +20,17 @@ export default function sitesReducer(state = Map(), action) {
         enabled: action.enabled,
       });
     case TOGGLE_SITE:
-      return state.update(action.id, (site) => {
-        return { ...site, enabled: !site.enabled };
-      });
+      return state.update(action.id, (site) => ({ ...site, enabled: !site.enabled }));
     case DELETE_SITE:
       return state.delete(action.id);
     case SET_PROFILE:
-      return state.update(action.id, (site) => {
-        return { ...site, profileId: action.profileId };
-      });
+      return state.update(action.id, (site) => ({ ...site, profileId: action.profileId }));
     case SET_LENGTH:
-      return state.update(action.id, (site) => {
-        return { ...site, length: action.length };
-      });
+      return state.update(action.id, (site) => ({ ...site, length: action.length }));
     case SET_TAG:
-      return state.update(action.id, (site) => {
-        return { ...site, tag: action.tag };
-      });
+      return state.update(action.id, (site) => ({ ...site, tag: action.tag }));
     case SET_TYPE:
-      return state.update(action.id, (site) => {
-        return { ...site, type: action.passwordType };
-      });
+      return state.update(action.id, (site) => ({ ...site, type: action.passwordType }));
     default:
       return state;
   }

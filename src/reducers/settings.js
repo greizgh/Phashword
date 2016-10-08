@@ -7,7 +7,7 @@ const defaultSettings = {
 export default function settingsReducer(state = defaultSettings, action) {
   switch (action.type) {
     case TOGGLE_DEFAULT_STATE:
-      return {...state, defaultState: !state.defaultState};
+      return { ...state, defaultState: !state.defaultState };
     default:
       return state;
   }

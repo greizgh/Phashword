@@ -1,6 +1,6 @@
-import appReducer from '../src/reducers.js';
 import { assert } from 'chai';
 import { setCurrentProfile } from '../src/actions.js';
+import appReducer from '../src/reducers.js';
 
 describe('appReducer', () => {
   it('should handle profile change', () => {

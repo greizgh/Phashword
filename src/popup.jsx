@@ -1,12 +1,10 @@
+/* eslint-env browser */
+/* global chrome */
 import React from 'react';
 import { render } from 'react-dom';
 import Popup from './components/popup.jsx';
 import { openSettings } from './actions';
 import { toggleSite, setTag, setProfile, setLength, setType } from './actions/site';
-
-function dispatch(action) {
-  chrome.runtime.sendMessage(action);
-}
 
 function onClose() {
   window.close();
@@ -17,7 +15,7 @@ function onSettings() {
 }
 
 function onReady() {
-  chrome.runtime.sendMessage({type: 'POPUP_READY'});
+  chrome.runtime.sendMessage({ type: 'POPUP_READY' });
 }
 
 function onToggleState(siteId) {

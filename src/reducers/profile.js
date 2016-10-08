@@ -1,3 +1,5 @@
+import { Map } from 'immutable';
+import uuid from 'uuid';
 import {
   CREATE_PROFILE,
   DELETE_PROFILE,
@@ -9,10 +11,8 @@ import {
   SET_PROFILE_KEY,
 } from '../actions/profile';
 import { PASSWORD_TYPES, DEFAULT_COLOR, DEFAULT_LENGTH } from '../constants';
-import uuid from 'uuid';
-import { Map } from 'immutable';
 
-export default function profilesReducer(state = Map(), action) {
+export default function profilesReducer(state = new Map(), action) {
   switch (action.type) {
     case CREATE_PROFILE:
       return state.set(uuid.v4(), {

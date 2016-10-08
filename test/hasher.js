@@ -3,7 +3,7 @@ import { hashPassword } from '../src/hasher.js';
 
 describe('hasher', () => {
   it('should has basic hasing capabilities', () => {
-    let hash = hashPassword(
+    const hash = hashPassword(
       'test',       // site tag
       'master',     // master key
       'private',    // private key
