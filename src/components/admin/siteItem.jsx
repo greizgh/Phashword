@@ -36,15 +36,22 @@ const btnStyle = {
   ':focus': {
     borderColor: '#fff',
     boxShadow: '0 0 0 2px rgba(97, 181, 255, 0.75)',
-  }
+  },
 };
 
 class SiteItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.deleteSite = this.deleteSite.bind(this);
+  }
+  deleteSite() {
+    this.props.onDelete(this.props.site.id);
+  }
   render() {
     return (
       <div style={style}>
         {this.props.site.id} - {this.props.site.tag} - {this.props.site.length}
-        <button key="delbtn" onClick={this.props.onDelete} style={btnStyle}>Delete</button>
+        <button key="delbtn" onClick={this.deleteSite} style={btnStyle}>Delete</button>
       </div>
     );
   }
