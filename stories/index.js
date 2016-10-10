@@ -3,6 +3,7 @@ import { storiesOf, action } from '@kadira/storybook';
 import Popup from '../src/components/popup.jsx';
 import QuickState from '../src/components/popup/quicksettings.jsx';
 import SiteItem from '../src/components/admin/siteItem.jsx';
+import SiteAdmin from '../src/components/admin/siteAdmin.jsx';
 import '../css/popup.css';
 
 storiesOf('popup', module)
@@ -55,6 +56,14 @@ const site = {
   profile: 'uuid',
   tag: 'custom',
   length: 12,
-}
+};
 storiesOf('admin.siteItem', module)
-.add('default', () => <SiteItem site={site} onDelete={action('delete site')} />);
+  .add('default', () => <SiteItem site={site} onDelete={action('delete site')} />);
+
+const sites = [
+  site,
+  { id: 'eff', tag: 'tag', length: 22 },
+];
+
+storiesOf('admin.sites', module)
+  .add('default', () => <SiteAdmin sites={sites} onDelete={action('delete site')} />);
