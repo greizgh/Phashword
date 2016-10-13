@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
+import faker from 'faker';
 import Popup from '../src/components/popup.jsx';
 import QuickState from '../src/components/popup/quicksettings.jsx';
 import SiteItem from '../src/components/admin/siteItem.jsx';
@@ -63,8 +64,16 @@ storiesOf('admin.siteItem', module)
 
 const sites = [
   site,
-  { id: 'eff', tag: 'tag', length: 22 },
 ];
+
+for (let i=0; i<10; i++) {
+  sites.push({
+    id: faker.internet.domainWord(),
+    profile: 'uuid',
+    tag: faker.lorem.word(),
+    length: 12
+  });
+}
 
 storiesOf('admin.sites', module)
   .add('default', () => <SiteAdmin sites={sites} onDelete={action('delete site')} />);
