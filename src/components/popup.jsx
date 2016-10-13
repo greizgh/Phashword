@@ -102,4 +102,4 @@ Popup.propTypes = {
   onTypeChange: React.PropTypes.func,
   onLengthChange: React.PropTypes.func,
   onTagChange: React.PropTypes.func,
-}
+};

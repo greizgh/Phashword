@@ -4,6 +4,7 @@ import Popup from '../src/components/popup.jsx';
 import QuickState from '../src/components/popup/quicksettings.jsx';
 import SiteItem from '../src/components/admin/siteItem.jsx';
 import SiteAdmin from '../src/components/admin/siteAdmin.jsx';
+import Settings from '../src/components/admin/settings.jsx'; 
 import '../css/popup.css';
 
 storiesOf('popup', module)
@@ -67,3 +68,12 @@ const sites = [
 
 storiesOf('admin.sites', module)
   .add('default', () => <SiteAdmin sites={sites} onDelete={action('delete site')} />);
+
+storiesOf('admin.settings', module)
+  .add('default', () =>
+      <Settings
+        onDelete={action('delete')}
+        onReady={action('settings ready')}
+        sites={sites}
+      />
+  );
