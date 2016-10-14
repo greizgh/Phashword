@@ -1,43 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
-
-const style = {
-  width: '400px',
-  padding: '10px',
-  backgroundColor: '#fcfcfc',
-  boxShadow: '1px 1px 3px #ababab',
-  transitionDuration: '250ms',
-  transitionProperty: 'box-shadow',
-  ':hover': {
-    backgroundColor: '#fafafa',
-    boxShadow: '1px 1px 3px #cdcdcd',
-  },
-};
-
-const btnStyle = {
-  backgroundColor: '#fbfbfb',
-  border: '1px solid #b1b1b1',
-  boxShadow: '0 0 0 0 transparent',
-  font: 'caption',
-  height: '24px',
-  outline: '0 !important',
-  padding: '0 8px 0',
-  transitionDuration: '250ms',
-  transitionProperty: 'box-shadow, border',
-  float: 'right',
-  ':hover': {
-    backgroundColor: '#ebebeb',
-    border: '1px solid #b1b1b1',
-  },
-  ':active': {
-    backgroundColor: '#d4d4d4',
-    border: '1px solid #858585',
-  },
-  ':focus': {
-    borderColor: '#fff',
-    boxShadow: '0 0 0 2px rgba(97, 181, 255, 0.75)',
-  },
-};
+import { siteItemStyle, btnStyle } from '../style.js';
 
 class SiteItem extends React.Component {
   constructor(props) {
@@ -49,7 +12,7 @@ class SiteItem extends React.Component {
   }
   render() {
     return (
-      <div style={style}>
+      <div style={siteItemStyle}>
         {this.props.site.id} - {this.props.site.tag} - {this.props.site.length}
         <button key="delbtn" onClick={this.deleteSite} style={btnStyle}>Delete</button>
       </div>

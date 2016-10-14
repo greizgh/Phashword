@@ -1,7 +1,9 @@
 import React from 'react';
+import Radium from 'radium';
 import SiteItem from './siteItem.jsx';
+import { textInputStyle } from '../style.js';
 
-export default class SiteAdmin extends React.Component {
+class SiteAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +18,7 @@ export default class SiteAdmin extends React.Component {
   render() {
     return (
       <div>
-        <input type="text" value={this.state.filter} onChange={this.setFilter} />
+        <input type="text" value={this.state.filter} onChange={this.setFilter} style={textInputStyle}/>
         <div>
           {this.props.sites
             .filter((site) => site.id.startsWith(this.state.filter))
@@ -33,3 +35,5 @@ SiteAdmin.propTypes = {
   sites: React.PropTypes.arrayOf(React.PropTypes.object),
   onDelete: React.PropTypes.func,
 };
+
+export default Radium(SiteAdmin);
