@@ -9,6 +9,7 @@ export const siteItemStyle = {
     backgroundColor: '#fafafa',
     boxShadow: '1px 1px 3px #cdcdcd',
   },
+  font: 'caption',
 };
 
 export const btnStyle = {
@@ -51,5 +52,90 @@ export const textInputStyle = {
   ':focus': {
     borderColor: '#0996f8',
     boxShadow: '0 0 0 2px rgba(97, 181, 255, 0.75)',
+  },
+};
+
+export const panelStyle = {
+  color: '#222426',
+  cursor: 'default',
+  font: 'caption',
+  padding: '0px',
+};
+
+export const panelFormStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '16px',
+};
+
+export const panelFormItemStyle = {
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'row',
+  marginBottom: '12px',
+};
+
+export const labelStyle = {
+  flexShrink: '0',
+  marginRight: '6px',
+  textAlign: 'right',
+};
+
+export const inputStyle = {
+  flexGrow: '1',
+};
+
+export const separatorStyle = {
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  width: '1px',
+  zIndex: 99,
+};
+
+export const tabHeaderStyle = {
+  color: '#1a1a1a',
+  display: 'flex',
+  flexDirection: 'row',
+  height: '41px',
+  marginBottom: '-1px',
+  padding: '0',
+};
+
+export const tabButtonStyle = {
+  base: {
+    flex: '1 1 auto',
+    margin: '0 -1px',
+    padding: '12px',
+    textAlign: 'center',
+    ':hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.06)',
+    },
+  },
+  selected: {
+    boxShadow: '0 -1px 0 #0670cc inset, 0 -4px 0 #0996f8 inset',
+    color: '#0996f8',
+    ':hover': {
+      color: '#0670cc',
+    },
+  },
+};
+
+export const popupFooterStyle = {
+  backgroundColor: 'rgba(0, 0, 0, 0.06)',
+  borderTop: '1px solid rgba(0, 0, 0, 0.15)',
+  color: '#1a1a1a',
+  display: 'flex',
+  flexDirection: 'row',
+  height: '41px',
+  marginTop: '-1px',
+  padding: 0,
+};
+
+export const popupFooterButtonStyle = {
+  flex: '1 1 auto',
+  margin: '0 -1px',
+  padding: '12px',
+  textAlign: 'center',
+  ':hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.06)',
   },
 };

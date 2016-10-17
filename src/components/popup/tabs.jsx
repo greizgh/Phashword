@@ -1,27 +1,36 @@
 import React from 'react';
+import Radium from 'radium';
+import {
+  panelStyle,
+  panelFormStyle,
+  separatorStyle,
+  tabHeaderStyle,
+  tabButtonStyle,
+} from '../style.js';
 
-export class Tabs extends React.Component {
+class _Tabs extends React.Component {
   constructor(props) {
     super(props);
     this.state = { selected: props.selected };
   }
   renderTitles() {
     return (
-      <div className="panel-section panel-section-tabs">
+      <div style={tabHeaderStyle} className='Tabs__header'>
         {this.props.children.map((child, index) => {
-          let activeClass = 'panel-section-tabs-button';
+          const styles = [tabButtonStyle.base];
           if (this.state.selected === index) {
-            activeClass += ' selected';
+            styles.push(tabButtonStyle.selected);
           }
-          let separator = <div className="panel-section-tabs-separator"></div>;
-          if (index === this.props.children.length) {
-            separator = '';
+          let separator = <div style={separatorStyle}></div>;
+          if (index === this.props.children.length - 1) {
+            separator = null;
           }
           return (
             <div
-              className={activeClass}
+              style={styles}
               onClick={() => this.setState({ selected: index })}
               key={index}
+              className='Tabs__header__button'
             >
               {child.props.label}
               {separator}
@@ -33,26 +42,30 @@ export class Tabs extends React.Component {
   }
   render() {
     return (
-      <div className="panel">
+      <div style={panelStyle} className='Tabs'>
         {this.renderTitles()}
         {this.props.children[this.state.selected]}
       </div>
     );
   }
 }
-Tabs.propTypes = { selected: React.PropTypes.number };
-Tabs.defaultProps = { selected: 0 };
+_Tabs.propTypes = { selected: React.PropTypes.number };
+_Tabs.defaultProps = { selected: 0 };
 
-export class Pane extends React.Component {
+export const Tabs = Radium(_Tabs);
+
+class _Pane extends React.Component {
   render() {
     return (
-      <div className="panel-section panel-section-formElements">
+      <div style={panelFormStyle} className='Tabs__panel'>
         {this.props.children}
       </div>
     );
   }
 }
-Pane.propTypes = {
+_Pane.propTypes = {
   label: React.PropTypes.string.isRequired,
   children: React.PropTypes.element.isRequired,
 };
+
+export const Pane = Radium(_Pane);

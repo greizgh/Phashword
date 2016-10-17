@@ -1,8 +1,10 @@
 import React from 'react';
+import Radium from 'radium';
+import { panelFormStyle, panelFormItemStyle, labelStyle, inputStyle } from '../style.js';
 
-export default class QuickState extends React.Component {
+class QuickState extends React.Component {
   getColorStyle() {
-    const style = {};
+    const style = panelFormItemStyle;
     if (this.props.profiles[this.props.currentProfile]) {
       style.borderBottom = `5px solid ${this.props.profiles[this.props.currentProfile].color}`;
     }
@@ -11,10 +13,11 @@ export default class QuickState extends React.Component {
 
   render() {
     return (
-      <div className="panel-section panel-section-formElements">
-        <div className="panel-formElements-item" style={this.getColorStyle()}>
-          <label htmlFor="profile">Profile</label>
+      <div style={panelFormStyle}>
+        <div style={this.getColorStyle()}>
+          <label htmlFor="profile" style={labelStyle}>Profile</label>
           <select
+            style={inputStyle}
             id="profile"
             value={this.props.currentProfile}
             onChange={this.props.onProfileChange}
@@ -24,9 +27,16 @@ export default class QuickState extends React.Component {
             ))}
           </select>
         </div>
-        <div className="panel-formElements-item">
-          <label htmlFor="state">Active</label>
-          <input type="checkbox" className="default" id="state" onClick={this.props.onToggle} checked={this.props.enabled}/>
+        <div style={panelFormItemStyle}>
+          <label htmlFor="state" style={labelStyle}>Active</label>
+          <input
+            style={inputStyle}
+            type="checkbox"
+            className="default"
+            id="state"
+            onClick={this.props.onToggle}
+            checked={this.props.enabled}
+          />
         </div>
       </div>
     );
@@ -40,3 +50,5 @@ QuickState.propTypes = {
   onToggle: React.PropTypes.func,
   onProfileChange: React.PropTypes.func,
 };
+
+export default Radium(QuickState);

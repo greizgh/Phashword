@@ -1,20 +1,43 @@
 import React from 'react';
+import Radium from 'radium';
+import { panelFormStyle, panelFormItemStyle, labelStyle, inputStyle, textInputStyle } from '../style.js';
 
-export default class SiteProfile extends React.Component {
+class SiteProfile extends React.Component {
   render() {
     return (
-      <div className="panel-section panel-section-formElements">
-        <div className="panel-formElements-item">
-          <label htmlFor="tag">Tag</label>
-          <input type="text" name="tag" id="tag" size="20" value={this.props.tag} onChange={this.props.onChangeTag}/>
+      <div style={panelFormStyle}>
+        <div style={panelFormItemStyle}>
+          <label htmlFor="tag" style={labelStyle}>Tag</label>
+          <input
+            type="text"
+            style={[inputStyle, textInputStyle]}
+            key={'tag'}
+            id="tag"
+            size="20"
+            value={this.props.tag}
+            onChange={this.props.onChangeTag}
+          />
         </div>
-        <div className="panel-formElements-item">
-          <label htmlFor="password_length">Length</label>
-          <input type="number" id="password_length" min="1" value={this.props.length} onChange={this.props.onChangeLength}/>
+        <div style={panelFormItemStyle}>
+          <label style={labelStyle} htmlFor="password_length">Length</label>
+          <input
+            type="number"
+            style={[inputStyle, textInputStyle]}
+            key={'password'}
+            id="password_length"
+            min="1"
+            value={this.props.length}
+            onChange={this.props.onChangeLength}
+          />
         </div>
-        <div className="panel-formElements-item">
-          <label htmlFor="password_type">Type</label>
-          <select name="password_type" id="password_type" value={this.props.type} onChange={this.props.onChangeType}>
+        <div style={panelFormItemStyle}>
+          <label style={labelStyle} htmlFor="password_type">Type</label>
+          <select
+            style={inputStyle}
+            id="password_type"
+            value={this.props.type}
+            onChange={this.props.onChangeType}
+          >
             <option value="1">Alphanumeric and special characters</option>
             <option value="2">Alphanumeric</option>
             <option value="3">Numeric</option>
@@ -33,3 +56,5 @@ SiteProfile.propTypes = {
   onChangeLength: React.PropTypes.func,
   onChangeTag: React.PropTypes.func,
 };
+
+export default Radium(SiteProfile);

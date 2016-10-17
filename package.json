@@ -8,7 +8,7 @@
     "build": "npm run prepare && webpack && npm run copy && npm run zip",
     "test": "karma start",
     "prepare": "mkdir -p ./dist",
-    "copy": "cp -r res/icons ./dist/ && cp -r html/* ./dist/ && cp -r css/* ./dist/ && cp manifest.json ./dist",
+    "copy": "cp -r res/icons ./dist/ && cp -r html/* ./dist/ && cp manifest.json ./dist",
     "zip": "cd ./dist && zip -r -x\"*.zip\" phashword.xpi .",
     "clean": "rm -rf ./dist/*",
     "storybook": "start-storybook -p 6006",

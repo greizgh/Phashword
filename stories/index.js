@@ -6,7 +6,6 @@ import QuickState from '../src/components/popup/quicksettings.jsx';
 import SiteItem from '../src/components/admin/siteItem.jsx';
 import SiteAdmin from '../src/components/admin/siteAdmin.jsx';
 import Settings from '../src/components/admin/settings.jsx'; 
-import '../css/popup.css';
 
 storiesOf('popup', module)
   .add('Empty state', () => (

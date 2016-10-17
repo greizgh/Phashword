@@ -3,6 +3,7 @@ import KeyGenerator from './popup/keygenerator.jsx';
 import SiteProfile from './popup/siteprofile.jsx';
 import QuickSettings from './popup/quicksettings.jsx';
 import { Tabs, Pane } from './popup/tabs.jsx';
+import { popupFooterStyle, separatorStyle, popupFooterButtonStyle } from './style.js';
 
 const popupStyle = {
   width: '400px',
@@ -82,10 +83,10 @@ export default class Popup extends React.Component {
             <KeyGenerator requestPassword={this.props.onPassword} password={this.state.password} />
           </Pane>
         </Tabs>
-        <footer>
-          <div className="panel-section-footer-button" onClick={this.props.onSettings}>Settings</div>
-          <div className="separator"></div>
-          <div className="panel-section-footer-button default" onClick={this.props.onClose}>Close</div>
+        <footer style={popupFooterStyle}>
+          <div style={popupFooterButtonStyle} onClick={this.props.onSettings}>Settings</div>
+          <div style={separatorStyle}></div>
+          <div style={popupFooterButtonStyle} onClick={this.props.onClose}>Close</div>
         </footer>
       </div>
     );
