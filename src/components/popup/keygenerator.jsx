@@ -1,6 +1,13 @@
 import React from 'react';
 import Radium from 'radium';
-import { panelFormStyle, panelFormItemStyle, labelStyle, inputStyle, textInputStyle } from '../style.js';
+import {
+  panelFormStyle,
+  panelFormItemStyle,
+  panelLastFormItemStyle,
+  labelStyle,
+  inputStyle,
+  textInputStyle,
+} from '../style.js';
 
 class KeyGenerator extends React.Component {
   render() {
@@ -16,7 +23,7 @@ class KeyGenerator extends React.Component {
             onChange={this.props.requestPassword}
           />
         </div>
-        <div style={panelFormItemStyle}>
+        <div style={[panelFormItemStyle, panelLastFormItemStyle]}>
           <label style={labelStyle} htmlFor="password">Password</label>
           <input
             style={[inputStyle, textInputStyle]}

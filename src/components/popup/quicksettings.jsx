@@ -1,6 +1,13 @@
 import React from 'react';
 import Radium from 'radium';
-import { panelFormStyle, panelFormItemStyle, labelStyle, inputStyle, selectStyle } from '../style.js';
+import {
+  panelFormStyle,
+  panelFormItemStyle,
+  panelLastFormItemStyle,
+  labelStyle,
+  inputStyle,
+  selectStyle,
+} from '../style.js';
 
 class QuickState extends React.Component {
   getColorStyle() {
@@ -27,7 +34,7 @@ class QuickState extends React.Component {
             ))}
           </select>
         </div>
-        <div style={panelFormItemStyle}>
+        <div style={[panelFormItemStyle, panelLastFormItemStyle]}>
           <label htmlFor="state" style={labelStyle}>Active</label>
           <input
             style={inputStyle}

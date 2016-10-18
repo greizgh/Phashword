@@ -1,6 +1,14 @@
 import React from 'react';
 import Radium from 'radium';
-import { panelFormStyle, panelFormItemStyle, labelStyle, inputStyle, textInputStyle, selectStyle } from '../style.js';
+import {
+  panelFormStyle,
+  panelFormItemStyle,
+  panelLastFormItemStyle,
+  labelStyle,
+  inputStyle,
+  textInputStyle,
+  selectStyle,
+} from '../style.js';
 
 class SiteProfile extends React.Component {
   render() {
@@ -30,7 +38,7 @@ class SiteProfile extends React.Component {
             onChange={this.props.onChangeLength}
           />
         </div>
-        <div style={panelFormItemStyle}>
+        <div style={[panelFormItemStyle, panelLastFormItemStyle]}>
           <label style={labelStyle} htmlFor="password_type">Type</label>
           <select
             style={selectStyle}

@@ -102,6 +102,10 @@ export const panelFormItemStyle = {
   marginBottom: '12px',
 };
 
+export const panelLastFormItemStyle = {
+  marginBottom: '0',
+};
+
 export const labelStyle = {
   flexShrink: '0',
   marginRight: '6px',
