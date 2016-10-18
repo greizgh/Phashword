@@ -16,6 +16,9 @@ export default class Settings extends React.Component {
     return (
       <div>
         <Tabs>
+          <Pane label="Options">
+            <p>Global options</p>
+          </Pane>
           <Pane label="Profiles">
             <p>Profiles settings</p>
           </Pane>
