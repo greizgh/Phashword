@@ -2,6 +2,9 @@ import React from 'react';
 import Radium from 'radium';
 import { siteItemStyle, btnStyle } from '../style.js';
 
+const shrink = { flexShrink: '0' };
+const grow = { flexGrow: '1' };
+
 class SiteItem extends React.Component {
   constructor(props) {
     super(props);
@@ -13,8 +16,10 @@ class SiteItem extends React.Component {
   render() {
     return (
       <div style={siteItemStyle}>
-        {this.props.site.id} - {this.props.site.tag} - {this.props.site.length}
-        <button key="delbtn" onClick={this.deleteSite} style={btnStyle}>Delete</button>
+        <span style={grow}>
+          {this.props.site.id} - {this.props.site.tag} - {this.props.site.length}
+        </span>
+        <button key="delbtn" onClick={this.deleteSite} style={[btnStyle, shrink]}>Delete</button>
       </div>
     );
   }

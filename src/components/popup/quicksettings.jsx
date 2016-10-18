@@ -1,6 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
-import { panelFormStyle, panelFormItemStyle, labelStyle, inputStyle } from '../style.js';
+import { panelFormStyle, panelFormItemStyle, labelStyle, inputStyle, selectStyle } from '../style.js';
 
 class QuickState extends React.Component {
   getColorStyle() {
@@ -17,7 +17,7 @@ class QuickState extends React.Component {
         <div style={this.getColorStyle()}>
           <label htmlFor="profile" style={labelStyle}>Profile</label>
           <select
-            style={inputStyle}
+            style={selectStyle}
             id="profile"
             value={this.props.currentProfile}
             onChange={this.props.onProfileChange}

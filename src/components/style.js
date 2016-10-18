@@ -1,5 +1,4 @@
 export const siteItemStyle = {
-  width: '400px',
   padding: '10px',
   backgroundColor: '#fcfcfc',
   boxShadow: '1px 1px 3px #ababab',
@@ -10,6 +9,8 @@ export const siteItemStyle = {
     boxShadow: '1px 1px 3px #cdcdcd',
   },
   font: 'caption',
+  display: 'flex',
+  flexDirection: 'row',
 };
 
 export const btnStyle = {
@@ -22,7 +23,6 @@ export const btnStyle = {
   padding: '0 8px 0',
   transitionDuration: '250ms',
   transitionProperty: 'box-shadow, border',
-  float: 'right',
   ':hover': {
     backgroundColor: '#ebebeb',
     border: '1px solid #b1b1b1',
@@ -51,6 +51,33 @@ export const textInputStyle = {
   },
   ':focus': {
     borderColor: '#0996f8',
+    boxShadow: '0 0 0 2px rgba(97, 181, 255, 0.75)',
+  },
+};
+
+export const selectStyle = {
+  backgroundColor: '#fbfbfb',
+  border: '1px solid #b1b1b1',
+  boxShadow: '0 0 0 0 transparent',
+  font: 'caption',
+  height: '24px',
+  outline: '0',
+  padding: '0 8px 0',
+  MozAppearance: 'none',
+  MozPaddingEnd: '24px',
+  flexGrow: '1',
+  transitionDuration: '250ms',
+  transitionProperty: 'box-shadow, border',
+  backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCwxMkwzLDcsNCw2bDQsNCw0LTQsMSwxWiIgZmlsbD0iIzZBNkE2QSIgLz4KPC9zdmc+Cg==)',
+  backgroundPosition: 'calc(100% - 4px) center',
+  backgroundRepeat: 'no-repeat',
+  textOverflow: 'ellipsis',
+  ':hover': {
+    backgroundColor: '#ebebeb',
+    border: '1px solid #b1b1b1',
+  },
+  ':focus': {
+    borderColor: '#fff',
     boxShadow: '0 0 0 2px rgba(97, 181, 255, 0.75)',
   },
 };
