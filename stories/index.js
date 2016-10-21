@@ -5,7 +5,8 @@ import Popup from '../src/components/popup.jsx';
 import QuickState from '../src/components/popup/quicksettings.jsx';
 import SiteItem from '../src/components/admin/siteItem.jsx';
 import SiteAdmin from '../src/components/admin/siteAdmin.jsx';
-import Settings from '../src/components/admin/settings.jsx'; 
+import Settings from '../src/components/admin/settings.jsx';
+import ProfileItem from '../src/components/admin/profileItem.jsx';
 
 storiesOf('popup', module)
   .add('Empty state', () => (
@@ -65,22 +66,30 @@ const sites = [
   site,
 ];
 
-for (let i=0; i<10; i++) {
+for (let i = 0; i < 10; i++) {
   sites.push({
     id: faker.internet.domainWord(),
     profile: 'uuid',
     tag: faker.lorem.word(),
-    length: 12
+    length: 12,
   });
 }
 
 storiesOf('admin.sites', module)
   .add('default', () => <SiteAdmin sites={sites} onDelete={action('delete site')} />);
 
+storiesOf('admin.profileItem', module)
+  .add('default', () =>
+    <ProfileItem
+      onDelete={action('delete profile')}
+      profile={profile}
+    />
+  );
+
 storiesOf('admin.settings', module)
   .add('default', () =>
       <Settings
-        onDelete={action('delete')}
+        onDelete={action('delete site')}
         onReady={action('settings ready')}
         sites={sites}
       />
