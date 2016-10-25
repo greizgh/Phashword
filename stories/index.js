@@ -47,7 +47,7 @@ storiesOf('popup.quickstate', module)
     <QuickState
       currentProfile={'uuid'}
       profiles={[profile]}
-      enabled={true}
+      enabled
       onToggle={action('toggle state')}
       onProfileChange={action('profile change')}
     />
@@ -88,9 +88,11 @@ storiesOf('admin.profileItem', module)
 
 storiesOf('admin.settings', module)
   .add('default', () =>
-      <Settings
-        onDelete={action('delete site')}
-        onReady={action('settings ready')}
-        sites={sites}
-      />
+    <Settings
+      onSiteDelete={action('delete site')}
+      onProfileDelete={action('delete profile')}
+      onReady={action('settings ready')}
+      sites={sites}
+      profiles={[profile]}
+    />
   );
