@@ -2,10 +2,10 @@ const webpackConfig = require('./webpack.config');
 
 webpackConfig.devtool = 'inline-source-map';
 webpackConfig.entry = {};
-webpackConfig.module.postLoaders = [{
+webpackConfig.module.preLoaders = [{
   test: /\.jsx?$/,
   exclude: /(test|node_modules)/,
-  loader: 'istanbul-instrumenter',
+  loader: 'isparta',
 }];
 webpackConfig.externals = {
   'cheerio': 'window',
