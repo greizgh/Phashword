@@ -71,3 +71,10 @@ export function getPopupState(state) {
     type: currentSiteSettings.type,
   };
 }
+
+export function getSettingsState(state) {
+  return {
+    profiles: state.profiles.map((value, key) => ({ ...value, id: key })).toArray(),
+    sites: state.siteSettings.map((value, key) => ({ ...value, id: key })).toArray(),
+  }
+}

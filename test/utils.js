@@ -1,6 +1,6 @@
 import { Map } from 'immutable';
 import { assert } from 'chai';
-import { url2tag, getSiteSettings, getPopupState } from '../src/utils.js';
+import { url2tag, getSiteSettings, getPopupState, getSettingsState } from '../src/utils.js';
 import { PASSWORD_TYPES } from '../src/constants.js';
 
 const state = {
@@ -70,5 +70,16 @@ describe('getPopupState', () => {
   it('should return profiles as an array', () => {
     const popupState = getPopupState(state);
     assert.equal(popupState.profiles.length, 2);
+  });
+});
+
+describe('getSettingsState', () => {
+  it('should return profiles as array', () => {
+    const settingsState = getSettingsState(state);
+    assert.equal(settingsState.profiles.length, 2);
+  });
+  it('should return sites as array', () => {
+    const settingsState = getSettingsState(state);
+    assert.equal(settingsState.sites.length, 1);
   });
 });

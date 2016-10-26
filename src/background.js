@@ -3,7 +3,7 @@ import { store, dispatcher } from './store';
 import { defaultProfileObserver, siteSettingsSaver } from './observers';
 import { hashPassword } from './hasher';
 import { setCurrentSite } from './actions.js';
-import { url2tag, getPopupState } from './utils.js';
+import { url2tag, getPopupState, getSettingsState } from './utils.js';
 
 store.subscribe(defaultProfileObserver);
 dispatcher.subscribe(siteSettingsSaver);
@@ -39,6 +39,14 @@ store.subscribe((state) => {
   chrome.runtime.sendMessage({
     type: '@POPUP_STATE',
     state: getPopupState(state),
+  });
+});
+
+// Update settings with new state
+store.subscribe((state) => {
+  chrome.runtime.sendMessage({
+    type: '@SETTINGS_STATE',
+    state: getSettingsState(state),
   });
 });
 
