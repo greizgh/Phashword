@@ -76,5 +76,13 @@ export function getSettingsState(state) {
   return {
     profiles: state.profiles.map((value, key) => ({ ...value, id: key })).toArray(),
     sites: state.siteSettings.map((value, key) => ({ ...value, id: key })).toArray(),
-  }
+  };
+}
+
+// Check if site is missing data
+export function isSiteComplete(site) {
+  const properties = ['profile', 'tag', 'length', 'type', 'enabled'];
+  return properties
+    .map((prop) => typeof site[prop] !== 'undefined')
+    .reduce((acc, x) => acc && x, true);
 }

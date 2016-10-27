@@ -1,6 +1,6 @@
 import { Map } from 'immutable';
 import { assert } from 'chai';
-import { url2tag, getSiteSettings, getPopupState, getSettingsState } from '../src/utils.js';
+import { url2tag, getSiteSettings, getPopupState, getSettingsState, isSiteComplete } from '../src/utils.js';
 import { PASSWORD_TYPES } from '../src/constants.js';
 
 const state = {
@@ -83,3 +83,12 @@ describe('getSettingsState', () => {
     assert.equal(settingsState.sites.length, 1);
   });
 });
+
+describe('isSiteComplete', () => {
+  it('should return true for a complete site', () => {
+    assert.isTrue(isSiteComplete(state.siteSettings.get('mozilla')));
+  })
+  it('should return false for an incomplete site', () => {
+    assert.isFalse(isSiteComplete({tag: 'test'}));
+  })
+})

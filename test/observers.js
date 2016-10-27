@@ -34,5 +34,6 @@ describe('siteSettingsSaver', () => {
     dispatcher.subscribe(siteSettingsSaver);
     dispatcher.onNext(setTag('test', 'tag'));
     assert.equal(state.siteSettings.get('test').tag, 'tag');
+    assert.isDefined(state.siteSettings.get('test').profile);
   });
 });

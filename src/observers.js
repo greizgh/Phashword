@@ -1,7 +1,7 @@
 import { createProfile, setDefaultProfile } from './actions/profile';
 import { dispatcher, store } from './store';
 import { TOGGLE_SITE, SET_PROFILE, SET_TAG, SET_TYPE, SET_LENGTH, addSite } from './actions/site';
-import { getSiteSettings } from './utils';
+import { getSiteSettings, isSiteComplete } from './utils';
 
 let lastKnownState;
 store.subscribe((state) => { lastKnownState = state; });
@@ -21,7 +21,9 @@ export function defaultProfileObserver(state) {
 // Save site settings if default values are changed
 export function siteSettingsSaver(action) {
   const siteActions = [TOGGLE_SITE, SET_PROFILE, SET_TAG, SET_TYPE, SET_LENGTH];
-  if (siteActions.includes(action.type) && !lastKnownState.siteSettings.has(action.id)) {
+  const siteExists = lastKnownState.siteSettings.has(action.id);
+  const complete = isSiteComplete(lastKnownState.siteSettings.get(action.id, {}));
+  if (siteActions.includes(action.type) && (!siteExists || !complete)) {
     const siteSettings = getSiteSettings(lastKnownState);
     // Create target siteSettings
     dispatcher.onNext(addSite(
@@ -32,7 +34,9 @@ export function siteSettingsSaver(action) {
       siteSettings.type,
       siteSettings.enabled
     ));
-    // Replay initial action as it couldn't be handled
-    dispatcher.onNext(action);
+    if (!siteExists) {
+      // Replay initial action as it couldn't be handled
+      dispatcher.onNext(action);
+    }
   }
 }
