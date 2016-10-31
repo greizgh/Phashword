@@ -162,6 +162,7 @@ export const popupFooterStyle = {
 };
 
 export const popupFooterButtonStyle = {
+  font: 'caption',
   flex: '1 1 auto',
   margin: '0 -1px',
   padding: '12px',
