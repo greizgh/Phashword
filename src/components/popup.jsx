@@ -45,15 +45,15 @@ export default class Popup extends React.Component {
     this.props.onTypeChange(this.state.siteId, event.target.value);
   }
   requestPass(event) {
-    chrome.runtime.sendMessage({
-      type: 'REQUEST_PASS',
-      privateKey: this.state.profiles[this.state.selectedProfile].privateKey,
+    const request = {
+      passwordType: this.state.type,
+      passwordLength: this.state.length,
       tag: this.state.tag,
       masterKey: event.target.value,
-      passwordLength: this.state.length,
-      passwordType: this.state.type,
-    }, (response) => {
-      this.setState({ ... this.state, password: response.hash });
+      profile: this.state.selectedProfile,
+    };
+    this.props.onPassword(request, (hash) => {
+      this.setState({ ...this.state, password: hash });
     });
   }
   render() {
@@ -80,12 +80,12 @@ export default class Popup extends React.Component {
             />
           </Pane>
           <Pane label="Generate">
-            <KeyGenerator requestPassword={this.props.onPassword} password={this.state.password} />
+            <KeyGenerator requestPassword={this.requestPass} password={this.state.password} />
           </Pane>
         </Tabs>
         <footer style={popupFooterStyle}>
           <div style={popupFooterButtonStyle} onClick={this.props.onSettings}>Settings</div>
-          <div style={separatorStyle}></div>
+          <div style={separatorStyle} />
           <div style={popupFooterButtonStyle} onClick={this.props.onClose}>Close</div>
         </footer>
       </div>

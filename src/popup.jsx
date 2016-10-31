@@ -38,11 +38,21 @@ function onProfileChange(siteId, profileId) {
   chrome.runtime.sendMessage(setProfile(siteId, profileId));
 }
 
+function onPassword(request, setPasswordCallback) {
+  chrome.runtime.sendMessage({
+    type: 'REQUEST_PASS',
+    siteData: request,
+  }, (response) => {
+    setPasswordCallback(response.hash);
+  });
+}
+
 const popup = render(
   <Popup
     onReady={onReady}
     onClose={onClose}
     onSettings={onSettings}
+    onPassword={onPassword}
     onToggleState={onToggleState}
     onProfileChange={onProfileChange}
     onTagChange={onTagChange}

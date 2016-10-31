@@ -10,18 +10,19 @@ const store = createStore(appReducer);
 chrome.runtime.onMessage.addListener(
   (request, sender, sendResponse) => {
     let hash;
-    console.log(request);
+    let privKey;
     switch (request.type) {
       case 'OPEN_SETTINGS':
         chrome.runtime.openOptionsPage();
         break;
       case 'REQUEST_PASS':
+        privKey = store.getState().profiles.get(request.siteData.profile).privateKey;
         hash = hashPassword(
-          request.tag,
-          request.masterKey,
-          request.privateKey,
-          request.passwordLength,
-          request.passwordType
+          request.siteData.tag,
+          request.siteData.masterKey,
+          privKey,
+          request.siteData.passwordLength,
+          request.siteData.passwordType
         );
         sendResponse({ hash });
         break;
@@ -32,10 +33,6 @@ chrome.runtime.onMessage.addListener(
         break;
     }
   }
-);
-
-store.subscribe(() =>
-  console.log(store.getState())
 );
 
 // Update popup with new state

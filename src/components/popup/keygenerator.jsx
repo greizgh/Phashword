@@ -20,6 +20,7 @@ class KeyGenerator extends React.Component {
             type="password"
             key={'key'}
             id="key"
+            value={this.props.masterKey}
             onChange={this.props.requestPassword}
           />
         </div>
@@ -41,6 +42,7 @@ class KeyGenerator extends React.Component {
 
 KeyGenerator.propTypes = {
   password: React.PropTypes.string,
+  masterKey: React.PropTypes.string,
   requestPassword: React.PropTypes.func,
 };
 
