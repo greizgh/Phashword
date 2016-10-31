@@ -14,14 +14,14 @@ function onSiteDelete(siteId) {
   chrome.runtime.sendMessage(deleteSite(siteId));
 }
 
-function onProfileDelete(profileId) {
-  chrome.runtime.sendMessage(deleteProfile(profileId));
+function dispatch(action) {
+  chrome.runtime.sendMessage(action);
 }
 
 const settings = render(
   <Settings
     onReady={onReady}
-    onProfileDelete={onProfileDelete}
+    dispatch={dispatch}
     onSiteDelete={onSiteDelete}
   />,
   document.getElementById('settings')

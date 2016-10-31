@@ -9,6 +9,14 @@ import {
   selectStyle,
   panelFormItemStyle,
 } from '../style.js';
+import {
+  deleteProfile,
+  setProfileName,
+  setProfileType,
+  setProfileColor,
+  setProfileLength,
+  setProfileKey,
+} from '../../actions/profile';
 
 const itemStyle = {
   padding: '10px',
@@ -24,10 +32,30 @@ const headerStyle = {
 class ProfileItem extends React.Component {
   constructor(props) {
     super(props);
-    this.deleteProfile = this.deleteProfile.bind(this);
+    this.onDeleteProfile = this.onDeleteProfile.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
+    this.onColorChange = this.onColorChange.bind(this);
+    this.onLengthChange = this.onLengthChange.bind(this);
+    this.onTypeChange = this.onTypeChange.bind(this);
+    this.onPrivateKeyChange = this.onPrivateKeyChange.bind(this);
   }
-  deleteProfile() {
-    this.props.onDelete(this.props.profile.id);
+  onDeleteProfile() {
+    this.props.dispatch(deleteProfile(this.props.profile.id));
+  }
+  onNameChange(event) {
+    this.props.dispatch(setProfileName(this.props.profile.id, event.target.value));
+  }
+  onColorChange(event) {
+    this.props.dispatch(setProfileColor(this.props.profile.id, event.target.value));
+  }
+  onLengthChange(event) {
+    this.props.dispatch(setProfileLength(this.props.profile.id, event.target.value));
+  }
+  onTypeChange(event) {
+    this.props.dispatch(setProfileType(this.props.profile.id, event.target.value));
+  }
+  onPrivateKeyChange(event) {
+    this.props.dispatch(setProfileKey(this.props.profile.id, event.target.value));
   }
   render() {
     return (
@@ -85,8 +113,7 @@ class ProfileItem extends React.Component {
           </div>
           <div style={panelFormItemStyle}>
             <label style={labelStyle} htmlFor="private_key">Private key</label>
-            <input
-              type="text"
+            <textarea
               style={[inputStyle, textInputStyle]}
               key={'private'}
               id="private_key"
@@ -96,7 +123,7 @@ class ProfileItem extends React.Component {
             <QRCode value={this.props.profile.privateKey} />
           </div>
           <div style={panelFormItemStyle}>
-            <button key="delbtn" onClick={this.deleteProfile} style={btnStyle}>Delete</button>
+            <button key="delbtn" onClick={this.onDeleteProfile} style={btnStyle}>Delete</button>
           </div>
         </div>
       </div>
@@ -106,7 +133,7 @@ class ProfileItem extends React.Component {
 
 ProfileItem.propTypes = {
   profile: React.PropTypes.object,
-  onDelete: React.PropTypes.func,
+  dispatch: React.PropTypes.func,
 };
 
 export default Radium(ProfileItem);

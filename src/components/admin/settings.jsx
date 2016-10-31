@@ -24,7 +24,7 @@ export default class Settings extends React.Component {
           <Pane label="Profiles">
             <ProfileSettings
               profiles={this.state.profiles}
-              onDelete={this.props.onProfileDelete}
+              dispatch={this.props.dispatch}
             />
           </Pane>
           <Pane label="Sites">
@@ -42,7 +42,7 @@ export default class Settings extends React.Component {
 Settings.propTypes = {
   onReady: React.PropTypes.func.isRequired,
   onSiteDelete: React.PropTypes.func,
-  onProfileDelete: React.PropTypes.func,
+  dispatch: React.PropTypes.func.isRequired,
   sites: React.PropTypes.array,
   profiles: React.PropTypes.array,
 };

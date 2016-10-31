@@ -6,7 +6,7 @@ export default class ProfileSettings extends React.Component {
     return (
       <div>
         {this.props.profiles.map((profile) => (
-          <ProfileItem profile={profile} onDelete={this.props.onDelete} />
+          <ProfileItem profile={profile} dispatch={this.props.dispatch} />
         ))}
       </div>
     );
@@ -15,5 +15,5 @@ export default class ProfileSettings extends React.Component {
 
 ProfileSettings.propTypes = {
   profiles: React.PropTypes.arrayOf(React.PropTypes.object),
-  onDelete: React.PropTypes.func,
+  dispatch: React.PropTypes.func.isRequired,
 };
