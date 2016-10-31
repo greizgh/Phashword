@@ -12,17 +12,23 @@ import {
 } from '../actions/profile';
 import { PASSWORD_TYPES, DEFAULT_COLOR, DEFAULT_LENGTH } from '../constants';
 
-export default function profilesReducer(state = new Map(), action) {
+function getNewProfile(defaultProfile=false) {
+  return {
+    name: 'Default',
+    default: defaultProfile,
+    color: DEFAULT_COLOR,
+    length: DEFAULT_LENGTH,
+    type: PASSWORD_TYPES.SPECIAL,
+    privateKey: uuid.v4(),
+  };
+}
+
+const defaultState = new Map().set(uuid.v4(), getNewProfile(true));
+
+export default function profilesReducer(state = defaultState, action) {
   switch (action.type) {
     case CREATE_PROFILE:
-      return state.set(uuid.v4(), {
-        name: 'Default',
-        default: false,
-        color: DEFAULT_COLOR,
-        length: DEFAULT_LENGTH,
-        type: PASSWORD_TYPES.SPECIAL,
-        privateKey: uuid.v4(),
-      });
+      return state.set(uuid.v4(), getNewProfile());
     case DELETE_PROFILE:
       return state.delete(action.id);
     case SET_DEFAULT_PROFILE:

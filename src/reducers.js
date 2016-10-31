@@ -1,3 +1,4 @@
+import { Map } from 'immutable';
 import {
   SET_CURRENT_PROFILE,
   SET_CURRENT_SITE,
@@ -24,7 +25,7 @@ function currentSite(state = null, action) {
   }
 }
 
-export default function appReducer(state, action) {
+export default function appReducer(state = {}, action) {
   return {
     currentSite: currentSite(state.currentSite, action),
     currentProfile: currentProfile(state.currentProfile, action),

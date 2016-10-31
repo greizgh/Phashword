@@ -14,6 +14,11 @@ import {
 } from '../src/actions/profile';
 
 describe('profilesReducer', () => {
+  it('should provide a default profile', () => {
+    const profiles = profilesReducer(undefined, {type: 'UNHANDLED'});
+    assert.equal(profiles.size, 1);
+    assert.isTrue(profiles.first().default)
+  });
   it('should handle profile creation', () => {
     const profiles = profilesReducer(Map(), createProfile());
     assert.equal(profiles.size, 1);
