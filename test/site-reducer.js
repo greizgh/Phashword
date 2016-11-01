@@ -12,49 +12,80 @@ import {
   setType,
 } from '../src/actions/site';
 
+const fakeState = {
+  currentSite: 'testsite',
+  settings: {
+    defaultState: true,
+  },
+  profiles: new Map({
+    uuid: {
+      default: true,
+      length: 12,
+      type: PASSWORD_TYPES.SPECIAL,
+    },
+  }),
+  siteSettings: new Map({
+    mozilla: {
+      enabled: true,
+      tag: 'mozilla',
+      length: 12,
+      type: PASSWORD_TYPES.SPECIAL,
+      profile: 'uuid',
+    },
+    test: {
+      enabled: false,
+      tag: 'test',
+      length: 8,
+      type: PASSWORD_TYPES.NUMERIC,
+      profile: 'uuid',
+    },
+  }),
+};
+
 describe('siteReducer', () => {
   it('should handle site creation', () => {
-    const sites = siteReducer(Map(), addSite('www.mozilla.org'));
-    assert.equal(sites.size, 1);
+    const sites = siteReducer(fakeState, addSite('newsite'));
+    assert.isTrue(sites.has('newsite'));
   });
   it('should allow to toggle site state', () => {
     const sites = siteReducer(
-      Map({'www.mozilla.org': { enabled: true}, 'localhost': {enabled: false}}),
-      toggleSite('localhost')
+      fakeState,
+      toggleSite('test')
     );
-    assert.isTrue(sites.get('www.mozilla.org').enabled);
-    assert.isTrue(sites.get('localhost').enabled);
+    assert.isTrue(sites.get('mozilla').enabled);
+    assert.isTrue(sites.get('test').enabled);
   });
   it('should remove site', () => {
-    const sites = siteReducer(Map({localhost: {}}), deleteSite('localhost'));
-    assert.equal(sites.size, 0);
+    const sites = siteReducer(fakeState, deleteSite('test'));
+    assert.isFalse(sites.has('test'));
   });
   it('should update site tag', () => {
-    const sites = siteReducer(
-      Map({'localhost': {tag: 'test'}, 'www.mozilla.org': {tag: 'mozilla'}}),
-      setTag('localhost', 'local')
-    );
-    assert.equal(sites.get('localhost').tag, 'local');
+    const sites = siteReducer(fakeState, setTag('test', 'local'));
+    assert.equal(sites.get('test').tag, 'local');
   });
   it('should update site profile', () => {
-    const sites = siteReducer(
-      Map({'localhost': {profileId: 1}, 'www.mozilla.org': {profileId: 1}}),
-      setProfile('localhost', 2)
-    );
-    assert.equal(sites.get('localhost').profileId, 2);
+    const sites = siteReducer(fakeState, setProfile('test', 'newuuid'));
+    assert.equal(sites.get('test').profile, 'newuuid');
   });
   it('should update site length', () => {
-    const sites = siteReducer(
-      Map({'localhost': {length: 10}, 'www.mozilla.org': {length: 12}}),
-      setLength('localhost', 8)
-    );
-    assert.equal(sites.get('localhost').length, 8);
+    const sites = siteReducer(fakeState, setLength('test', 8));
+    assert.equal(sites.get('test').length, 8);
   });
   it('should update site type', () => {
-    const sites = siteReducer(
-      Map({'localhost': {type: PASSWORD_TYPES.NUMERIC}}),
-      setType('localhost', PASSWORD_TYPES.SPECIAL)
-    );
-    assert.equal(sites.get('localhost').type, PASSWORD_TYPES.SPECIAL);
+    const sites = siteReducer(fakeState, setType('test', PASSWORD_TYPES.SPECIAL));
+    assert.equal(sites.get('test').type, PASSWORD_TYPES.SPECIAL);
+  });
+  it('should create site settings on update action', () => {
+    const sites = siteReducer(fakeState, toggleSite('new'));
+    assert.isTrue(sites.has('new'));
+    const createdSite = sites.get('new');
+    assert.isOk(createdSite.length);
+    assert.isOk(createdSite.type);
+    assert.isOk(createdSite.tag);
+    assert.isOk(createdSite.profile);
+  });
+  it('should apply initial action upon creation', () => {
+    const sites = siteReducer(fakeState, setLength('new', 24));
+    assert.equal(sites.get('new').length, 24);
   });
 });

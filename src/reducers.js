@@ -29,7 +29,7 @@ export default function appReducer(state = {}, action) {
   return {
     currentSite: currentSite(state.currentSite, action),
     currentProfile: currentProfile(state.currentProfile, action),
-    siteSettings: sitesReducer(state.siteSettings, action),
+    siteSettings: sitesReducer(state, action),
     profiles: profilesReducer(state.profiles, action),
     settings: settingsReducer(state.settings, action),
   };

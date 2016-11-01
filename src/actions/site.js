@@ -23,8 +23,8 @@ export function setTag(id, tag) {
   return { type: SET_TAG, id, tag };
 }
 
-export function setProfile(id, profileId) {
-  return { type: SET_PROFILE, id, profileId };
+export function setProfile(id, profile) {
+  return { type: SET_PROFILE, id, profile };
 }
 
 export function setLength(id, length) {

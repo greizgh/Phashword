@@ -8,11 +8,21 @@ import {
   SET_LENGTH,
   SET_TYPE,
 } from '../actions/site';
+import { getSiteSettings } from '../utils.js';
 
-export default function sitesReducer(state = new Map(), action) {
+const updateActions = [TOGGLE_SITE, SET_PROFILE, SET_LENGTH, SET_TAG, SET_TYPE];
+
+export default function sitesReducer(state = { siteSettings: new Map() }, action) {
+  let sites = state.siteSettings;
+  if (updateActions.includes(action.type) && !state.siteSettings.has(action.id)) {
+    // Update action on a non existing site
+    // Let's create one with current default values
+    const newSettings = getSiteSettings(state);
+    sites = sites.set(action.id, newSettings);
+  }
   switch (action.type) {
     case ADD_SITE:
-      return state.set(action.id, {
+      return sites.set(action.id, {
         profile: action.profile,
         tag: action.tag,
         length: action.length,
@@ -20,18 +30,22 @@ export default function sitesReducer(state = new Map(), action) {
         enabled: action.enabled,
       });
     case TOGGLE_SITE:
-      return state.update(action.id, (site) => ({ ...site, enabled: !site.enabled }));
+      return sites.update(action.id, (site) => ({ ...site, enabled: !site.enabled }));
     case DELETE_SITE:
-      return state.delete(action.id);
+      return sites.delete(action.id);
     case SET_PROFILE:
-      return state.update(action.id, (site) => ({ ...site, profileId: action.profileId }));
+      return sites.update(action.id, (site) => ({
+        ...site, profile: action.profile,
+      }));
     case SET_LENGTH:
-      return state.update(action.id, (site) => ({ ...site, length: action.length }));
+      return sites.update(action.id, (site) => ({ ...site, length: action.length }));
     case SET_TAG:
-      return state.update(action.id, (site) => ({ ...site, tag: action.tag }));
+      return sites.update(action.id, (site) => ({ ...site, tag: action.tag }));
     case SET_TYPE:
-      return state.update(action.id, (site) => ({ ...site, type: action.passwordType }));
+      return sites.update(action.id, (site) => ({
+        ...site, type: action.passwordType,
+      }));
     default:
-      return state;
+      return sites;
   }
 }
