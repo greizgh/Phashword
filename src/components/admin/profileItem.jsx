@@ -29,6 +29,14 @@ const headerStyle = {
   fontWeight: 'bold',
 };
 
+const qrStyle = {
+  margin: '10px',
+};
+
+const privStyle = {
+  height: '128px',
+};
+
 class ProfileItem extends React.Component {
   constructor(props) {
     super(props);
@@ -114,13 +122,15 @@ class ProfileItem extends React.Component {
           <div style={panelFormItemStyle}>
             <label style={labelStyle} htmlFor="private_key">Private key</label>
             <textarea
-              style={[inputStyle, textInputStyle]}
+              style={[inputStyle, textInputStyle, privStyle]}
               key={'private'}
               id="private_key"
               value={this.props.profile.privateKey}
               onChange={this.onPrivateKeyChange}
             />
-            <QRCode value={this.props.profile.privateKey} />
+            <div style={qrStyle}>
+              <QRCode value={this.props.profile.privateKey} />
+            </div>
           </div>
           <div style={panelFormItemStyle}>
             <button key="delbtn" onClick={this.onDeleteProfile} style={btnStyle}>Delete</button>

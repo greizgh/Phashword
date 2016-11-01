@@ -108,6 +108,7 @@ export const panelLastFormItemStyle = {
 
 export const labelStyle = {
   flexShrink: '0',
+  flexBasis: '80px',
   marginRight: '6px',
   textAlign: 'right',
 };
