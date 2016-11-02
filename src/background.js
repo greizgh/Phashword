@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 import appReducer from './reducers';
 import { hashPassword } from './hasher';
 import { setCurrentSite } from './actions.js';
-import { url2tag, getPopupState, getSettingsState } from './utils.js';
+import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils.js';
 
 const store = createStore(appReducer);
 
@@ -37,27 +37,43 @@ chrome.runtime.onMessage.addListener(
 
 // Update popup with new state
 store.subscribe(() => {
-  const state = store.getState();
   chrome.runtime.sendMessage({
     type: '@POPUP_STATE',
-    state: getPopupState(state),
+    state: getPopupState(store.getState()),
   });
 });
 
 // Update settings with new state
 store.subscribe(() => {
-  const state = store.getState();
   chrome.runtime.sendMessage({
     type: '@SETTINGS_STATE',
-    state: getSettingsState(state),
+    state: getSettingsState(store.getState()),
   });
 });
+
+function updateWorkerState() {
+  chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
+    if (tabs.length > 0) {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        {
+          type: '@WORKER_STATE',
+          state: getWorkerState(store.getState(), url2tag(tabs[0].url)),
+        }
+      );
+    }
+  });
+}
+
+// Update worker with new state
+store.subscribe(updateWorkerState);
 
 function handleTabChange() {
   chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
     if (tabs[0]) {
       const currentHostname = url2tag(tabs[0].url);
       store.dispatch(setCurrentSite(currentHostname));
+      updateWorkerState();
     }
   });
 }
