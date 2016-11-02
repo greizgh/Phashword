@@ -1,6 +1,12 @@
 import { Map } from 'immutable';
 import { assert } from 'chai';
-import { url2tag, getSiteSettings, getPopupState, getSettingsState, isSiteComplete } from '../src/utils.js';
+import {
+  url2tag,
+  getSiteSettings,
+  getPopupState,
+  getSettingsState,
+  getWorkerState,
+} from '../src/utils.js';
 import { PASSWORD_TYPES } from '../src/constants.js';
 
 const state = {
@@ -13,11 +19,13 @@ const state = {
       type: PASSWORD_TYPES.NUMERIC,
       length: 8,
       default: true,
+      color: '#f0f0f0',
     },
     uuid2: {
       type: PASSWORD_TYPES.SPECIAL,
       length: 12,
       default: false,
+      color: '#abcdef',
     },
   }),
   siteSettings: new Map({
@@ -64,6 +72,13 @@ describe('getSiteSettings', () => {
     assert.equal(settings.length, 12);
     assert.equal(settings.profile, 'uuid2');
   });
+  it('should accept site as optional argument', () => {
+    const settings = getSiteSettings(state, 'mozilla');
+    assert.equal(settings.tag, 'special');
+    assert.isTrue(settings.enabled);
+    assert.equal(settings.length, 12);
+    assert.equal(settings.profile, 'uuid2');
+  });
 });
 
 describe('getPopupState', () => {
@@ -84,11 +99,17 @@ describe('getSettingsState', () => {
   });
 });
 
-describe('isSiteComplete', () => {
-  it('should return true for a complete site', () => {
-    assert.isTrue(isSiteComplete(state.siteSettings.get('mozilla')));
-  })
-  it('should return false for an incomplete site', () => {
-    assert.isFalse(isSiteComplete({tag: 'test'}));
-  })
-})
+describe('getWorkerState', () => {
+  it('should expose site data', () => {
+    const workerState = getWorkerState(state, 'http://www.mozilla.org');
+    assert.equal(workerState.length, 12);
+    assert.isTrue(workerState.enabled);
+    assert.equal(workerState.type, PASSWORD_TYPES.SPECIAL);
+    assert.equal(workerState.tag, 'special');
+    assert.equal(workerState.profile, 'uuid2');
+  });
+  it('should expose profile color', () => {
+    const workerState = getWorkerState(state, 'http://www.mozilla.org');
+    assert.equal(workerState.color, '#abcdef');
+  });
+});

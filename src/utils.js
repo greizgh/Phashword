@@ -46,7 +46,7 @@ export function url2tag(url) {
 }
 
 
-export function getSiteSettings(state) {
+export function getSiteSettings(state, site = state.currentSite) {
   const defaultProfile = state.profiles.findEntry((profile) => profile.default);
   const defaultValues = {
     enabled: state.settings.defaultState,
@@ -79,10 +79,10 @@ export function getSettingsState(state) {
   };
 }
 
-// Check if site is missing data
-export function isSiteComplete(site) {
-  const properties = ['profile', 'tag', 'length', 'type', 'enabled'];
-  return properties
-    .map((prop) => typeof site[prop] !== 'undefined')
-    .reduce((acc, x) => acc && x, true);
+export function getWorkerState(state, url) {
+  const site = getSiteSettings(state, url2tag(url));
+  return {
+    ...site,
+    color: state.profiles.get(site.profile).color,
+  };
 }
