@@ -14,6 +14,9 @@ const updateActions = [TOGGLE_SITE, SET_PROFILE, SET_LENGTH, SET_TAG, SET_TYPE];
 
 export default function sitesReducer(state = { siteSettings: new Map() }, action) {
   let sites = state.siteSettings;
+  if (!sites) {
+    sites = new Map();
+  }
   if (updateActions.includes(action.type) && !state.siteSettings.has(action.id)) {
     // Update action on a non existing site
     // Let's create one with current default values
