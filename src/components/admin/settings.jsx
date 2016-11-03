@@ -12,7 +12,7 @@ export default class Settings extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.onReady();
+    this.props.dispatch({ type: 'SETTINGS_READY' });
   }
   render() {
     return (
@@ -40,7 +40,6 @@ export default class Settings extends React.Component {
 }
 
 Settings.propTypes = {
-  onReady: React.PropTypes.func.isRequired,
   onSiteDelete: React.PropTypes.func,
   dispatch: React.PropTypes.func.isRequired,
   sites: React.PropTypes.array,

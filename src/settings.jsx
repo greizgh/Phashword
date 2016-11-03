@@ -6,10 +6,6 @@ import Settings from './components/admin/settings.jsx';
 import { deleteSite } from './actions/site.js';
 import { deleteProfile } from './actions/profile.js';
 
-function onReady() {
-  chrome.runtime.sendMessage({ type: 'SETTINGS_READY' });
-}
-
 function onSiteDelete(siteId) {
   chrome.runtime.sendMessage(deleteSite(siteId));
 }
@@ -20,7 +16,6 @@ function dispatch(action) {
 
 const settings = render(
   <Settings
-    onReady={onReady}
     dispatch={dispatch}
     onSiteDelete={onSiteDelete}
   />,

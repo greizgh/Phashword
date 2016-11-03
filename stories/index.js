@@ -86,7 +86,6 @@ storiesOf('admin.settings', module)
     <Settings
       onSiteDelete={action('delete site')}
       onProfileDelete={action('delete profile')}
-      onReady={action('settings ready')}
       sites={sites}
       profiles={[profile]}
     />
