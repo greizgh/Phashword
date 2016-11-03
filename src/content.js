@@ -10,7 +10,6 @@ const overlay = document.createElement('input');
 overlay.type = 'password';
 overlay.style.visibility = 'hidden';
 overlay.style.position = 'absolute';
-overlay.style.backgroundColor = '#560000';
 document.body.appendChild(overlay);
 
 overlay.addEventListener('blur', function(event) {
@@ -63,6 +62,7 @@ chrome.runtime.onMessage.addListener((message) => {
       enable();
     }
     state = message.state;
+    overlay.style.backgroundColor = state.color;
   }
 });
 
