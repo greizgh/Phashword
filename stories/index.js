@@ -11,15 +11,10 @@ import ProfileItem from '../src/components/admin/profileItem.jsx';
 storiesOf('popup', module)
   .add('Empty state', () => (
     <Popup
+      dispatch={action('dispatch')}
       onSettings={action('settings')}
       onClose={action('close')}
-      onReady={action('ready')}
-      onToggleState={action('toggle state')}
-      onProfileChange={action('change profile')}
       onPassword={action('password')}
-      onTagChange={action('change tag')}
-      onTypeChange={action('change type')}
-      onLengthChange={action('change type')}
     />
   ));
 

@@ -4,6 +4,7 @@ import SiteProfile from './popup/siteprofile.jsx';
 import QuickSettings from './popup/quicksettings.jsx';
 import { Tabs, Pane } from './popup/tabs.jsx';
 import { popupFooterStyle, separatorStyle, popupFooterButtonStyle } from './style.js';
+import { toggleSite, setTag, setProfile, setLength, setType } from '../actions/site.js';
 
 const popupStyle = {
   width: '400px',
@@ -27,22 +28,26 @@ export default class Popup extends React.Component {
     this.onTagChange = this.onTagChange.bind(this);
     this.onLengthChange = this.onLengthChange.bind(this);
     this.onTypeChange = this.onTypeChange.bind(this);
+    this.onToggleState = this.onToggleState.bind(this);
   }
   componentDidMount() {
     // Advertise popup is ready to receive current state
-    this.props.onReady();
+    this.props.dispatch({ type: 'POPUP_READY' });
   }
   onProfileChange(profile) {
-    this.props.onProfileChange(this.state.siteId, profile);
+    this.props.dispatch(setProfile(this.state.siteId, profile));
   }
   onTagChange(event) {
-    this.props.onTagChange(this.state.siteId, event.target.value);
+    this.props.dispatch(setTag(this.state.siteId, event.target.value));
   }
   onLengthChange(event) {
-    this.props.onLengthChange(this.state.siteId, event.target.value);
+    this.props.dispatch(setLength(this.state.siteId, event.target.value));
   }
   onTypeChange(event) {
-    this.props.onTypeChange(this.state.siteId, event.target.value);
+    this.props.dispatch(setType(this.state.siteId, event.target.value));
+  }
+  onToggleState() {
+    this.props.dispatch(toggleSite(this.state.siteId));
   }
   requestPass(event) {
     const request = {
@@ -65,7 +70,7 @@ export default class Popup extends React.Component {
               profiles={this.state.profiles}
               currentProfile={this.state.selectedProfile}
               enabled={this.state.enabled}
-              onToggle={this.props.onToggleState}
+              onToggle={this.onToggleState}
               onProfileChange={this.onProfileChange}
             />
           </Pane>
@@ -94,13 +99,8 @@ export default class Popup extends React.Component {
 }
 
 Popup.propTypes = {
-  onReady: React.PropTypes.func,
+  dispatch: React.PropTypes.func.isRequired,
   onPassword: React.PropTypes.func,
-  onToggleState: React.PropTypes.func,
-  onProfileChange: React.PropTypes.func,
   onSettings: React.PropTypes.func,
   onClose: React.PropTypes.func,
-  onTypeChange: React.PropTypes.func,
-  onLengthChange: React.PropTypes.func,
-  onTagChange: React.PropTypes.func,
 };

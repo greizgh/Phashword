@@ -41,7 +41,7 @@ class QuickState extends React.Component {
             type="checkbox"
             className="default"
             id="state"
-            onClick={this.props.onToggle}
+            onChange={this.props.onToggle}
             checked={this.props.enabled}
           />
         </div>
