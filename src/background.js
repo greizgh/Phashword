@@ -16,7 +16,7 @@ chrome.runtime.onMessage.addListener(
         chrome.runtime.openOptionsPage();
         break;
       case 'REQUEST_PASS':
-        privKey = store.getState().profiles.get(request.siteData.profile).privateKey;
+        privKey = store.getState().profiles.get(request.siteData.profile).key;
         hash = hashPassword(
           request.siteData.tag,
           request.siteData.masterKey,

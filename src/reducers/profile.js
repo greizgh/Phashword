@@ -19,7 +19,7 @@ function getNewProfile(defaultProfile=false) {
     color: DEFAULT_COLOR,
     length: DEFAULT_LENGTH,
     type: PASSWORD_TYPES.SPECIAL,
-    privateKey: uuid.v4(),
+    key: uuid.v4(),
   };
 }
 

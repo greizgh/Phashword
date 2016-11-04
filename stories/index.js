@@ -25,7 +25,7 @@ const profile = {
   color: '#c32c32',
   length: 12,
   type: 3,
-  privateKey: 'private',
+  key: 'private',
 };
 
 storiesOf('popup.quickstate', module)

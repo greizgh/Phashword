@@ -125,11 +125,11 @@ class ProfileItem extends React.Component {
               style={[inputStyle, textInputStyle, privStyle]}
               key={'private'}
               id="private_key"
-              value={this.props.profile.privateKey}
+              value={this.props.profile.key}
               onChange={this.onPrivateKeyChange}
             />
             <div style={qrStyle}>
-              <QRCode value={this.props.profile.privateKey} />
+              <QRCode value={this.props.profile.key} />
             </div>
           </div>
           <div style={panelFormItemStyle}>

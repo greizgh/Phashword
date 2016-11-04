@@ -6,7 +6,7 @@ export default class ProfileSettings extends React.Component {
     return (
       <div>
         {this.props.profiles.map((profile) => (
-          <ProfileItem profile={profile} dispatch={this.props.dispatch} />
+          <ProfileItem key={profile.id} profile={profile} dispatch={this.props.dispatch} />
         ))}
       </div>
     );

@@ -17,7 +17,8 @@ describe('profilesReducer', () => {
   it('should provide a default profile', () => {
     const profiles = profilesReducer(undefined, {type: 'UNHANDLED'});
     assert.equal(profiles.size, 1);
-    assert.isTrue(profiles.first().default)
+    assert.isTrue(profiles.first().default);
+    assert.isOk(profiles.first().key);
   });
   it('should handle profile creation', () => {
     const profiles = profilesReducer(Map(), createProfile());
