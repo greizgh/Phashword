@@ -20,12 +20,14 @@ const state = {
       length: 8,
       default: true,
       color: '#f0f0f0',
+      name: 'Default',
     },
     uuid2: {
       type: PASSWORD_TYPES.SPECIAL,
       length: 12,
       default: false,
       color: '#abcdef',
+      name: 'FOSS',
     },
   }),
   siteSettings: new Map({
@@ -112,4 +114,8 @@ describe('getWorkerState', () => {
     const workerState = getWorkerState(state, 'http://www.mozilla.org');
     assert.equal(workerState.color, '#abcdef');
   });
+  it('should expose profile name', () => {
+    const workerState = getWorkerState(state, 'http://www.mozilla.org');
+    assert.equal(workerState.name, 'FOSS');
+  })
 });

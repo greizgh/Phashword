@@ -8,6 +8,9 @@ let cover;
 // Create password overlay
 const overlay = document.createElement('input');
 overlay.type = 'password';
+overlay.style.border = '0';
+overlay.style.borderRadius = '5px';
+overlay.style.padding = '10px';
 overlay.style.visibility = 'hidden';
 overlay.style.position = 'absolute';
 document.body.appendChild(overlay);
@@ -63,6 +66,7 @@ chrome.runtime.onMessage.addListener((message) => {
     }
     state = message.state;
     overlay.style.backgroundColor = state.color;
+    overlay.placeholder = `${state.name} - ${state.tag}`;
   }
 });
 

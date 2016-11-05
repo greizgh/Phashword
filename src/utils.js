@@ -81,8 +81,10 @@ export function getSettingsState(state) {
 
 export function getWorkerState(state, url) {
   const site = getSiteSettings(state, url2tag(url));
+  const profile = state.profiles.get(site.profile);
   return {
     ...site,
-    color: state.profiles.get(site.profile).color,
+    color: profile.color,
+    name: profile.name,
   };
 }
