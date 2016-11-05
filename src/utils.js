@@ -50,12 +50,12 @@ export function getSiteSettings(state, site = state.currentSite) {
   const defaultProfile = state.profiles.findEntry((profile) => profile.default);
   const defaultValues = {
     enabled: state.settings.defaultState,
-    tag: state.currentSite,
+    tag: site,
     length: defaultProfile[1].length,
     type: defaultProfile[1].type,
     profile: defaultProfile[0],
   };
-  return state.siteSettings.get(state.currentSite, defaultValues);
+  return state.siteSettings.get(site, defaultValues);
 }
 
 // Extract popup data from global state

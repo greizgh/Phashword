@@ -75,11 +75,11 @@ describe('getSiteSettings', () => {
     assert.equal(settings.profile, 'uuid2');
   });
   it('should accept site as optional argument', () => {
-    const settings = getSiteSettings(state, 'mozilla');
-    assert.equal(settings.tag, 'special');
-    assert.isTrue(settings.enabled);
-    assert.equal(settings.length, 12);
-    assert.equal(settings.profile, 'uuid2');
+    const settings = getSiteSettings(state, 'test');
+    assert.equal(settings.tag, 'test');
+    assert.isFalse(settings.enabled);
+    assert.equal(settings.length, 8);
+    assert.equal(settings.profile, 'uuid');
   });
 });
 
