@@ -84,8 +84,7 @@ storiesOf('admin.profileItem', module)
 storiesOf('admin.settings', module)
   .add('default', () =>
     <Settings
-      onSiteDelete={action('delete site')}
-      onProfileDelete={action('delete profile')}
+      dispatch={action('dispatch')}
       sites={sites}
       profiles={[profile]}
     />
