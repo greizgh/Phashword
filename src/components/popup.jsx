@@ -63,7 +63,7 @@ export default class Popup extends React.Component {
   }
   render() {
     return (
-      <div className="panel" style={popupStyle}>
+      <div style={popupStyle}>
         <Tabs>
           <Pane label="Profile">
             <QuickSettings
