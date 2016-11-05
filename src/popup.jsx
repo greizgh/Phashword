@@ -4,7 +4,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import Popup from './components/popup.jsx';
 import { openSettings } from './actions';
-import { toggleSite, setTag, setProfile, setLength, setType } from './actions/site';
 
 function onClose() {
   window.close();

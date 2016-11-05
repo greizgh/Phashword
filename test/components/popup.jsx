@@ -1,5 +1,4 @@
 import React from 'react';
-import { assert } from 'chai';
 import { mount } from 'enzyme';
 import Popup from '../../src/components/popup.jsx';
 import { TOGGLE_SITE } from '../../src/actions/site.js';

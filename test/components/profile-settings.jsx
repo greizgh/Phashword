@@ -1,5 +1,4 @@
 import React from 'react';
-import { assert } from 'chai';
 import { mount } from 'enzyme';
 import ProfileSettings from '../../src/components/admin/profileSettings.jsx';
 import { CREATE_PROFILE } from '../../src/actions/profile.js';

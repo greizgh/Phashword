@@ -1,4 +1,3 @@
-import { Map } from 'immutable';
 import {
   SET_CURRENT_PROFILE,
   SET_CURRENT_SITE,

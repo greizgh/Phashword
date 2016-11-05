@@ -4,7 +4,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import Settings from './components/admin/settings.jsx';
 import { deleteSite } from './actions/site.js';
-import { deleteProfile } from './actions/profile.js';
 
 function onSiteDelete(siteId) {
   chrome.runtime.sendMessage(deleteSite(siteId));

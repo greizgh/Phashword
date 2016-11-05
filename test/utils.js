@@ -117,5 +117,5 @@ describe('getWorkerState', () => {
   it('should expose profile name', () => {
     const workerState = getWorkerState(state, 'http://www.mozilla.org');
     assert.equal(workerState.name, 'FOSS');
-  })
+  });
 });

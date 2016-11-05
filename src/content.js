@@ -15,7 +15,7 @@ overlay.style.visibility = 'hidden';
 overlay.style.position = 'absolute';
 document.body.appendChild(overlay);
 
-overlay.addEventListener('blur', function(event) {
+overlay.addEventListener('blur', function (event) {
   event.target.style.visibility = 'hidden';
   const request = {
     passwordType: state.type,

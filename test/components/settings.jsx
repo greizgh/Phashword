@@ -1,5 +1,4 @@
 import React from 'react';
-import { assert } from 'chai';
 import { mount } from 'enzyme';
 import Settings from '../../src/components/admin/settings.jsx';
 

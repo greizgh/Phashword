@@ -15,7 +15,7 @@ function convertToDigits(input, seed, length) {
   for (let i = 0; i < length; i++) {
     if (!isDigit(input[i])) {
       const digit = String.fromCharCode((seed + input.charCodeAt(pivot)) % 10 + zeroChar);
-      input  = input.substr(0, i) + digit + input.substr(i + 1);
+      input = input.substr(0, i) + digit + input.substr(i + 1);
       pivot = i + 1;
     }
   }

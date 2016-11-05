@@ -15,7 +15,7 @@ class _Tabs extends React.Component {
   }
   renderTitles() {
     return (
-      <div style={tabHeaderStyle} className='Tabs__header'>
+      <div style={tabHeaderStyle} className="Tabs__header">
         {this.props.children.map((child, index) => {
           const styles = [tabButtonStyle.base];
           if (this.state.selected === index) {
@@ -30,7 +30,7 @@ class _Tabs extends React.Component {
               style={styles}
               onClick={() => this.setState({ selected: index })}
               key={index}
-              className='Tabs__header__button'
+              className="Tabs__header__button"
             >
               {child.props.label}
               {separator}
@@ -42,7 +42,7 @@ class _Tabs extends React.Component {
   }
   render() {
     return (
-      <div style={panelStyle} className='Tabs'>
+      <div style={panelStyle} className="Tabs">
         {this.renderTitles()}
         {this.props.children[this.state.selected]}
       </div>
@@ -57,7 +57,7 @@ export const Tabs = Radium(_Tabs);
 class _Pane extends React.Component {
   render() {
     return (
-      <div style={panelFormStyle} className='Tabs__panel'>
+      <div style={panelFormStyle} className="Tabs__panel">
         {this.props.children}
       </div>
     );

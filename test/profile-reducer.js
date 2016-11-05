@@ -15,27 +15,27 @@ import {
 
 describe('profilesReducer', () => {
   it('should provide a default profile', () => {
-    const profiles = profilesReducer(undefined, {type: 'UNHANDLED'});
+    const profiles = profilesReducer(undefined, { type: 'UNHANDLED' });
     assert.equal(profiles.size, 1);
     assert.isTrue(profiles.first().default);
     assert.isOk(profiles.first().key);
   });
   it('should handle profile creation', () => {
-    const profiles = profilesReducer(Map(), createProfile());
+    const profiles = profilesReducer(new Map(), createProfile());
     assert.equal(profiles.size, 1);
   });
   it('should update profile name', () => {
     const profiles = profilesReducer(
-      Map({uuid1: {name: 'test'}, uuid2: {name: 'original'}}),
+      new Map({ uuid1: { name: 'test' }, uuid2: { name: 'original' } }),
       setProfileName('uuid1', 'update')
     );
     assert.equal(profiles.get('uuid1').name, 'update');
     assert.equal(profiles.get('uuid2').name, 'original');
   });
   it('should allow to change default profile', () => {
-    const profiles = Map({
-      uuid1: {default: true},
-      uuid2: {default: false}, 
+    const profiles = new Map({
+      uuid1: { default: true },
+      uuid2: { default: false },
     });
     const state = profilesReducer(profiles, setDefaultProfile('uuid2'));
     assert.isFalse(state.get('uuid1').default);
@@ -43,7 +43,7 @@ describe('profilesReducer', () => {
   });
   it('should update profile color', () => {
     const profiles = profilesReducer(
-      Map({uuid1: {color: '#000000'}, uuid2: {color: 'blue'}}),
+      new Map({ uuid1: { color: '#000000' }, uuid2: { color: 'blue' } }),
       setProfileColor('uuid1', '#ffffff')
     );
     assert.equal(profiles.get('uuid1').color, '#ffffff');
@@ -51,7 +51,7 @@ describe('profilesReducer', () => {
   });
   it('should update profile key', () => {
     const profiles = profilesReducer(
-      Map({uuid1: {key: 'dumb'}, uuid2: {key: '1234'}}),
+      new Map({ uuid1: { key: 'dumb' }, uuid2: { key: '1234' } }),
       setProfileKey('uuid1', 'test')
     );
     assert.equal(profiles.get('uuid1').key, 'test');
@@ -59,7 +59,7 @@ describe('profilesReducer', () => {
   });
   it('should update profile length', () => {
     const profiles = profilesReducer(
-      Map({uuid1: {length: 8}, uuid2: {length: 22}}),
+      new Map({ uuid1: { length: 8 }, uuid2: { length: 22 } }),
       setProfileLength('uuid1', 12)
     );
     assert.equal(profiles.get('uuid1').length, 12);
@@ -67,14 +67,17 @@ describe('profilesReducer', () => {
   });
   it('should update profile type', () => {
     const profiles = profilesReducer(
-      Map({uuid1: {type: PASSWORD_TYPES.SPECIAL}, uuid2: {type: PASSWORD_TYPES.ALPHANUMERIC}}),
+      new Map({
+        uuid1: { type: PASSWORD_TYPES.SPECIAL },
+        uuid2: { type: PASSWORD_TYPES.ALPHANUMERIC },
+      }),
       setProfileType('uuid1', PASSWORD_TYPES.NUMERIC)
     );
     assert.equal(profiles.get('uuid1').type, PASSWORD_TYPES.NUMERIC);
     assert.equal(profiles.get('uuid2').type, PASSWORD_TYPES.ALPHANUMERIC);
   });
   it('should support profile deletion', () => {
-    const initialState = Map({
+    const initialState = new Map({
       uuid1: {},
       uuid2: {},
       uuid3: {},

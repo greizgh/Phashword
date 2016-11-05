@@ -12,7 +12,7 @@ import {
 } from '../actions/profile';
 import { PASSWORD_TYPES, DEFAULT_COLOR, DEFAULT_LENGTH } from '../constants';
 
-function getNewProfile(defaultProfile=false) {
+function getNewProfile(defaultProfile = false) {
   return {
     name: 'Default',
     default: defaultProfile,
