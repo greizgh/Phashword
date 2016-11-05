@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { hashPassword } from '../src/hasher.js';
+import hashPassword from '../src/hasher.js';
 
 describe('hasher', () => {
   it('should has basic hasing capabilities', () => {
@@ -96,5 +96,9 @@ describe('hasher', () => {
     );
     twik = 'B766HlSaS/Gq';
     assert.equal(password, twik, 'Compatible with several special chars in master and private key');
+  });
+  it('should return empty string on empty key', () => {
+    const pass = hashPassword('tag', '', 'private', 12, 1);
+    assert.equal(pass, '');
   });
 });

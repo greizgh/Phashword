@@ -89,7 +89,10 @@ function _hashPassword(tag, key, length, type) {
   return hash.substring(0, length);
 }
 
-export function hashPassword(tag, masterKey, privateKey, length, passwordType) {
+export default function hashPassword(tag, masterKey, privateKey, length, passwordType) {
+  if (masterKey === '') {
+    return '';
+  }
   if (privateKey !== null) {
     tag = _hashPassword(privateKey, tag, 24, PASSWORD_TYPES.SPECIAL);
   }

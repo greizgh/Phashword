@@ -1,7 +1,7 @@
 /* global chrome */
 import { createStore } from 'redux';
 import appReducer from './reducers';
-import { hashPassword } from './hasher';
+import hashPassword from './hasher';
 import { setCurrentSite } from './actions.js';
 import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils.js';
 
