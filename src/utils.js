@@ -86,5 +86,6 @@ export function getWorkerState(state, url) {
     ...site,
     color: profile.color,
     name: profile.name,
+    toggleKey: state.settings.toggleKey,
   };
 }

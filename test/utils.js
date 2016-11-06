@@ -12,6 +12,7 @@ import { PASSWORD_TYPES } from '../src/constants.js';
 const state = {
   settings: {
     defaultState: false,
+    toggleKey: 'Esc',
   },
   currentSite: 'localhost',
   profiles: new Map({
@@ -117,5 +118,9 @@ describe('getWorkerState', () => {
   it('should expose profile name', () => {
     const workerState = getWorkerState(state, 'http://www.mozilla.org');
     assert.equal(workerState.name, 'FOSS');
+  });
+  it('should expose toggle key', () => {
+    const workerState = getWorkerState(state, 'http://www.mozilla.org');
+    assert.equal(workerState.toggleKey, 'Esc');
   });
 });
