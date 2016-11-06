@@ -58,7 +58,7 @@ function updateWorkerState() {
         tabs[0].id,
         {
           type: '@WORKER_STATE',
-          state: getWorkerState(store.getState(), url2tag(tabs[0].url)),
+          state: getWorkerState(store.getState(), tabs[0].url),
         }
       );
     }
