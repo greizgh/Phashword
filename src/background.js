@@ -1,11 +1,12 @@
 /* global chrome */
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers';
 import hashPassword from './hasher';
 import { setCurrentSite } from './actions.js';
 import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils.js';
+import { saveOnHash } from './middlewares/site.js';
 
-const store = createStore(appReducer);
+const store = createStore(appReducer, applyMiddleware(saveOnHash));
 
 chrome.runtime.onMessage.addListener(
   (request, sender, sendResponse) => {
@@ -25,6 +26,10 @@ chrome.runtime.onMessage.addListener(
           request.siteData.passwordType
         );
         sendResponse({ hash });
+        if (request.siteData.masterKey) {
+          // Allow profile save if a password is generated
+          store.dispatch(request);
+        }
         break;
       default:
         if (!request.type.startsWith('@')) {
