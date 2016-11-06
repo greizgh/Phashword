@@ -4,6 +4,7 @@
 let state = { enabled: false };
 // Keep track of covered input
 let cover;
+let enter = false;
 
 // Create password overlay
 const overlay = document.createElement('input');
@@ -29,8 +30,19 @@ overlay.addEventListener('blur', function (event) {
     siteData: request,
   }, (response) => {
     cover.value = response.hash;
+    if (enter) {
+      cover.form.submit();
+      enter = false;
+    }
   });
   event.target.value = '';
+});
+
+overlay.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    enter = true;
+    overlay.blur();
+  }
 });
 
 function handleFocus(event) {
