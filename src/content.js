@@ -5,6 +5,7 @@ let state = { enabled: false };
 // Keep track of covered input
 let cover;
 let enter = false;
+const DISABLED_ATTR = 'nophash';
 
 // Create password overlay
 const overlay = document.createElement('input');
@@ -17,6 +18,7 @@ overlay.style.position = 'absolute';
 document.body.appendChild(overlay);
 
 overlay.addEventListener('blur', function (event) {
+  // On overlay blur, set password field with hash and hide overlay
   event.target.style.visibility = 'hidden';
   const request = {
     passwordType: state.type,
@@ -38,23 +40,49 @@ overlay.addEventListener('blur', function (event) {
   event.target.value = '';
 });
 
+// show overlay and give it the same dimensions as target
+function setOverlay(target) {
+  cover = target;
+  const targetRect = target.getBoundingClientRect();
+  overlay.style.top = `${targetRect.top}px`;
+  overlay.style.left = `${targetRect.left}px`;
+  overlay.style.width = `${targetRect.right - targetRect.left}px`;
+  overlay.style.height = `${targetRect.bottom - targetRect.top}px`;
+  overlay.style.visibility = 'visible';
+  overlay.focus();
+}
+
+// Handle toggle key press to reenable overlay for field
+function handleToggleKey(event) {
+  if (event.target.type === 'password' && event.target.hasAttribute(DISABLED_ATTR)) {
+    if (event.key === state.toggleKey) {
+      event.target.removeAttribute(DISABLED_ATTR);
+      event.target.removeEventListener('keydown', handleToggleKey);
+      setOverlay(event.target);
+    }
+  }
+}
+
 overlay.addEventListener('keydown', function (event) {
+  // On enter 'forward' submit to covered field
   if (event.key === 'Enter') {
     enter = true;
     overlay.blur();
   }
+  // On toggle key press, disable overlay for covered field
+  if (event.key === state.toggleKey) {
+    cover.setAttribute(DISABLED_ATTR, true);
+    overlay.value = '';
+    overlay.blur();
+    cover.focus();
+    cover.addEventListener('keydown', handleToggleKey);
+  }
 });
 
+// On focus, show overlay
 function handleFocus(event) {
-  if (event.target.type === 'password' && event.target != overlay) {
-    cover = event.target;
-    const targetRect = event.target.getBoundingClientRect();
-    overlay.style.top = `${targetRect.top}px`;
-    overlay.style.left = `${targetRect.left}px`;
-    overlay.style.width = `${targetRect.right - targetRect.left}px`;
-    overlay.style.height = `${targetRect.bottom - targetRect.top}px`;
-    overlay.style.visibility = 'visible';
-    overlay.focus();
+  if (event.target.type === 'password' && event.target != overlay && !event.target.hasAttribute(DISABLED_ATTR)) {
+    setOverlay(event.target);
   }
 }
 
