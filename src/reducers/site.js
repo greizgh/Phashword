@@ -8,6 +8,7 @@ import {
   SET_LENGTH,
   SET_TYPE,
 } from '../actions/site';
+import { DELETE_PROFILE } from '../actions/profile.js';
 import { getSiteSettings } from '../utils.js';
 
 const updateActions = [TOGGLE_SITE, SET_PROFILE, SET_LENGTH, SET_TAG, SET_TYPE];
@@ -48,6 +49,8 @@ export default function sitesReducer(state = { siteSettings: new Map() }, action
       return sites.update(action.id, (site) => ({
         ...site, type: action.passwordType,
       }));
+    case DELETE_PROFILE:
+      return sites.filter(site => site.profile !== action.id);
     default:
       return sites;
   }

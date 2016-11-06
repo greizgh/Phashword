@@ -11,6 +11,7 @@ import {
   setTag,
   setType,
 } from '../src/actions/site';
+import { deleteProfile } from '../src/actions/profile.js';
 
 const fakeState = {
   currentSite: 'testsite',
@@ -38,6 +39,13 @@ const fakeState = {
       length: 8,
       type: PASSWORD_TYPES.NUMERIC,
       profile: 'uuid',
+    },
+    other: {
+      enabled: false,
+      tag: 'other',
+      length: 12,
+      type: PASSWORD_TYPES.SPECIAL,
+      profile: 'uuid2',
     },
   }),
 };
@@ -87,5 +95,11 @@ describe('siteReducer', () => {
   it('should apply initial action upon creation', () => {
     const sites = siteReducer(fakeState, setLength('new', 24));
     assert.equal(sites.get('new').length, 24);
+  });
+  it('should delete sites which depend on deleted profile', () => {
+    const sites = siteReducer(fakeState, deleteProfile('uuid'));
+    assert.isFalse(sites.has('mozilla'));
+    assert.isFalse(sites.has('test'));
+    assert.isTrue(sites.has('other'));
   });
 });
