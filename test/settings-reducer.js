@@ -13,7 +13,7 @@ describe('settingsReducer', () => {
   });
   it('should use Escape key as quick toggle key', () => {
     const settings = settingsReducer(undefined, '@init');
-    assert.equal('Esc', settings.toggleKey);
+    assert.equal('Escape', settings.toggleKey);
   });
   it('should allow to change toogle key', () => {
     const settings = settingsReducer(undefined, setToggleKey('F2'));

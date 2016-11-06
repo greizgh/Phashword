@@ -2,7 +2,7 @@ import { TOGGLE_DEFAULT_STATE, SET_TOGGLE_KEY } from '../actions';
 
 const defaultSettings = {
   defaultState: false,
-  toggleKey: 'Esc',
+  toggleKey: 'Escape',
 };
 
 export default function settingsReducer(state = defaultSettings, action) {
