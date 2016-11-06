@@ -26,26 +26,30 @@ function getNewProfile(defaultProfile = false) {
 const defaultState = new Map().set(uuid.v4(), getNewProfile(true));
 
 export default function profilesReducer(state = defaultState, action) {
+  let profiles = state;
+  if (profiles instanceof Object && !(profiles instanceof Map)) {
+    profiles = new Map(profiles);
+  }
   switch (action.type) {
     case CREATE_PROFILE:
-      return state.set(uuid.v4(), getNewProfile());
+      return profiles.set(uuid.v4(), getNewProfile());
     case DELETE_PROFILE:
-      return state.delete(action.id);
+      return profiles.delete(action.id);
     case SET_DEFAULT_PROFILE:
-      return state
+      return profiles
         .map((profile) => ({ ...profile, default: false }))
         .update(action.id, (profile) => ({ ...profile, default: true }));
     case SET_PROFILE_NAME:
-      return state.update(action.id, (profile) => ({ ...profile, name: action.name }));
+      return profiles.update(action.id, (profile) => ({ ...profile, name: action.name }));
     case SET_PROFILE_COLOR:
-      return state.update(action.id, (profile) => ({ ...profile, color: action.color }));
+      return profiles.update(action.id, (profile) => ({ ...profile, color: action.color }));
     case SET_PROFILE_TYPE:
-      return state.update(action.id, (profile) => ({ ...profile, type: action.passwordType }));
+      return profiles.update(action.id, (profile) => ({ ...profile, type: action.passwordType }));
     case SET_PROFILE_LENGTH:
-      return state.update(action.id, (profile) => ({ ...profile, length: action.length }));
+      return profiles.update(action.id, (profile) => ({ ...profile, length: action.length }));
     case SET_PROFILE_KEY:
-      return state.update(action.id, (profile) => ({ ...profile, key: action.key }));
+      return profiles.update(action.id, (profile) => ({ ...profile, key: action.key }));
     default:
-      return state;
+      return profiles;
   }
 }

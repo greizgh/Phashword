@@ -85,4 +85,13 @@ describe('profilesReducer', () => {
     const profiles = profilesReducer(initialState, deleteProfile('uuid2'));
     assert.equal(profiles.size, 2);
   });
+  it('should handle state as object', () => {
+    const profiles = profilesReducer({
+      uuid: {
+        length: 12,
+      },
+    }, { type: '@init' });
+    assert.instanceOf(profiles, Map);
+    assert.isTrue(profiles.has('uuid'));
+  });
 });
