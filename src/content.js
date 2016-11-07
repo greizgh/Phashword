@@ -10,6 +10,7 @@ const DISABLED_ATTR = 'nophash';
 // Create password overlay
 const overlay = document.createElement('input');
 overlay.type = 'password';
+overlay.style.zIndex = 2147483647;
 overlay.style.border = '0';
 overlay.style.borderRadius = '5px';
 overlay.style.padding = '10px';
@@ -44,10 +45,10 @@ overlay.addEventListener('blur', function (event) {
 function setOverlay(target) {
   cover = target;
   const targetRect = target.getBoundingClientRect();
-  overlay.style.top = `${targetRect.top}px`;
-  overlay.style.left = `${targetRect.left}px`;
-  overlay.style.width = `${targetRect.right - targetRect.left}px`;
-  overlay.style.height = `${targetRect.bottom - targetRect.top}px`;
+  overlay.style.top = `${targetRect.top + window.scrollY}px`;
+  overlay.style.left = `${targetRect.left + window.scrollX}px`;
+  overlay.style.width = `${targetRect.width}px`;
+  overlay.style.height = `${targetRect.height}px`;
   overlay.style.visibility = 'visible';
   overlay.focus();
 }
