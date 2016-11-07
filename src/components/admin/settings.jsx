@@ -1,6 +1,7 @@
 import React from 'react';
 import SiteAdmin from './siteAdmin.jsx';
 import ProfileSettings from './profileSettings.jsx';
+import GlobalSettings from './global-settings.jsx';
 import { Tabs, Pane } from '../popup/tabs.jsx';
 
 export default class Settings extends React.Component {
@@ -9,6 +10,8 @@ export default class Settings extends React.Component {
     this.state = {
       sites: props.sites || [],
       profiles: props.profiles || [],
+      toggleKey: 'Escape',
+      defaultState: false,
     };
   }
   componentDidMount() {
@@ -19,7 +22,11 @@ export default class Settings extends React.Component {
       <div>
         <Tabs>
           <Pane label="Options">
-            <p>Global options</p>
+            <GlobalSettings
+              dispatch={this.props.dispatch}
+              defaultState={this.state.defaultState}
+              toggleKey={this.state.toggleKey}
+            />
           </Pane>
           <Pane label="Profiles">
             <ProfileSettings
@@ -44,4 +51,6 @@ Settings.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   sites: React.PropTypes.array,
   profiles: React.PropTypes.array,
+  defaultState: React.PropTypes.bool,
+  toggleKey: React.PropTypes.string,
 };

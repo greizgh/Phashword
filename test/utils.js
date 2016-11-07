@@ -92,13 +92,18 @@ describe('getPopupState', () => {
 });
 
 describe('getSettingsState', () => {
+  const settingsState = getSettingsState(state);
   it('should return profiles as array', () => {
-    const settingsState = getSettingsState(state);
     assert.equal(settingsState.profiles.length, 2);
   });
   it('should return sites as array', () => {
-    const settingsState = getSettingsState(state);
     assert.equal(settingsState.sites.length, 1);
+  });
+  it('should return default state', () => {
+    assert.isDefined(settingsState.defaultState);
+  });
+  it('should return toggle key', () => {
+    assert.isDefined(settingsState.toggleKey);
   });
 });
 
