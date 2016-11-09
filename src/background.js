@@ -6,6 +6,15 @@ import { setCurrentSite } from './actions.js';
 import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils.js';
 import { saveOnHash } from './middlewares/site.js';
 
+// Synchronize v1 data
+const port = browser.runtime.connect({name: "sync-v1-data"});
+port.onMessage.addListener((msg) => {
+  if (msg) {
+    // Where it can be saved using the WebExtensions storage API.
+    console.log(msg);
+  }
+});
+
 chrome.storage.local.get((savedData) => {
   const store = createStore(appReducer, savedData.state, applyMiddleware(saveOnHash));
 

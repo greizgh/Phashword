@@ -9,7 +9,7 @@ module.exports = {
     settings: './src/settings.jsx',
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'addon/webextension'),
     filename: '[name].bundle.js',
   },
   module: {
