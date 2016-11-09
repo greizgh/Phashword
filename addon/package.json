@@ -1,0 +1,14 @@
+{
+  "name": "phashword",
+  "title": "Phashword",
+  "id": "jid1-nY3RWh8Fb7qhXw@jetpack",
+  "description": "Easy to use password generator",
+  "author": "Greizgh",
+  "license": "GPL-3.0",
+  "version": "2.0.0-beta3",
+  "main": "main.js",
+  "permissions": {
+    "multiprocess": true
+  },
+  "hasEmbeddedWebExtension": true
+}

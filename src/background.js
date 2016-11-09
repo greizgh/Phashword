@@ -6,8 +6,22 @@ import { setCurrentSite } from './actions.js';
 import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils.js';
 import { saveOnHash } from './middlewares/site.js';
 import { ICONS_ON, ICONS_OFF } from './constants.js';
+import migrateData from './migration.js';
 
 chrome.storage.local.get((savedData) => {
+  if (!savedData.state) {
+    // Try to migrate from v1
+    const port = browser.runtime.connect({name: "sync-v1-data"});
+    port.onMessage.addListener((data) => {
+      if (data) {
+        const migratedState = migrateData(data);
+        chrome.storage.local.set({ migrated: true });
+        chrome.storage.local.set({ state: migratedState });
+        browser.runtime.reload();
+      }
+    });
+  }
+
   const store = createStore(appReducer, savedData.state, applyMiddleware(saveOnHash));
 
   // Save state in local storage
