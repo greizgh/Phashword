@@ -5,7 +5,7 @@
   "license": "GPL-3.0",
   "version": "2.0.0",
   "scripts": {
-    "build": "npm run prepare && webpack && npm run copy && npm run zip",
+    "build": "npm run prepare && webpack",
     "test": "karma start",
     "prepare": "mkdir -p ./addon/webextension",
     "copy": "cp -r res/icons ./addon/webextension && cp -r html/* ./addon/webextension && cp -r css/* ./addon/webextension && cp manifest.json ./addon/webextension",
