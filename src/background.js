@@ -1,4 +1,4 @@
-/* global chrome */
+/* global browser, chrome */
 import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers';
 import hashPassword from './hasher';
@@ -48,10 +48,16 @@ chrome.storage.local.get((savedData) => {
 
   // Update popup with new state
   store.subscribe(() => {
+    const state = getPopupState(store.getState());
     chrome.runtime.sendMessage({
       type: '@POPUP_STATE',
-      state: getPopupState(store.getState()),
+      state,
     });
+    let icon = 'icons/icon-off.svg';
+    if (state.enabled) {
+      icon = 'icons/icon-on.svg';
+    }
+    browser.browserAction.setIcon({ path: icon });
   });
 
   // Update settings with new state

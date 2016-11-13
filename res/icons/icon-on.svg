@@ -14,8 +14,8 @@
    width="96"
    height="96"
    id="svg2408"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="smuxi-frontend-gnome.svg"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="icon.svg"
    inkscape:export-filename="/home/matt/projets/pwhashplus/data/icon-32.png"
    inkscape:export-xdpi="30"
    inkscape:export-ydpi="30">
@@ -28,12 +28,12 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1364"
-     inkscape:window-height="748"
+     inkscape:window-width="1918"
+     inkscape:window-height="1060"
      id="namedview74"
      showgrid="false"
      inkscape:zoom="4.9166667"
-     inkscape:cx="50.006691"
+     inkscape:cx="0.98974218"
      inkscape:cy="45.23075"
      inkscape:window-x="0"
      inkscape:window-y="18"
@@ -282,7 +282,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -360,14 +360,6 @@
        inkscape:connector-curvature="0"
        id="path3615"
        style="opacity:0.2;fill:url(#radialGradient3619);fill-opacity:1;fill-rule:nonzero;stroke:none" />
-  </g>
-  <g
-     id="layer3">
-    <path
-       d="m -52,17 c -18.225397,0 -33,12.088312 -33,27 0,9.498438 5.99976,17.843462 15.0625,22.65625 -0.344625,2.508754 -1.914014,8.649817 -9.34375,10.75 9.622915,1.045823 16.013601,-3.646306 19.40625,-7.1875 C -57.351493,70.724251 -54.713933,71 -52,71 -33.774603,71 -19,58.911688 -19,44 -19,29.088312 -33.774603,17 -52,17 z"
-       inkscape:connector-curvature="0"
-       id="path3625"
-       style="opacity:0.4;fill:#d40000;fill-opacity:1;stroke:none;display:inline" />
   </g>
   <g
      id="layer5"
