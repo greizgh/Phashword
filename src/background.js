@@ -1,10 +1,11 @@
-/* global chrome */
+/* global browser, chrome */
 import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers';
 import hashPassword from './hasher';
 import { setCurrentSite } from './actions.js';
 import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils.js';
 import { saveOnHash } from './middlewares/site.js';
+import { ICONS_ON, ICONS_OFF } from './constants.js';
 
 chrome.storage.local.get((savedData) => {
   const store = createStore(appReducer, savedData.state, applyMiddleware(saveOnHash));
@@ -48,10 +49,16 @@ chrome.storage.local.get((savedData) => {
 
   // Update popup with new state
   store.subscribe(() => {
+    const state = getPopupState(store.getState());
     chrome.runtime.sendMessage({
       type: '@POPUP_STATE',
-      state: getPopupState(store.getState()),
+      state,
     });
+    let icon = ICONS_OFF;
+    if (state.enabled) {
+      icon = ICONS_ON;
+    }
+    browser.browserAction.setIcon({ path: icon });
   });
 
   // Update settings with new state
