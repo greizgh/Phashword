@@ -1,5 +1,5 @@
 /* eslint-env browser */
-/* global chrome */
+/* global browser, chrome */
 import React from 'react';
 import { render } from 'react-dom';
 import Popup from './components/popup.jsx';
@@ -32,6 +32,7 @@ const popup = render(
     onClose={onClose}
     onSettings={onSettings}
     onPassword={onPassword}
+    translate={browser.i18n.getMessage}
   />,
   document.getElementById('quick-settings')
 );

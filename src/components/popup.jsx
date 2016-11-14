@@ -65,16 +65,17 @@ export default class Popup extends React.Component {
     return (
       <div style={popupStyle}>
         <Tabs>
-          <Pane label="Profile">
+          <Pane label={this.props.translate('profile')}>
             <QuickSettings
               profiles={this.state.profiles}
               currentProfile={this.state.selectedProfile}
               enabled={this.state.enabled}
               onToggle={this.onToggleState}
               onProfileChange={this.onProfileChange}
+              translate={this.props.translate}
             />
           </Pane>
-          <Pane label="Site">
+          <Pane label={this.props.translate('site')}>
             <SiteProfile
               length={this.state.length}
               tag={this.state.tag}
@@ -82,16 +83,25 @@ export default class Popup extends React.Component {
               onChangeType={this.onTypeChange}
               onChangeTag={this.onTagChange}
               onChangeLength={this.onLengthChange}
+              translate={this.props.translate}
             />
           </Pane>
-          <Pane label="Generate">
-            <KeyGenerator requestPassword={this.requestPass} password={this.state.password} />
+          <Pane label={this.props.translate('generate')}>
+            <KeyGenerator
+              requestPassword={this.requestPass}
+              password={this.state.password}
+              translate={this.props.translate}
+            />
           </Pane>
         </Tabs>
         <footer style={popupFooterStyle}>
-          <div style={popupFooterButtonStyle} onClick={this.props.onSettings}>Settings</div>
+          <div style={popupFooterButtonStyle} onClick={this.props.onSettings}>
+            {this.props.translate('popup.settings')}
+          </div>
           <div style={separatorStyle} />
-          <div style={popupFooterButtonStyle} onClick={this.props.onClose}>Close</div>
+          <div style={popupFooterButtonStyle} onClick={this.props.onClose}>
+            {this.props.translate('popup.close')}
+          </div>
         </footer>
       </div>
     );
@@ -103,4 +113,9 @@ Popup.propTypes = {
   onPassword: React.PropTypes.func,
   onSettings: React.PropTypes.func,
   onClose: React.PropTypes.func,
+  translate: React.PropTypes.func,
+};
+
+Popup.defaultProps = {
+  translate: (id) => id,
 };

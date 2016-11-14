@@ -15,7 +15,9 @@ class SiteProfile extends React.Component {
     return (
       <div style={panelFormStyle}>
         <div style={panelFormItemStyle}>
-          <label htmlFor="tag" style={labelStyle}>Tag</label>
+          <label htmlFor="tag" style={labelStyle}>
+            {this.props.translate('hash.tag')}
+          </label>
           <input
             type="text"
             style={[inputStyle, textInputStyle]}
@@ -27,7 +29,9 @@ class SiteProfile extends React.Component {
           />
         </div>
         <div style={panelFormItemStyle}>
-          <label style={labelStyle} htmlFor="password_length">Length</label>
+          <label style={labelStyle} htmlFor="password_length">
+            {this.props.translate('hash.length')}
+          </label>
           <input
             type="number"
             style={[inputStyle, textInputStyle]}
@@ -39,16 +43,24 @@ class SiteProfile extends React.Component {
           />
         </div>
         <div style={[panelFormItemStyle, panelLastFormItemStyle]}>
-          <label style={labelStyle} htmlFor="password_type">Type</label>
+          <label style={labelStyle} htmlFor="password_type">
+            {this.props.translate('hash.type')}
+          </label>
           <select
             style={selectStyle}
             id="password_type"
             value={this.props.type}
             onChange={this.props.onChangeType}
           >
-            <option value="1">Alphanumeric and special characters</option>
-            <option value="2">Alphanumeric</option>
-            <option value="3">Numeric</option>
+            <option value="1">
+              {this.props.translate('type.special')}
+            </option>
+            <option value="2">
+              {this.props.translate('type.alphanum')}
+            </option>
+            <option value="3">
+              {this.props.translate('type.numeric')}
+            </option>
           </select>
         </div>
       </div>
@@ -63,6 +75,11 @@ SiteProfile.propTypes = {
   onChangeType: React.PropTypes.func,
   onChangeLength: React.PropTypes.func,
   onChangeTag: React.PropTypes.func,
+  translate: React.PropTypes.func,
+};
+
+SiteProfile.defaultProps = {
+  translate: (id) => id,
 };
 
 export default Radium(SiteProfile);

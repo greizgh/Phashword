@@ -11,6 +11,7 @@
     "48": "icons/icon-48.png",
     "96": "icons/icon-96.png"
   },
+  "default_locale": "en",
 
   "applications": {
     "gecko": {

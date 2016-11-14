@@ -22,7 +22,9 @@ class QuickState extends React.Component {
     return (
       <div style={panelFormStyle}>
         <div style={this.getColorStyle()}>
-          <label htmlFor="profile" style={labelStyle}>Profile</label>
+          <label htmlFor="profile" style={labelStyle}>
+            {this.props.translate('profile')}
+          </label>
           <select
             style={selectStyle}
             id="profile"
@@ -35,7 +37,9 @@ class QuickState extends React.Component {
           </select>
         </div>
         <div style={[panelFormItemStyle, panelLastFormItemStyle]}>
-          <label htmlFor="state" style={labelStyle}>Active</label>
+          <label htmlFor="state" style={labelStyle}>
+            {this.props.translate('active')}
+          </label>
           <input
             style={inputStyle}
             type="checkbox"
@@ -56,6 +60,11 @@ QuickState.propTypes = {
   enabled: React.PropTypes.bool,
   onToggle: React.PropTypes.func,
   onProfileChange: React.PropTypes.func,
+  translate: React.PropTypes.func,
+};
+
+QuickState.defaultProps = {
+  translate: (id) => id,
 };
 
 export default Radium(QuickState);

@@ -14,7 +14,9 @@ class KeyGenerator extends React.Component {
     return (
       <div style={panelFormStyle}>
         <div style={panelFormItemStyle}>
-          <label style={labelStyle} htmlFor="key">Master key</label>
+          <label style={labelStyle} htmlFor="key">
+            {this.props.translate('master_key')}
+          </label>
           <input
             style={[inputStyle, textInputStyle]}
             type="password"
@@ -25,7 +27,9 @@ class KeyGenerator extends React.Component {
           />
         </div>
         <div style={[panelFormItemStyle, panelLastFormItemStyle]}>
-          <label style={labelStyle} htmlFor="password">Password</label>
+          <label style={labelStyle} htmlFor="password">
+            {this.props.translate('password')}
+          </label>
           <input
             style={[inputStyle, textInputStyle]}
             type="text"
@@ -44,6 +48,11 @@ KeyGenerator.propTypes = {
   password: React.PropTypes.string,
   masterKey: React.PropTypes.string,
   requestPassword: React.PropTypes.func,
+  translate: React.PropTypes.func,
+};
+
+KeyGenerator.defaultProps = {
+  translate: (id) => id,
 };
 
 export default Radium(KeyGenerator);

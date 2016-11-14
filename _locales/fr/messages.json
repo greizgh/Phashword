@@ -1,0 +1,46 @@
+{
+  "active": {
+    "message": "Actif"
+  },
+  "generate": {
+    "message": "Générer"
+  },
+  "hash.length": {
+    "message": "Longueur"
+  },
+  "hash.tag": {
+    "message": "Étiquette"
+  },
+  "hash.type": {
+    "message": "Type"
+  },
+  "master_key": {
+    "message": "Clé principale"
+  },
+  "password": {
+    "message": "Mot de passe"
+  },
+  "popup.close": {
+    "message": "Fermer",
+    "description": "Popup close button"
+  },
+  "popup.settings": {
+    "message": "Préférences",
+    "description": "Popup settings button"
+  },
+  "profile": {
+    "message": "Profil"
+  },
+  "site": {
+    "message": "Site"
+  },
+  "type.alphanum": {
+    "message": "Alphanumerique"
+  },
+  "type.numeric": {
+    "message": "Numerique"
+  },
+  "type.special": {
+    "message": "Alphanumerique et caractères spéciaux"
+  }
+}
