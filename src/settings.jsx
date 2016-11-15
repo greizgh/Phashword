@@ -1,5 +1,5 @@
 /* eslint-env browser */
-/* global chrome */
+/* global browser, chrome */
 import React from 'react';
 import { render } from 'react-dom';
 import Settings from './components/admin/settings.jsx';
@@ -17,6 +17,7 @@ const settings = render(
   <Settings
     dispatch={dispatch}
     onSiteDelete={onSiteDelete}
+    translate={browser.i18n.getMessage}
   />,
   document.getElementById('settings')
 );

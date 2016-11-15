@@ -73,7 +73,9 @@ class ProfileItem extends React.Component {
         </div>
         <div>
           <div style={panelFormItemStyle}>
-            <label htmlFor="name" style={labelStyle}>Name</label>
+            <label htmlFor="name" style={labelStyle}>
+              {this.props.translate('profile.name')}
+            </label>
             <input
               style={[inputStyle, textInputStyle]}
               type="text"
@@ -84,7 +86,9 @@ class ProfileItem extends React.Component {
             />
           </div>
           <div style={panelFormItemStyle}>
-            <label htmlFor="color" style={labelStyle}>Color</label>
+            <label htmlFor="color" style={labelStyle}>
+              {this.props.translate('profile.color')}
+            </label>
             <input
               style={inputStyle}
               type="color"
@@ -94,7 +98,9 @@ class ProfileItem extends React.Component {
             />
           </div>
           <div style={panelFormItemStyle}>
-            <label htmlFor="length" style={labelStyle}>Length</label>
+            <label htmlFor="length" style={labelStyle}>
+              {this.props.translate('hash.length')}
+            </label>
             <input
               type="number"
               style={[inputStyle, textInputStyle]}
@@ -106,7 +112,9 @@ class ProfileItem extends React.Component {
             />
           </div>
           <div style={panelFormItemStyle}>
-            <label style={labelStyle} htmlFor="type">Type</label>
+            <label style={labelStyle} htmlFor="type">
+              {this.props.translate('hash.type')}
+            </label>
             <select
               style={selectStyle}
               key={'type'}
@@ -114,13 +122,21 @@ class ProfileItem extends React.Component {
               value={this.props.profile.type}
               onChange={this.onTypeChange}
             >
-              <option key={1} value="1">Alphanumeric and special characters</option>
-              <option key={2} value="2">Alphanumeric</option>
-              <option key={3} value="3">Numeric</option>
+              <option value={1}>
+                {this.props.translate('type.special')}
+              </option>
+              <option value={2}>
+                {this.props.translate('type.alphanum')}
+              </option>
+              <option value={3}>
+                {this.props.translate('type.numeric')}
+              </option>
             </select>
           </div>
           <div style={panelFormItemStyle}>
-            <label style={labelStyle} htmlFor="private_key">Private key</label>
+            <label style={labelStyle} htmlFor="private_key">
+              {this.props.translate('profile.private_key')}
+            </label>
             <textarea
               style={[inputStyle, textInputStyle, privStyle]}
               key={'private'}
@@ -133,7 +149,9 @@ class ProfileItem extends React.Component {
             </div>
           </div>
           <div style={panelFormItemStyle}>
-            <button key="delbtn" onClick={this.onDeleteProfile} style={btnStyle}>Delete</button>
+            <button key="delbtn" onClick={this.onDeleteProfile} style={btnStyle}>
+              {this.props.translate('profile.delete')}
+            </button>
           </div>
         </div>
       </div>
@@ -144,6 +162,11 @@ class ProfileItem extends React.Component {
 ProfileItem.propTypes = {
   profile: React.PropTypes.object,
   dispatch: React.PropTypes.func,
+  translate: React.PropTypes.func,
+};
+
+ProfileItem.defaultProps = {
+  translate: (id) => id,
 };
 
 export default Radium(ProfileItem);

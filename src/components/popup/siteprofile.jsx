@@ -52,13 +52,13 @@ class SiteProfile extends React.Component {
             value={this.props.type}
             onChange={this.props.onChangeType}
           >
-            <option value="1">
+            <option value={1}>
               {this.props.translate('type.special')}
             </option>
-            <option value="2">
+            <option value={2}>
               {this.props.translate('type.alphanum')}
             </option>
-            <option value="3">
+            <option value={3}>
               {this.props.translate('type.numeric')}
             </option>
           </select>

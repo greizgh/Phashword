@@ -32,7 +32,11 @@ class SiteAdmin extends React.Component {
           {this.props.sites
             .filter((site) => site.id.startsWith(this.state.filter))
             .map((site) => (
-              <SiteItem site={site} onDelete={this.props.onDelete} />
+              <SiteItem
+                site={site}
+                onDelete={this.props.onDelete}
+                translate={this.props.translate}
+              />
           ))}
         </div>
       </div>
@@ -43,6 +47,11 @@ class SiteAdmin extends React.Component {
 SiteAdmin.propTypes = {
   sites: React.PropTypes.arrayOf(React.PropTypes.object),
   onDelete: React.PropTypes.func,
+  translate: React.PropTypes.func,
+};
+
+SiteAdmin.defaultProps = {
+  translate: (id) => id,
 };
 
 export default Radium(SiteAdmin);

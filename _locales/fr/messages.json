@@ -17,6 +17,9 @@
   "master_key": {
     "message": "Clé principale"
   },
+  "options": {
+    "message": "Options"
+  },
   "password": {
     "message": "Mot de passe"
   },
@@ -28,11 +31,47 @@
     "message": "Préférences",
     "description": "Popup settings button"
   },
+  "preferences.default_state": {
+    "message": "Actif par défaut"
+  },
+  "preferences.key.escape": {
+    "message": "Échap"
+  },
+  "preferences.toggle_key": {
+    "message": "Touche de bascule"
+  },
   "profile": {
     "message": "Profil"
   },
+  "profile.color": {
+    "message": "Couleur"
+  },
+  "profile.delete": {
+    "message": "Supprimer",
+    "description": "Profile delete button"
+  },
+  "profile.name": {
+    "message": "Nom"
+  },
+  "profile.private_key": {
+    "message": "Clé privée"
+  },
+  "profiles": {
+    "message": "Profiles"
+  },
+  "profiles.create_new": {
+    "message": "Nouveau profil",
+    "description": "Create new profile button"
+  },
   "site": {
     "message": "Site"
+  },
+  "site.delete": {
+    "message": "Supprimer",
+    "description": "Site delete button"
+  },
+  "sites": {
+    "message": "Sites"
   },
   "type.alphanum": {
     "message": "Alphanumerique"

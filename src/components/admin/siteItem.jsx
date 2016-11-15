@@ -19,7 +19,13 @@ class SiteItem extends React.Component {
         <span style={grow}>
           {this.props.site.id} - {this.props.site.tag} - {this.props.site.length}
         </span>
-        <button key="delbtn" onClick={this.deleteSite} style={[btnStyle, shrink]}>Delete</button>
+        <button
+          key={'delbtn' + this.props.site.id}
+          onClick={this.deleteSite}
+          style={[btnStyle, shrink]}
+        >
+          {this.props.translate('site.delete')}
+        </button>
       </div>
     );
   }
@@ -28,6 +34,11 @@ class SiteItem extends React.Component {
 SiteItem.propTypes = {
   site: React.PropTypes.object,
   onDelete: React.PropTypes.func,
+  translate: React.PropTypes.func,
+};
+
+SiteItem.defaultProps = {
+  translate: (id) => id,
 };
 
 export default Radium(SiteItem);

@@ -15,9 +15,16 @@ export default class ProfileSettings extends React.Component {
     return (
       <div>
         {this.props.profiles.map((profile) => (
-          <ProfileItem key={profile.id} profile={profile} dispatch={this.props.dispatch} />
+          <ProfileItem
+            key={profile.id}
+            profile={profile}
+            dispatch={this.props.dispatch}
+            translate={this.props.translate}
+          />
         ))}
-        <button onClick={this.onCreate} style={btnStyle} >Create new profile</button>
+        <button onClick={this.onCreate} style={btnStyle} >
+          {this.props.translate('profiles.create_new')}
+        </button>
       </div>
     );
   }
@@ -26,4 +33,9 @@ export default class ProfileSettings extends React.Component {
 ProfileSettings.propTypes = {
   profiles: React.PropTypes.arrayOf(React.PropTypes.object),
   dispatch: React.PropTypes.func.isRequired,
+  translate: React.PropTypes.func,
+};
+
+ProfileSettings.defaultProps = {
+  translate: (id) => id,
 };

@@ -21,23 +21,26 @@ export default class Settings extends React.Component {
     return (
       <div>
         <Tabs>
-          <Pane label="Options">
+          <Pane label={this.props.translate('options')}>
             <GlobalSettings
               dispatch={this.props.dispatch}
               defaultState={this.state.defaultState}
               toggleKey={this.state.toggleKey}
+              translate={this.props.translate}
             />
           </Pane>
-          <Pane label="Profiles">
+          <Pane label={this.props.translate('profiles')}>
             <ProfileSettings
               profiles={this.state.profiles}
               dispatch={this.props.dispatch}
+              translate={this.props.translate}
             />
           </Pane>
-          <Pane label="Sites">
+          <Pane label={this.props.translate('sites')}>
             <SiteAdmin
               sites={this.state.sites}
               onDelete={this.props.onSiteDelete}
+              translate={this.props.translate}
             />
           </Pane>
         </Tabs>
@@ -53,4 +56,9 @@ Settings.propTypes = {
   profiles: React.PropTypes.array,
   defaultState: React.PropTypes.bool,
   toggleKey: React.PropTypes.string,
+  translate: React.PropTypes.func,
+};
+
+Settings.defaultProps = {
+  translate: (id) => id,
 };
