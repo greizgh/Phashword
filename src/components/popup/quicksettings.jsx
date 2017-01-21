@@ -9,13 +9,16 @@ import {
   selectStyle,
 } from '../style.js';
 
+const borderedDivStyle = Object.assign({}, panelFormItemStyle);
+
 class QuickState extends React.Component {
   getColorStyle() {
-    const style = panelFormItemStyle;
-    if (this.props.profiles[this.props.currentProfile]) {
-      style.borderBottom = `5px solid ${this.props.profiles[this.props.currentProfile].color}`;
+    const profile = this.props.profiles
+      .filter((p) => p.id === this.props.currentProfile)[0];
+    if (profile) {
+      borderedDivStyle.borderBottom = `5px solid ${profile.color}`;
     }
-    return style;
+    return borderedDivStyle;
   }
 
   render() {
