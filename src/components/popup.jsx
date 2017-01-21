@@ -34,8 +34,8 @@ export default class Popup extends React.Component {
     // Advertise popup is ready to receive current state
     this.props.dispatch({ type: 'POPUP_READY' });
   }
-  onProfileChange(profile) {
-    this.props.dispatch(setProfile(this.state.siteId, profile));
+  onProfileChange(event) {
+    this.props.dispatch(setProfile(this.state.siteId, event.target.value));
   }
   onTagChange(event) {
     this.props.dispatch(setTag(this.state.siteId, event.target.value));
