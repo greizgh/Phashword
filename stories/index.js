@@ -1,6 +1,8 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import faker from 'faker';
+import uuid from 'uuid';
+import { PASSWORD_TYPES } from '../src/constants.js';
 import Popup from '../src/components/popup.jsx';
 import QuickState from '../src/components/popup/quicksettings.jsx';
 import SiteItem from '../src/components/admin/siteItem.jsx';
@@ -28,11 +30,24 @@ const profile = {
   key: 'private',
 };
 
+const profiles = [profile];
+for (let i = 0; i < 3; i++) {
+  profiles.push({
+    id: uuid.v4(),
+    default: false,
+    type: PASSWORD_TYPES.SPECIAL,
+    length: 12,
+    key: uuid.v4(),
+    name: faker.random.word(),
+    color: faker.internet.color(),
+  });
+}
+
 storiesOf('popup.quickstate', module)
   .add('Site disabled', () =>
     <QuickState
       currentProfile={'uuid'}
-      profiles={[profile]}
+      profiles={profiles}
       enabled={false}
       onToggle={action('toggle state')}
       onProfileChange={action('profile change')}
@@ -41,7 +56,7 @@ storiesOf('popup.quickstate', module)
   .add('Site enabled', () =>
     <QuickState
       currentProfile={'uuid'}
-      profiles={[profile]}
+      profiles={profiles}
       enabled
       onToggle={action('toggle state')}
       onProfileChange={action('profile change')}
