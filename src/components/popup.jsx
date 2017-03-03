@@ -58,7 +58,7 @@ export default class Popup extends React.Component {
       profile: this.state.selectedProfile,
     };
     this.props.onPassword(request, (hash) => {
-      this.setState({ ...this.state, password: hash });
+      this.setState({ password: hash });
     });
   }
   render() {
