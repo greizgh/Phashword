@@ -14,7 +14,7 @@ It doesn't get in your way:
 * enable phashword only for some websites
 * disable it per field (try pressing the "Escape" key!)
 
-##On the go?
+## On the go?
 
 Phashword is fully compatible with [Twik](https://github.com/gustavomondron/twik) for Android.
 
