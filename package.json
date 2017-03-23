@@ -6,7 +6,7 @@
   "version": "2.0.0",
   "scripts": {
     "build": "npm run prepare && webpack && npm run copy && npm run zip",
-    "test": "karma start",
+    "test": "NODE_ENV=test karma start",
     "prepare": "mkdir -p ./dist",
     "copy": "cp -r _locales ./dist && cp -r res/icons ./dist/ && cp -r html/* ./dist/ && cp -r css/* ./dist/ && cp manifest.json ./dist",
     "zip": "cd ./dist && zip -r -x\"*.zip\" phashword.xpi .",
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@kadira/storybook": "^2.5.2",
+    "babel-plugin-istanbul": "^4.1.1",
     "chai": "^3.5.0",
     "enzyme": "^2.4.1",
     "eslint": "^3.17.1",
@@ -50,7 +51,6 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
     "faker": "^4.1.0",
-    "isparta-loader": "^2.0.0",
     "karma": "^1.5.0",
     "karma-chai": "^0.1.0",
     "karma-cli": "^1.0.0",

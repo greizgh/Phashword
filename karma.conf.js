@@ -1,12 +1,6 @@
 const webpackConfig = require('./webpack.config');
 
 webpackConfig.devtool = 'inline-source-map';
-webpackConfig.module.rules.push({
-  test: /\.jsx?$/,
-  exclude: /(test|node_modules)/,
-  use: ['isparta-loader'],
-  enforce: 'pre',
-});
 webpackConfig.externals = {
   'cheerio': 'window',
   'react/addons': true,
