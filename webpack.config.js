@@ -13,16 +13,10 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: 'babel',
-    },
-    {
-      test: /\.json$/,
-      loaders: [
-        'json',
-      ],
+      use: ['babel-loader'],
     }],
   },
   plugins: [

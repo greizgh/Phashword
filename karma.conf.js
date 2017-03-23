@@ -1,12 +1,12 @@
 const webpackConfig = require('./webpack.config');
 
 webpackConfig.devtool = 'inline-source-map';
-webpackConfig.entry = {};
-webpackConfig.module.preLoaders = [{
+webpackConfig.module.rules.push({
   test: /\.jsx?$/,
   exclude: /(test|node_modules)/,
-  loader: 'isparta',
-}];
+  use: ['isparta-loader'],
+  enforce: 'pre',
+});
 webpackConfig.externals = {
   'cheerio': 'window',
   'react/addons': true,
@@ -14,7 +14,7 @@ webpackConfig.externals = {
   'react/lib/ReactContext': true,
 };
 
-module.exports = function (config) {
+module.exports = (config) => {
   config.set({
     browsers: ['Firefox'],
     files: [
