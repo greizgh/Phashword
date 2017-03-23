@@ -1,7 +1,7 @@
 import {
   SET_CURRENT_PROFILE,
   SET_CURRENT_SITE,
-} from './actions.js';
+} from './actions';
 import profilesReducer from './reducers/profile';
 import sitesReducer from './reducers/site';
 import settingsReducer from './reducers/settings';

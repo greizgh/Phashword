@@ -2,10 +2,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers';
 import hashPassword from './hasher';
-import { setCurrentSite } from './actions.js';
-import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils.js';
-import { saveOnHash } from './middlewares/site.js';
-import { ICONS_ON, ICONS_OFF } from './constants.js';
+import { setCurrentSite } from './actions';
+import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils';
+import { saveOnHash } from './middlewares/site';
+import { ICONS_ON, ICONS_OFF } from './constants';
 
 chrome.storage.local.get((savedData) => {
   const store = createStore(appReducer, savedData.state, applyMiddleware(saveOnHash));
@@ -30,7 +30,7 @@ chrome.storage.local.get((savedData) => {
             request.siteData.masterKey,
             privKey,
             request.siteData.passwordLength,
-            request.siteData.passwordType
+            request.siteData.passwordType,
           );
           sendResponse({ hash });
           if (request.siteData.masterKey) {
