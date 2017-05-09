@@ -27,7 +27,7 @@ You will need some tools: [npm](https://www.npmjs.com/get-npm), [web-ext](https:
 Run the following, after a checkout:
 
     yarn/npm install
-    NODE_ENV=production npm run build
+    npm run build:release
     web-ext build -s dist
 
 You should obtain an installable _zip_ in the `web-ext-artifacts/` directory.
