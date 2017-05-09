@@ -1,4 +1,4 @@
-const webpackConfig = require('./webpack.config');
+const webpackConfig = require('./webpack.dev');
 
 webpackConfig.devtool = 'inline-source-map';
 webpackConfig.externals = {
