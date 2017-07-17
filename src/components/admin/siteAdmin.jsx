@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import SiteItem from './siteItem.jsx';
 import { textInputStyle } from '../style.js';
@@ -45,9 +46,9 @@ class SiteAdmin extends React.Component {
 }
 
 SiteAdmin.propTypes = {
-  sites: React.PropTypes.arrayOf(React.PropTypes.object),
-  onDelete: React.PropTypes.func,
-  translate: React.PropTypes.func,
+  sites: PropTypes.arrayOf(PropTypes.object),
+  onDelete: PropTypes.func,
+  translate: PropTypes.func,
 };
 
 SiteAdmin.defaultProps = {

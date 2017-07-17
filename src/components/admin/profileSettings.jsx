@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ProfileItem from './profileItem.jsx';
 import { createProfile } from '../../actions/profile.js';
 import { btnStyle } from '../style.js';
@@ -31,9 +32,9 @@ export default class ProfileSettings extends React.Component {
 }
 
 ProfileSettings.propTypes = {
-  profiles: React.PropTypes.arrayOf(React.PropTypes.object),
-  dispatch: React.PropTypes.func.isRequired,
-  translate: React.PropTypes.func,
+  profiles: PropTypes.arrayOf(PropTypes.object),
+  dispatch: PropTypes.func.isRequired,
+  translate: PropTypes.func,
 };
 
 ProfileSettings.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SiteAdmin from './siteAdmin.jsx';
 import ProfileSettings from './profileSettings.jsx';
 import GlobalSettings from './global-settings.jsx';
@@ -50,13 +51,13 @@ export default class Settings extends React.Component {
 }
 
 Settings.propTypes = {
-  onSiteDelete: React.PropTypes.func,
-  dispatch: React.PropTypes.func.isRequired,
-  sites: React.PropTypes.array,
-  profiles: React.PropTypes.array,
-  defaultState: React.PropTypes.bool,
-  toggleKey: React.PropTypes.string,
-  translate: React.PropTypes.func,
+  onSiteDelete: PropTypes.func,
+  dispatch: PropTypes.func.isRequired,
+  sites: PropTypes.array,
+  profiles: PropTypes.array,
+  defaultState: PropTypes.bool,
+  toggleKey: PropTypes.string,
+  translate: PropTypes.func,
 };
 
 Settings.defaultProps = {

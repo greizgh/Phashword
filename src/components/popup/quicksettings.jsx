@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import {
   panelFormStyle,
@@ -58,12 +59,12 @@ class QuickState extends React.Component {
 }
 
 QuickState.propTypes = {
-  currentProfile: React.PropTypes.string.isRequired,
-  profiles: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  enabled: React.PropTypes.bool,
-  onToggle: React.PropTypes.func,
-  onProfileChange: React.PropTypes.func,
-  translate: React.PropTypes.func,
+  currentProfile: PropTypes.string.isRequired,
+  profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  enabled: PropTypes.bool,
+  onToggle: PropTypes.func,
+  onProfileChange: PropTypes.func,
+  translate: PropTypes.func,
 };
 
 QuickState.defaultProps = {

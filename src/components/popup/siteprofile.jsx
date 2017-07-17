@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import {
   panelFormStyle,
@@ -69,13 +70,13 @@ class SiteProfile extends React.Component {
 }
 
 SiteProfile.propTypes = {
-  tag: React.PropTypes.string,
-  length: React.PropTypes.number,
-  type: React.PropTypes.number,
-  onChangeType: React.PropTypes.func,
-  onChangeLength: React.PropTypes.func,
-  onChangeTag: React.PropTypes.func,
-  translate: React.PropTypes.func,
+  tag: PropTypes.string,
+  length: PropTypes.number,
+  type: PropTypes.number,
+  onChangeType: PropTypes.func,
+  onChangeLength: PropTypes.func,
+  onChangeTag: PropTypes.func,
+  translate: PropTypes.func,
 };
 
 SiteProfile.defaultProps = {

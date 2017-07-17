@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import KeyGenerator from './popup/keygenerator.jsx';
 import SiteProfile from './popup/siteprofile.jsx';
 import QuickSettings from './popup/quicksettings.jsx';
@@ -109,11 +110,11 @@ export default class Popup extends React.Component {
 }
 
 Popup.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  onPassword: React.PropTypes.func,
-  onSettings: React.PropTypes.func,
-  onClose: React.PropTypes.func,
-  translate: React.PropTypes.func,
+  dispatch: PropTypes.func.isRequired,
+  onPassword: PropTypes.func,
+  onSettings: PropTypes.func,
+  onClose: PropTypes.func,
+  translate: PropTypes.func,
 };
 
 Popup.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import QRCode from 'qrcode.react';
 import {
@@ -160,9 +161,9 @@ class ProfileItem extends React.Component {
 }
 
 ProfileItem.propTypes = {
-  profile: React.PropTypes.object,
-  dispatch: React.PropTypes.func,
-  translate: React.PropTypes.func,
+  profile: PropTypes.object,
+  dispatch: PropTypes.func,
+  translate: PropTypes.func,
 };
 
 ProfileItem.defaultProps = {

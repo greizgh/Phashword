@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { setToggleKey, toggleDefaultState } from '../../actions.js';
 import { panelFormItemStyle, labelStyle, selectStyle, inputStyle } from '../style.js';
 
@@ -53,10 +54,10 @@ export default class GlobalSettings extends React.Component {
 }
 
 GlobalSettings.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  defaultState: React.PropTypes.bool,
-  toggleKey: React.PropTypes.string,
-  translate: React.PropTypes.func,
+  dispatch: PropTypes.func.isRequired,
+  defaultState: PropTypes.bool,
+  toggleKey: PropTypes.string,
+  translate: PropTypes.func,
 };
 
 GlobalSettings.defaultProps = {

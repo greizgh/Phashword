@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import { siteItemStyle, btnStyle } from '../style.js';
 
@@ -32,9 +33,9 @@ class SiteItem extends React.Component {
 }
 
 SiteItem.propTypes = {
-  site: React.PropTypes.object,
-  onDelete: React.PropTypes.func,
-  translate: React.PropTypes.func,
+  site: PropTypes.object,
+  onDelete: PropTypes.func,
+  translate: PropTypes.func,
 };
 
 SiteItem.defaultProps = {

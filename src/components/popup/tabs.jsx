@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import {
   panelStyle,
@@ -49,7 +50,7 @@ class _Tabs extends React.Component {
     );
   }
 }
-_Tabs.propTypes = { selected: React.PropTypes.number };
+_Tabs.propTypes = { selected: PropTypes.number };
 _Tabs.defaultProps = { selected: 0 };
 
 export const Tabs = Radium(_Tabs);
@@ -64,8 +65,8 @@ class _Pane extends React.Component {
   }
 }
 _Pane.propTypes = {
-  label: React.PropTypes.string.isRequired,
-  children: React.PropTypes.element.isRequired,
+  label: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export const Pane = Radium(_Pane);

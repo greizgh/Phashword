@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import {
   panelFormStyle,
@@ -45,10 +46,10 @@ class KeyGenerator extends React.Component {
 }
 
 KeyGenerator.propTypes = {
-  password: React.PropTypes.string,
-  masterKey: React.PropTypes.string,
-  requestPassword: React.PropTypes.func,
-  translate: React.PropTypes.func,
+  password: PropTypes.string,
+  masterKey: PropTypes.string,
+  requestPassword: PropTypes.func,
+  translate: PropTypes.func,
 };
 
 KeyGenerator.defaultProps = {
