@@ -18,6 +18,7 @@ overlay.style.paddingRight = '10px';
 overlay.style.margin = '0px';
 overlay.style.boxSizing = 'border-box';
 overlay.style.visibility = 'hidden';
+overlay.style.display = 'none';
 overlay.style.position = 'absolute';
 document.body.appendChild(overlay);
 
@@ -53,6 +54,7 @@ function setOverlay(target) {
   overlay.style.width = `${targetRect.width}px`;
   overlay.style.height = `${targetRect.height}px`;
   overlay.style.visibility = 'visible';
+  overlay.style.display = 'block';
   overlay.focus();
 }
 
@@ -97,6 +99,7 @@ function enable() {
 function disable() {
   document.removeEventListener('focus', handleFocus, true);
   overlay.style.visibility = 'hidden';
+  overlay.style.display = 'none';
   cover.focus();
 }
 
