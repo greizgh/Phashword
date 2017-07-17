@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import SiteAdmin from './siteAdmin.jsx';
 import ProfileSettings from './profileSettings.jsx';
 import GlobalSettings from './global-settings.jsx';
-import { Tabs, Pane } from '../popup/tabs.jsx';
+import { Tabs, Pane } from '../tabs.jsx';
 
-export default class Settings extends React.Component {
+export default class Settings extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

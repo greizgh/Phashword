@@ -8,7 +8,7 @@ const itemListStyle = {
   marginTop: '10px',
 };
 
-class SiteAdmin extends React.Component {
+class SiteAdmin extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

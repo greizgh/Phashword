@@ -12,7 +12,7 @@ import {
 
 const borderedDivStyle = Object.assign({}, panelFormItemStyle);
 
-class QuickState extends React.Component {
+class QuickState extends React.PureComponent {
   getColorStyle() {
     const profile = this.props.profiles
       .filter((p) => p.id === this.props.currentProfile)[0];

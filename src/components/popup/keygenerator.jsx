@@ -10,40 +10,36 @@ import {
   textInputStyle,
 } from '../style.js';
 
-class KeyGenerator extends React.Component {
-  render() {
-    return (
-      <div style={panelFormStyle}>
-        <div style={panelFormItemStyle}>
-          <label style={labelStyle} htmlFor="key">
-            {this.props.translate('master_key')}
-          </label>
-          <input
-            style={[inputStyle, textInputStyle]}
-            type="password"
-            key={'key'}
-            id="key"
-            value={this.props.masterKey}
-            onChange={this.props.requestPassword}
-          />
-        </div>
-        <div style={[panelFormItemStyle, panelLastFormItemStyle]}>
-          <label style={labelStyle} htmlFor="password">
-            {this.props.translate('password')}
-          </label>
-          <input
-            style={[inputStyle, textInputStyle]}
-            type="text"
-            key={'password'}
-            readOnly
-            id="password"
-            value={this.props.password}
-          />
-        </div>
-      </div>
-    );
-  }
-}
+const KeyGenerator = (props) => (
+  <div style={panelFormStyle}>
+    <div style={panelFormItemStyle}>
+      <label style={labelStyle} htmlFor="key">
+        {props.translate('master_key')}
+      </label>
+      <input
+        style={[inputStyle, textInputStyle]}
+        type="password"
+        key={'key'}
+        id="key"
+        value={props.masterKey}
+        onChange={props.requestPassword}
+      />
+    </div>
+    <div style={[panelFormItemStyle, panelLastFormItemStyle]}>
+      <label style={labelStyle} htmlFor="password">
+        {props.translate('password')}
+      </label>
+      <input
+        style={[inputStyle, textInputStyle]}
+        type="text"
+        key={'password'}
+        readOnly
+        id="password"
+        value={props.password}
+      />
+    </div>
+  </div>
+);
 
 KeyGenerator.propTypes = {
   password: PropTypes.string,

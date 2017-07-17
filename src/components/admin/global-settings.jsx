@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { setToggleKey, toggleDefaultState } from '../../actions.js';
 import { panelFormItemStyle, labelStyle, selectStyle, inputStyle } from '../style.js';
 
-export default class GlobalSettings extends React.Component {
+export default class GlobalSettings extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onToggleChange = this.onToggleChange.bind(this);

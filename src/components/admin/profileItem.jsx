@@ -38,7 +38,7 @@ const privStyle = {
   height: '128px',
 };
 
-class ProfileItem extends React.Component {
+class ProfileItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onDeleteProfile = this.onDeleteProfile.bind(this);

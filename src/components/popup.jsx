@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import KeyGenerator from './popup/keygenerator.jsx';
 import SiteProfile from './popup/siteprofile.jsx';
 import QuickSettings from './popup/quicksettings.jsx';
-import { Tabs, Pane } from './popup/tabs.jsx';
+import { Tabs, Pane } from './tabs.jsx';
 import { popupFooterStyle, separatorStyle, popupFooterButtonStyle } from './style.js';
 import { toggleSite, setTag, setProfile, setLength, setType } from '../actions/site.js';
 
@@ -11,7 +11,7 @@ const popupStyle = {
   width: '400px',
 };
 
-export default class Popup extends React.Component {
+export default class Popup extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

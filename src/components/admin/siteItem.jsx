@@ -6,7 +6,7 @@ import { siteItemStyle, btnStyle } from '../style.js';
 const shrink = { flexShrink: '0' };
 const grow = { flexGrow: '1' };
 
-class SiteItem extends React.Component {
+class SiteItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.deleteSite = this.deleteSite.bind(this);

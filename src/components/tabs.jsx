@@ -7,9 +7,9 @@ import {
   separatorStyle,
   tabHeaderStyle,
   tabButtonStyle,
-} from '../style.js';
+} from './style.js';
 
-class _Tabs extends React.Component {
+class _Tabs extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { selected: props.selected };
@@ -55,7 +55,7 @@ _Tabs.defaultProps = { selected: 0 };
 
 export const Tabs = Radium(_Tabs);
 
-class _Pane extends React.Component {
+class _Pane extends React.PureComponent {
   render() {
     return (
       <div style={panelFormStyle} className="Tabs__panel">

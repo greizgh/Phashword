@@ -4,7 +4,7 @@ import ProfileItem from './profileItem.jsx';
 import { createProfile } from '../../actions/profile.js';
 import { btnStyle } from '../style.js';
 
-export default class ProfileSettings extends React.Component {
+export default class ProfileSettings extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onCreate = this.onCreate.bind(this);

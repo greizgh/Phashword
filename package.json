@@ -5,8 +5,8 @@
   "license": "GPL-3.0",
   "version": "2.1.0",
   "scripts": {
-    "build:debug": "yarn run prepare && webpack --env=dev && yarn run copy && web-ext build -s dist",
-    "build:release": "yarn run prepare && webpack --env=prod && yarn run copy && web-ext build -s dist",
+    "build:debug": "yarn run prepare && webpack --env=dev && yarn run copy && web-ext build -s dist --overwrite-dest",
+    "build:release": "yarn run prepare && webpack --env=prod && yarn run copy && web-ext build -s dist --overwrite-dest",
     "test": "NODE_ENV=test jest",
     "prepare": "mkdir -p ./dist",
     "copy": "cp -r _locales ./dist && cp -r res/icons ./dist/ && cp -r html/* ./dist/ && cp -r css/* ./dist/ && cp manifest.json ./dist",
