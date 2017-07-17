@@ -3,3 +3,4 @@
 /dist/
 npm-debug.log
 coverage
+web-ext-artifacts
