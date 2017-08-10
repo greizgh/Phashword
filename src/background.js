@@ -7,12 +7,12 @@ import { url2tag, getPopupState, getSettingsState, getWorkerState } from './util
 import { saveOnHash } from './middlewares/site';
 import { ICONS_ON, ICONS_OFF } from './constants';
 
-chrome.storage.local.get((savedData) => {
+const main = (backend) => (savedData) => {
   const store = createStore(appReducer, savedData.state, applyMiddleware(saveOnHash));
 
-  // Save state in local storage
+  // Save state in given backend
   store.subscribe(() => {
-    chrome.storage.local.set({ state: store.getState() });
+    backend.set({ state: store.getState() });
   });
 
   chrome.runtime.onMessage.addListener(
@@ -98,4 +98,6 @@ chrome.storage.local.get((savedData) => {
 
   chrome.tabs.onUpdated.addListener(handleTabChange);
   chrome.tabs.onActivated.addListener(handleTabChange);
-});
+}
+
+chrome.storage.local.get(main(chrome.storage.local));
