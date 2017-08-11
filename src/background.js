@@ -100,4 +100,18 @@ const main = (backend) => (savedData) => {
   chrome.tabs.onActivated.addListener(handleTabChange);
 }
 
-chrome.storage.local.get(main(chrome.storage.local));
+browser.storage.local.get((data) => {
+  if (data.synced) {
+    // State has been migrated to sync backend
+    browser.storage.sync.get(main(browser.storage.sync));
+  } else {
+    // Migrate data to sync backend
+    browser.storage.sync.set(data)
+    .catch((error) => {
+      console.error(`Could not migrate data, fallback to local storage: ${error}`);
+      main(browser.storage.local)(data);
+    });
+    browser.storage.local.set({ synced: true });
+    browser.runtime.reload();
+  }
+});
