@@ -91,3 +91,13 @@ export function getWorkerState(state, url) {
     toggleKey: state.settings.toggleKey,
   };
 }
+
+// Serialize state before saving
+// In particular, convert immutable types to JS structures
+export function serializeState(state) {
+  return {
+    ...state,
+    profiles: state.profiles.toJS(),
+    siteSettings: state.siteSettings.toJS(),
+  };
+}

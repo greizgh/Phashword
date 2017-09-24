@@ -3,7 +3,7 @@ import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers';
 import hashPassword from './hasher';
 import { setCurrentSite } from './actions';
-import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils';
+import { url2tag, getPopupState, getSettingsState, getWorkerState, serializeState } from './utils';
 import { saveOnHash } from './middlewares/site';
 import { ICONS_ON, ICONS_OFF } from './constants';
 
@@ -12,7 +12,7 @@ chrome.storage.local.get((savedData) => {
 
   // Save state in local storage
   store.subscribe(() => {
-    chrome.storage.local.set({ state: store.getState() });
+    chrome.storage.local.set({ state: serializeState(store.getState()) });
   });
 
   chrome.runtime.onMessage.addListener(

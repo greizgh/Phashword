@@ -6,6 +6,7 @@ import {
   getPopupState,
   getSettingsState,
   getWorkerState,
+  serializeState,
 } from '../src/utils.js';
 import { PASSWORD_TYPES } from '../src/constants.js';
 
@@ -127,5 +128,16 @@ describe('getWorkerState', () => {
   it('should expose toggle key', () => {
     const workerState = getWorkerState(state, 'http://www.mozilla.org');
     assert.equal(workerState.toggleKey, 'Esc');
+  });
+});
+
+describe('serializeState', () => {
+  it('should convert immutable structures', () => {
+    const storedData = serializeState(state);
+    expect(storedData.profiles).toBeInstanceOf(Object);
+    expect(storedData.profiles).not.toBeInstanceOf(Map);
+    expect(storedData.siteSettings).toBeInstanceOf(Object);
+    expect(storedData.siteSettings).not.toBeInstanceOf(Map);
+    expect(storedData.siteSettings.mozilla).toBeDefined();
   });
 });

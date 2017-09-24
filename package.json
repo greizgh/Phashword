@@ -3,7 +3,7 @@
   "description": "Easy to use password generator",
   "author": "Greizgh",
   "license": "GPL-3.0",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "scripts": {
     "build:debug": "yarn run prepare && webpack --env=dev && yarn run copy && web-ext build -s dist --overwrite-dest",
     "build:release": "yarn run prepare && webpack --env=prod && yarn run copy && web-ext build -s dist --overwrite-dest",
@@ -13,7 +13,8 @@
     "zip": "cd ./dist && zip -r -x\"*.zip\" phashword.xpi .",
     "clean": "rm -rf ./dist/*",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "start": "web-ext run -s dist"
   },
   "repository": {
     "type": "git",
