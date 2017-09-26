@@ -1,47 +1,13 @@
-import { Map } from 'immutable';
 import { assert } from 'chai';
+import { PASSWORD_TYPES } from '../src/constants.js';
 import {
   url2tag,
   getSiteSettings,
   getPopupState,
   getSettingsState,
   getWorkerState,
-  serializeState,
 } from '../src/utils.js';
-import { PASSWORD_TYPES } from '../src/constants.js';
-
-const state = {
-  settings: {
-    defaultState: false,
-    toggleKey: 'Esc',
-  },
-  currentSite: 'localhost',
-  profiles: new Map({
-    uuid: {
-      type: PASSWORD_TYPES.NUMERIC,
-      length: 8,
-      default: true,
-      color: '#f0f0f0',
-      name: 'Default',
-    },
-    uuid2: {
-      type: PASSWORD_TYPES.SPECIAL,
-      length: 12,
-      default: false,
-      color: '#abcdef',
-      name: 'FOSS',
-    },
-  }),
-  siteSettings: new Map({
-    mozilla: {
-      enabled: true,
-      type: PASSWORD_TYPES.SPECIAL,
-      length: 12,
-      tag: 'special',
-      profile: 'uuid2',
-    },
-  }),
-};
+import { state } from '../fixtures';
 
 describe('url2tag', () => {
   it('should handle IPs', () => {
@@ -128,16 +94,5 @@ describe('getWorkerState', () => {
   it('should expose toggle key', () => {
     const workerState = getWorkerState(state, 'http://www.mozilla.org');
     assert.equal(workerState.toggleKey, 'Esc');
-  });
-});
-
-describe('serializeState', () => {
-  it('should convert immutable structures', () => {
-    const storedData = serializeState(state);
-    expect(storedData.profiles).toBeInstanceOf(Object);
-    expect(storedData.profiles).not.toBeInstanceOf(Map);
-    expect(storedData.siteSettings).toBeInstanceOf(Object);
-    expect(storedData.siteSettings).not.toBeInstanceOf(Map);
-    expect(storedData.siteSettings.mozilla).toBeDefined();
   });
 });

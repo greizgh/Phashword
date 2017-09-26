@@ -3,12 +3,13 @@ import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers';
 import hashPassword from './hasher';
 import { setCurrentSite } from './actions';
-import { url2tag, getPopupState, getSettingsState, getWorkerState, serializeState } from './utils';
+import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils';
+import { serializeState, deserializeState } from './serialization';
 import { saveOnHash } from './middlewares/site';
 import { ICONS_ON, ICONS_OFF } from './constants';
 
 chrome.storage.local.get((savedData) => {
-  const store = createStore(appReducer, savedData.state, applyMiddleware(saveOnHash));
+  const store = createStore(appReducer, deserializeState(savedData), applyMiddleware(saveOnHash));
 
   // Save state in local storage
   store.subscribe(() => {
