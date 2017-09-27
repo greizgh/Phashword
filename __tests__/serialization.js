@@ -17,23 +17,22 @@ describe('serializeState', () => {
 describe('deserializeState', () => {
   it('should convert js objects', () => {
     const data = deserializeState({
-      state: {
-        profiles: {
-          uuid: {
-            type: PASSWORD_TYPES.NUMERIC,
-            length: 8,
-            default: true,
-            color: '#f0f0f0',
-            name: 'Default',
-          },
+      profiles: {
+        uuid: {
+          type: PASSWORD_TYPES.NUMERIC,
+          length: 8,
+          default: true,
+          color: '#f0f0f0',
+          name: 'Default',
         },
-        siteSettings: {},
-      }
+      },
+      siteSettings: {},
     });
     expect(data.profiles).toBeInstanceOf(Map);
+    expect(data.profiles.get('uuid').length).toBe(8);
   });
   it('should return undefined on invalid state', () => {
-    const data = deserializeState({});
+    const data = deserializeState(undefined);
     expect(data).not.toBeDefined();
   });
 });

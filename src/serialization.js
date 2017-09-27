@@ -12,12 +12,12 @@ export function serializeState(state) {
 
 // Deserialize stored data
 // Convert plain objects to immutable data structures
-export function deserializeState(data) {
-  if (data.state) {
+export function deserializeState(state) {
+  if (state) {
     const ret = {
-      ...data.state,
-      profiles: Map(data.state.profiles),
-      siteSettings: Map(data.state.siteSettings),
+      ...state,
+      profiles: Map(state.profiles),
+      siteSettings: Map(state.siteSettings),
     };
     return ret;
   }

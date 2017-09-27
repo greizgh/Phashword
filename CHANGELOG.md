@@ -2,13 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Switch to sync storage backend (issue 23)
 ### Fixed
 - Addon unusable with firefox 57 (issue 25)
 
 ## [2.1.0] - 2017-07-17
 ### Added
 - Switch to a full webextension
-### Fixes
+### Fixed
 - Display of password field on some websites (issue 24)
 
 

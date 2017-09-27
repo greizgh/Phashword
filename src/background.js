@@ -8,12 +8,13 @@ import { serializeState, deserializeState } from './serialization';
 import { saveOnHash } from './middlewares/site';
 import { ICONS_ON, ICONS_OFF } from './constants';
 
-chrome.storage.local.get((savedData) => {
-  const store = createStore(appReducer, deserializeState(savedData), applyMiddleware(saveOnHash));
+// Initialize the addon from given state
+function main(state) {
+  const store = createStore(appReducer, state, applyMiddleware(saveOnHash));
 
   // Save state in local storage
   store.subscribe(() => {
-    chrome.storage.local.set({ state: serializeState(store.getState()) });
+    chrome.storage.sync.set({ state: serializeState(store.getState()) });
   });
 
   chrome.runtime.onMessage.addListener(
@@ -99,4 +100,26 @@ chrome.storage.local.get((savedData) => {
 
   chrome.tabs.onUpdated.addListener(handleTabChange);
   chrome.tabs.onActivated.addListener(handleTabChange);
-});
+}
+
+// Load data from storage
+function load() {
+  const load = Promise.all([
+    browser.storage.sync.get('state'),
+    browser.storage.local.get('state'),
+  ]);
+  return load.then(([syncData, localData]) => {
+    let savedState = deserializeState(syncData.state);
+    if (!syncData.state && localData.state) {
+      // Use data from local storage
+      savedState = localData.state;
+    }
+    return savedState;
+  }).catch((e) => {
+    console.error('Could not load state from storage');
+    console.error(e);
+    return undefined;
+  });
+}
+
+load().then(main);
