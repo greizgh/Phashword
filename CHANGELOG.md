@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [2.2.0rc1] - 2017-09-27
 ### Added
 - Switch to sync storage backend (issue 23)
 ### Fixed
