@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 // In particular, convert immutable types to JS structures
 export function serializeState(state) {
   return {
-    ...state,
+    settings: state.settings,
     profiles: state.profiles.toJS(),
     siteSettings: state.siteSettings.toJS(),
   };
@@ -15,7 +15,7 @@ export function serializeState(state) {
 export function deserializeState(state) {
   if (state) {
     const ret = {
-      ...state,
+      settings: state.settings,
       profiles: Map(state.profiles),
       siteSettings: Map(state.siteSettings),
     };

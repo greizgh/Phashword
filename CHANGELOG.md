@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Added
+- Do not save current site or profile as it is not reused between sessions
+
 ## [2.2.0rc1] - 2017-09-27
 ### Added
 - Switch to sync storage backend (issue 23)
