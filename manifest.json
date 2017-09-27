@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Phashword",
-  "version": "2.2.0rc1",
+  "version": "2.2.0rc2",
 
   "description": "Easy to use password manager",
   "homepage_url": "https://github.com/greizgh/Phashword",

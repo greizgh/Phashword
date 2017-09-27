@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [2.2.0rc2] - 2017-09-27
 ### Added
 - Do not save current site or profile as it is not reused between sessions
 
