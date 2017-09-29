@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Changed
 - Update tldjs lib
+- Update radium
 - Update some dev dependencies
 
 ## [2.2.0rc3] - 2017-09-29
