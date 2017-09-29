@@ -56,6 +56,6 @@
     "jest": "^20.0.4",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.6.1",
-    "web-ext": "^1.10.1"
+    "web-ext": "^2.0.0"
   }
 }

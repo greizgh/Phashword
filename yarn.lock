@@ -1328,7 +1328,14 @@ babel-runtime@6.11.6:
     core-js "^2.4.0"
     regenerator-runtime "^0.9.5"
 
-babel-runtime@6.23.0, babel-runtime@6.x.x, babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0, babel-runtime@^6.5.0, babel-runtime@^6.9.0, babel-runtime@^6.9.1, babel-runtime@^6.9.2:
+babel-runtime@6.25.0:
+  version "6.25.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.25.0.tgz#33b98eaa5d482bb01a8d1aa6b437ad2b01aec41c"
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.10.0"
+
+babel-runtime@6.x.x, babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0, babel-runtime@^6.5.0, babel-runtime@^6.9.0, babel-runtime@^6.9.1, babel-runtime@^6.9.2:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
@@ -7380,13 +7387,13 @@ wcwidth@^1.0.0:
   dependencies:
     defaults "^1.0.3"
 
-web-ext@^1.10.1:
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/web-ext/-/web-ext-1.10.1.tgz#c2d442deffefba15a89d24c9f28526b16740f469"
+web-ext@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/web-ext/-/web-ext-2.0.0.tgz#20640cfe4013e6ed703158f37ccb13b8e9348313"
   dependencies:
     addons-linter "0.22.3"
     babel-polyfill "6.20.0"
-    babel-runtime "6.23.0"
+    babel-runtime "6.25.0"
     bunyan "1.8.10"
     camelcase "4.1.0"
     debounce "1.0.2"
