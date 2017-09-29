@@ -5,8 +5,8 @@ import { Map } from 'immutable';
 export function serializeState(state) {
   return {
     settings: state.settings,
-    profiles: state.profiles.toJS(),
-    siteSettings: state.siteSettings.toJS(),
+    profiles: state.profiles.toObject(),
+    siteSettings: state.siteSettings.toObject(),
   };
 }
 

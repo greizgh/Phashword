@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.2.0rc3] - 2017-09-29
+### Fixed
+- Prevent loading a corrupted state
+
 ## [2.2.0rc2] - 2017-09-27
 ### Added
 - Do not save current site or profile as it is not reused between sessions

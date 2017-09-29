@@ -3,7 +3,7 @@ import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers';
 import hashPassword from './hasher';
 import { setCurrentSite } from './actions';
-import { url2tag, getPopupState, getSettingsState, getWorkerState } from './utils';
+import { url2tag, getPopupState, getSettingsState, getWorkerState, getSiteSettings } from './utils';
 import { serializeState, deserializeState } from './serialization';
 import { saveOnHash } from './middlewares/site';
 import { ICONS_ON, ICONS_OFF } from './constants';
@@ -114,6 +114,8 @@ function load() {
       // Use data from local storage
       savedState = localData.state;
     }
+    // This will throw if state is corrupted, resetting the state
+    getSiteSettings(savedState, '');
     return savedState;
   }).catch((e) => {
     console.error('Could not load state from storage');

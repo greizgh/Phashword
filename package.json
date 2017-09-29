@@ -3,7 +3,7 @@
   "description": "Easy to use password generator",
   "author": "Greizgh",
   "license": "GPL-3.0",
-  "version": "2.2.0rc2",
+  "version": "2.2.0rc3",
   "scripts": {
     "build:debug": "yarn run prepare && webpack --env=dev && yarn run copy && web-ext build -s dist --overwrite-dest",
     "build:release": "yarn run prepare && webpack --env=prod && yarn run copy && web-ext build -s dist --overwrite-dest",
