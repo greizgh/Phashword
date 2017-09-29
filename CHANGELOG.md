@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Changed
+- Update tldjs lib
+- Update some dev dependencies
+
 ## [2.2.0rc3] - 2017-09-29
 ### Fixed
 - Prevent loading a corrupted state
