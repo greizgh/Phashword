@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Changed
+- Bump minimal Firefox version to 53 (issue 26)
+
 ## [2.2.0] - 2017-09-29
 ### Changed
 - Update tldjs lib
