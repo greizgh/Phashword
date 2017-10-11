@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Changed
+- Update qrcode.react, immutablejs and radium
+
 ## [2.2.1] - 2017-10-07
 ### Changed
 - Bump minimal Firefox version to 53 (issue 26)
