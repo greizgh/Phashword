@@ -27,9 +27,6 @@ const defaultState = new Map().set(uuid.v4(), getNewProfile(true));
 
 export default function profilesReducer(state = defaultState, action) {
   let profiles = state;
-  if (profiles instanceof Object && !(profiles instanceof Map)) {
-    profiles = new Map(profiles);
-  }
   switch (action.type) {
     case CREATE_PROFILE:
       return profiles.set(uuid.v4(), getNewProfile());

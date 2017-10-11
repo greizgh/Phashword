@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Changed
+- Remove dead code in reducers
 - Update qrcode.react, immutablejs and radium
 
 ## [2.2.1] - 2017-10-07

@@ -102,9 +102,4 @@ describe('siteReducer', () => {
     assert.isFalse(sites.has('test'));
     assert.isTrue(sites.has('other'));
   });
-  it('should handle state as object', () => {
-    const sites = siteReducer({ siteSettings: { mozilla: {length: 12} } }, {type: '@init'});
-    assert.instanceOf(sites, Map);
-    assert.isTrue(sites.has('mozilla'));
-  });
 });

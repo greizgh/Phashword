@@ -18,9 +18,6 @@ export default function sitesReducer(state = { siteSettings: new Map() }, action
   if (!sites) {
     sites = new Map();
   }
-  if (sites instanceof Object && !(sites instanceof Map)) {
-    sites = new Map(sites);
-  }
   if (updateActions.includes(action.type) && !state.siteSettings.has(action.id)) {
     // Update action on a non existing site
     // Let's create one with current default values
