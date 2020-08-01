@@ -1,3 +1,11 @@
+# THIS PROJECT IS UNMAINTAINED
+
+I don't use it anymore, switch to some other open-source alternatives:
+- [bitwarden](https://bitwarden.com/)
+- [lesspass](https://lesspass.com/)
+
+---
+
 # Phashword
 
 Phashword aims to be a convenient password manager that doesn't get in your way.
